@@ -2,7 +2,7 @@ import styles from './player.module.css'
 
 import React from 'react'
 
-import video from './../../../assets/videos/video1.mp4'
+import video from 'C:/Study/IT/storage/videos/video1.mp4'
 import ReactPlayer from 'react-player/file'
 
 const Player = () => {
