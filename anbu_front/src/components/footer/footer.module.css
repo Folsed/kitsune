@@ -1,0 +1,48 @@
+/* Footer */
+
+.footer {
+    margin-top: 1.5rem;
+    /* background: #000 linear-gradient(180deg,#0000,#213944); */
+    background: #000;
+}
+
+.wrapper {
+    width: 1067px;
+    margin: 0 auto;
+}
+
+.content {
+    padding: 4rem 0;
+}
+
+.shalf {
+    border-bottom: 1px solid white;
+    opacity: .7;
+    margin: 5px 0;
+}
+
+.section-info {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.links {
+    display: flex;
+    position: relative;
+    justify-content: end;
+}
+
+
+.list li{
+    display: inline;
+    margin-left: 20px;
+}
+
+.list svg {
+    height: 25px;
+}
+
+.copyr span{
+    color: gray;
+}

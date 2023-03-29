@@ -1,0 +1,49 @@
+.player-wrapper {
+    width: 1067px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-areas: 
+        "seasons"
+        "video"
+        "series";
+        gap: 5px;
+}
+
+.player-container {
+    grid-area: video;
+    display: flex;
+    justify-content: center;
+    margin-inline: auto;
+    line-height: 30vw;
+    text-align: center;
+    position: relative;
+}
+
+.seasons-tabs-wrapper {
+    grid-area: seasons;
+}
+
+.series-tabs-wrapper {
+    grid-area: series;
+}
+
+.tab-item {
+    background: #212121;
+    color: #fff;
+    cursor: pointer;
+    float: left;
+    font-size: 13px;
+    margin: 0 2px 2px 0;
+    min-width: 74.23px;
+    padding: 7px 2px;
+    text-align: center;
+    transition: background .3s;
+}
+
+.tab-item:hover {
+    background: #303030;
+}
+
+.active {
+    background: #3c3c3c;
+}

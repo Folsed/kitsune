@@ -1,0 +1,51 @@
+.menu-dropdown {
+    background-color: #000000;
+    left: 0;
+    min-width: 20rem;
+    opacity: 0;
+    padding: 2rem 0 1.25rem;
+    position: fixed;
+    top: 50px;
+    transform: translateY(20px);
+    transition: transform .2s,opacity .6s,visibility .6s ;
+    visibility: hidden;
+    width: 100%;
+}
+
+.active-tab-content {
+    background-color: #000000;
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.dropdown-content {
+    width: 1167px;
+    margin: 0 auto;
+
+}
+
+.text {
+    opacity: .6;
+}
+
+.genres {
+    margin-top: 10px;
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-columns: repeat(5, 1fr);
+    gap: 5px 0;
+    grid-auto-flow: column;
+}
+
+.genre {
+    display: block;
+    padding: 5px 5px;
+    position: relative;
+}
+
+.genre:hover {
+    background-color: rgb(35, 35, 35);
+}
+
+

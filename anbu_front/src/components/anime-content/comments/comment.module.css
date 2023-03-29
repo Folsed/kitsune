@@ -1,0 +1,16 @@
+.comments-section {
+    width: 1067px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-areas: 
+    "info info"
+    "input any"
+    "comment any";
+    grid-template-columns: 67% auto;
+    gap: 40px;
+}
+
+.section-title {
+    grid-area: info;
+    margin: 20px 0 10px ;
+}

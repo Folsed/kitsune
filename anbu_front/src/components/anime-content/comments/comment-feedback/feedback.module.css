@@ -1,0 +1,44 @@
+.feedback {
+    grid-area: comment;
+    margin-bottom: 20px;
+}
+
+.comment-wrapp {
+    display: grid;
+    gap: 40px;
+}
+
+.comment {
+    display: grid;
+    grid-template-areas: "avatar content";
+    grid-template-columns: auto minmax(0, 1fr);
+}
+
+.avatar-wrap {
+    grid-area: avatar;
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+    background-color: rgb(28, 28, 28);
+    border-radius: 25px;
+}
+
+.content {
+    grid-area: content;
+    padding-left: 1.77rem;
+    display: grid;
+    gap: 10px;
+}
+
+.signature {
+    display: inline-flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.signature span {
+    font-size: 10px;
+    color: gray;
+}

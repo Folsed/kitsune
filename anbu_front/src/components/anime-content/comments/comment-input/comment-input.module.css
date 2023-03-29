@@ -1,0 +1,51 @@
+.input-wrapper {
+    grid-area: input;
+    display: grid;
+    grid-template-areas: "avatar textarea";
+    grid-template-columns: auto minmax(0, 1fr);
+}
+
+.avatar-wrap {
+    grid-area: avatar;
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+    background-color: rgb(28, 28, 28);
+    border-radius: 25px;
+}
+
+.textarea-wrap {
+    grid-area: textarea;
+    padding-left: 1.77rem;
+}
+/* 
+.textarea {
+    color: #141519;
+} */
+
+.editable-area {
+    background-color: #141519;
+    border: 1px solid #59595b;
+    color: #fff;
+    display: block;
+    height: 5.75rem;
+    padding: 0.375rem 0.5rem 0.625rem;
+    resize: none;
+    width: 100%;
+}
+
+.disabled {
+    height: 2.23rem;
+}
+
+.signature {
+    display: inline-flex;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+.signature h4 {
+    margin-left: 4px;
+}

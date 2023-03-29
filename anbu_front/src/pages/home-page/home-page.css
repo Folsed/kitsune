@@ -1,0 +1,14 @@
+.home-content-wrapper {
+    display: grid;
+    row-gap: 3rem;
+}
+
+.dynamic-wrapper {
+    display: grid;
+    grid-row-gap: 3rem;
+}
+
+.view-all__wrapper {
+    margin: 2rem auto;
+}
+

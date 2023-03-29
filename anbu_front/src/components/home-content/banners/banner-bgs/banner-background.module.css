@@ -1,0 +1,76 @@
+/* Orange */
+
+.orange-bg {
+    background: rgb(235, 108, 0);
+    color: #95ff0076;
+    background: linear-gradient(87deg, rgba(235, 108, 0, 1) 0%, rgba(244, 134, 11, 1) 36%, rgb(255, 119, 0) 94%);
+    height: 100%;
+}
+
+.orange-bg-piece-one {
+    position: absolute;
+    height: 700px;
+}
+
+.orange-bg-piece-two {
+    position: absolute;
+    height: 800px;
+    left: 70%;
+}
+
+
+
+
+
+
+/* Blue */
+.blue-bg {
+    background: rgb(148, 209, 233);
+    background: linear-gradient(27deg, rgba(148, 209, 233, 1) 4%, rgba(21, 174, 235, 0.9064967051273635) 49%, rgba(148, 207, 233, 1) 94%);
+    height: 100%;
+}
+.asd {
+    color: #6ec0da;
+}
+.blue-bg-piece-one {
+    position: absolute;
+    height: 700px;
+}
+
+.blue-bg-piece-two {
+    position: absolute;
+    height: 800px;
+    left: 70%;
+}
+
+
+
+
+
+
+
+/* News Bg */
+
+.banner-news__background {
+    background: rgb(235, 108, 0);
+    color: #95ff0076;
+    background: linear-gradient(87deg, rgba(235, 108, 0, 1) 0%, rgba(244, 134, 11, 1) 36%, rgb(255, 119, 0) 94%);
+    height: 100%;
+    position: relative;
+}
+
+.banner-news-background-p1 {
+    height: 64.25rem;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-49.5%, -35%);
+    width: 1944px;
+}
+
+.banner-news-background-p2 {
+    position: absolute;
+    height: 64.25rem;
+
+    left: 20%;
+}

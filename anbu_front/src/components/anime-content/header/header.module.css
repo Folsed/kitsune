@@ -1,0 +1,119 @@
+.header {}
+
+.wrapper {}
+
+.sub-wrapper {
+    position: relative;
+}
+
+.show-description {
+    position: relative;
+    max-width: 1067px;
+    height: 521px;
+    margin: 0 auto;
+}
+
+.desc-wrapper {
+    padding: 5.34rem 0;
+    display: flex;
+    max-width: 800px;
+    min-width: 500px;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.desc {
+    display: flex;
+    max-width: 800px;
+    min-width: 500px;
+    flex-direction: column;
+    gap: 0.75rem;
+    color: white;
+    justify-content: center;
+    font-size: 16px;
+}
+
+
+.desc .ani-logo {
+    width: 40%;
+    height: 12rem;
+    /* margin-bottom: 3rem; */
+    display: flex;
+    align-items: center;
+}
+
+
+
+.sub-preview-background-wrapper {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.sub-preview-background {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+}
+
+.sub-preview-background::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    -webkit-box-shadow: inset 800px 0px 195px 68px rgba(0, 0, 0, 0.872);
+    -moz-box-shadow: inset 800px 0px 195px 68px rgba(0, 0, 0, 0.872);
+    box-shadow: inset 800px 0px 195px 68px rgba(0, 0, 0, 0.872);
+    /* background: rgb(172, 149, 146);
+    background: linear-gradient(0deg, rgb(0, 0, 0) 0%, rgba(45, 253, 249, 0) 20%); */
+}
+
+.sub-preview-background img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.categs {
+    display: flex;
+    align-items: center;
+    gap: 0.724rem;
+}
+
+.categ-detail-wrap {
+    border-left: 2px solid #f42121;
+    border-right: 2px solid #f42121;
+    border-radius: 100px;
+}
+
+.categ-detail {
+    color: white;
+    padding: 2px 15px;
+    transition: all .4s;
+}
+
+.categ-detail:hover {
+    background-color: #00000065;
+    border-radius: 100px;
+}
+
+.desc-link {
+    color: rgb(255, 255, 255);
+}
+
+.spdetail {
+    opacity: .7;
+}

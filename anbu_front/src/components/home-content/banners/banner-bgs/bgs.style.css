@@ -1,0 +1,26 @@
+
+/* News Bg */
+
+.banner-news__background {
+    background: rgb(235, 108, 0);
+    color: #95ff0076;
+    background: linear-gradient(87deg, rgba(235, 108, 0, 1) 0%, rgba(244, 134, 11, 1) 36%, rgb(255, 119, 0) 94%);
+    height: 100%;
+    position: relative;
+}
+
+.banner-news-background-p1 {
+    height: 64.25rem;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-49.5%,-35%);
+    width: 1944px;
+}
+
+.banner-news-background-p2 {
+    position: absolute;
+    height: 64.25rem;
+
+    left: 20%;
+}

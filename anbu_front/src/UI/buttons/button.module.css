@@ -1,0 +1,70 @@
+.btn {
+    display: flex;
+    gap: 3px;
+    align-items: center;
+    background-color: transparent;
+    font-weight: 600;
+    font-size: 18px;
+    /* height: 50px; */
+    transition: all .5s;
+    padding: 10px;
+    border: 2px solid #f47521;
+    color: #f47521;
+}
+
+.btn svg {
+    width: 22px;
+    fill: #f47521;
+}
+
+.btn:hover {
+    border-color: #fd9047;
+    color: #fd9047;
+}
+
+.watchlist-btn {
+    display: flex;
+    gap: 3px;
+    align-items: center;
+    background-color: transparent;
+    font-weight: 600;
+    font-size: 18px;
+    height: 50px;
+    transition: all .5s;
+    padding: 10px;
+    border: 2px solid #f47521;
+    color: #f47521;
+}
+
+.watchlist-btn svg {
+    width: 22px;
+    fill: #f47521;
+}
+
+.watchlist-btn:hover {
+    border-color: #fd9047;
+    color: #fd9047;
+}
+
+.watch-btn {
+    display: flex;
+    align-items: center;
+    background-color: #f47521;
+    font-weight: 600;
+    font-size: 18px;
+    height: 50px;
+    transition: background-color .5s;
+    border: 2px solid #f47521;
+    padding: 10px;
+    width: 100%;
+    justify-content: center;
+}
+
+.watch-btn img {
+    width: 22px;
+}
+
+.watch-btn:hover {
+    background-color: #fd9047;
+
+}
