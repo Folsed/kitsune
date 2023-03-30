@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Api\AnimeController;
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\PreviewController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Resources\AnimeCollection;
 use App\Http\Resources\AnimeResource;
 use App\Http\Resources\CategoriesResource;
@@ -29,6 +31,8 @@ Route::middleware('auth:sanctum')->get('/api/user', function (Request $request) 
     return $request->user()->all()->toArray();
 });
 
+// Auth
+Route::post('api/registered', [AuthController::class, 'registered'])->name('api-registered');
 
 // Anime API
 

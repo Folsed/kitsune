@@ -1,15 +1,16 @@
 import './../../index.css'
 
 import React from 'react'
-import { Outlet } from 'react-router-dom'
+import { Navigate, Outlet } from 'react-router-dom'
 import Footer from '../footer/Footer'
 import Header from '../header/Header'
-import { userAuthContext } from '../../poviders/AuthProvider'
-import ReactPlayer from 'react-player'
-import YouTube from 'react-youtube'
+import { userAuthContext } from '../../providers/AuthProvider'
+import { ROUTES } from '../../router/routes'
+
 
 const DefaultLayout = () => {
     const { currentUser, userToken } = userAuthContext()
+
 
     return (
         <>

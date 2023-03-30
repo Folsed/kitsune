@@ -7,12 +7,14 @@ const AuthContext = createContext({
     setUserToken: () => {}
 })
 
+
+
 export const AuthProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState({
-        name: 'Folsed',
+        name: 'Folsedasd',
         email: 'folsed@gmail.com'
     })
-    const [userToken, setUserToken] = useState('535token5234')
+    const [userToken, setUserToken] = useState('')
 
     return (
         <AuthContext.Provider value={{

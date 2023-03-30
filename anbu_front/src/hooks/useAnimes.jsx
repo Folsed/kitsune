@@ -8,7 +8,7 @@ export const useAnimes = () => {
         () => AnimeService.getAll(),
         {
             keepPreviousData: true,
-            refetchOnWindowFocus: false,
+            refetchOnWindowFocus: true,
             onError: (error) => {
                 alert(error.message)
             },

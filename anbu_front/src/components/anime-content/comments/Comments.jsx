@@ -1,7 +1,7 @@
 import styles from './comment.module.css'
 
 import { useContext } from 'react'
-import AnimeContext from '../../../poviders/AnimeProvider'
+import AnimeContext from '../../../providers/AnimeProvider'
 import CommentInput from './comment-input/CommentInput'
 import Feedback from './comment-feedback/Feedback'
 

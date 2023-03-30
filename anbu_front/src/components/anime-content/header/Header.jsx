@@ -1,7 +1,7 @@
 import styles from './header.module.css'
 
 import React, { useContext } from 'react'
-import AnimeContext from '../../../poviders/AnimeProvider'
+import AnimeContext from '../../../providers/AnimeProvider'
 
 import logo from './../../../img/nier-logo3.png'
 

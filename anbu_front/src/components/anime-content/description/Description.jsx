@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
 import YouTube from 'react-youtube'
-import AnimeContext from '../../../poviders/AnimeProvider'
+import AnimeContext from '../../../providers/AnimeProvider'
 import { OrangeButton } from '../../../UI/buttons/OrangeButton'
 import { WatchlistButton } from '../../../UI/buttons/WatchlistButton'
 import styles from './description.module.css'

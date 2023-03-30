@@ -1,11 +1,12 @@
 import styles from './header.module.css'
 
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { Logo } from '../../assets/logo/Logo';
 import search from './../../assets/icons/search.svg'
 import { useEffect, useState } from 'react';
 import BrowseModal from '../modals/BrowseModal';
 import AuthModal from '../modals/auth/AuthModal';
+import { ROUTES } from '../../router/routes';
 
 const Header = () => {
     const [active, setActive] = useState(false)
@@ -73,9 +74,9 @@ const Header = () => {
                         <div
                             className={styles.dropdownMenuBox}
                         >
-                            <div
-                                className={`${styles.menuItem} ${toggleClass === 'auth' ? styles.activeTab : ''}`}
-                                onClick={() => handleClick('auth')}
+                            <NavLink
+                                to={ROUTES.register}
+                                className={`${styles.menuItem}`}
                             >
                                 <span>Авторизація</span>
                                 <div className="header-svg menu-icon">
@@ -83,8 +84,8 @@ const Header = () => {
                                     </path>
                                     </svg>
                                 </div>
-                            </div>
-                            <AuthModal active={active} setActive={setActive} toggleClass={toggleClass} setToggleClass={setToggleClass} />
+                            </NavLink>
+                            {/* <AuthModal toggleClass={toggleClass} setToggleClass={setToggleClass} /> */}
                         </div>
                     </div>
                 </div>
@@ -93,6 +94,7 @@ const Header = () => {
                     onClick={() => setActive(false)}
                 >
                 </div>
+                <p></p>
             </div>
 
         </header>
