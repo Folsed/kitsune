@@ -29,11 +29,14 @@ Route::middleware('auth:sanctum')->get('/api/user', function (Request $request) 
     return $request->user()->all()->toArray();
 });
 
-Route::get('api/anime', function() {
-    return AnimeResource::collection(Anime::all());
+
+// Anime API
+
+Route::controller(AnimeController::class)->group(function () {
+    Route::get('api/anime', 'index')->name('api-anime-all');
+    Route::get('api/anime/{id}', 'show')->name('api-anime-byId');
 });
 
-Route::get('api/anime/{id}', [AnimeController::class, 'show'])->name('show-anime');
 
 Route::get('api/anime/genres/list', function() {
     return GenreResourse::collection(Genre::all());

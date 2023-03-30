@@ -61,4 +61,5 @@
 <!--   Core JS Files   -->
 <script src="{{ asset('js/jquery.js') }}"></script>
 
+
 </html>

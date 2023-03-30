@@ -11,6 +11,8 @@ class Preview extends Model
 
     protected $fillable = [
         'preview_path',
+        'sub_preview_path',
+        'logo_path',
     ];
 
     public function anime()

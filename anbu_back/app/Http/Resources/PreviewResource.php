@@ -19,6 +19,7 @@ class PreviewResource extends JsonResource
             'anime_id' => $this->anime_id,
             'preview_path' => $this->preview_path,
             'sub_preview_path' => $this->sub_preview_path,
+            'logo_path' => $this->preview_path,
         ];
     }
 }

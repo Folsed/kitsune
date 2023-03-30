@@ -11,7 +11,6 @@ const Recently = () => {
 
     const { isLoading, isError, data } = useAnimes()
 
-
     if (isLoading ) {
         return <h3>Loading..</h3>
     }

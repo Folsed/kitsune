@@ -4,8 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Anime;
-use App\Models\AnimeCategory;
-use App\Models\Category;
+use App\Models\Genre;
 use App\Models\Preview;
 use App\Models\Screenshot;
 use Illuminate\Http\Request;
@@ -20,8 +19,8 @@ class AnimeFormsController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-        return view('admin-views.forms.admin-form-anime', compact('categories'));
+        $genres = Genre::all();
+        return view('admin-views.forms.admin-form-anime', compact('genres'));
     }
 
     /**
@@ -44,16 +43,17 @@ class AnimeFormsController extends Controller
             'duration' => 'required',
             'synopsis' => 'required',
             'trailer' => 'required',
-            'categories' => 'required',
+            'genres' => 'required',
             'preview' => 'required|file|image|mimes:webp,png,svg,jpeg,avif',
             'sub_preview' => 'required|file|image|mimes:webp,png,svg,jpeg,avif',
+            'logo' => 'required|file|image|mimes:webp,png,svg,jpeg,avif',
             // 'screenshot' => 'required|file|image|mimes:webp,png,svg,jpeg,avif',
         ]);
 
         $anime = new Anime();
         $anime->ua_title = $request->input('ua_title');
         $anime->en_title = $request->input('en_title');
-        $anime->alias = str_replace(' ', '-', strtolower($anime->en_title));
+        $anime->alias = preg_replace('/[^\pL\d]+/u', '-', strtolower($anime->en_title));
         $anime->aired = $request->input('aired');
         $anime->country = $request->input('country');
         $anime->episodes = $request->input('episodes');
@@ -67,13 +67,14 @@ class AnimeFormsController extends Controller
         $anime->save();
 
         // // Categories
-        $categories = Category::whereIn('name', $request->input('categories'))->pluck('id')->toArray();
-        $anime->categories()->sync($categories);
+        $genres = Genre::whereIn('name', $request->input('genres'))->pluck('id')->toArray();
+        $anime->genres()->sync($genres);
 
 
         // // Preview, Sub-preview
         $previewPath = 'images/anime/previews/';
         $subPreviewPath = 'images/anime/sub-previews/';
+        $logoPath = 'images/anime/logos/';
 
         if ($request->hasFile('preview') && $request->hasFile('sub_preview')) {
             // Preview
@@ -84,32 +85,22 @@ class AnimeFormsController extends Controller
             $subPreviewExtension = $request->file('sub_preview')->extension();
             $subPreviewFilename = $anime->id . '-' . $anime->alias . '.' . $subPreviewExtension;
 
+            // Logo
+            $logoExtension = $request->file('logo')->extension();
+            $logoFilename = $anime->id . '-' . $anime->alias . '.' . $logoExtension;
+
             // Put in Storage
             $request->preview->storeAs($previewPath, $previewFilename);
             $request->sub_preview->storeAs($subPreviewPath, $subPreviewFilename);
+            $request->logo->storeAs($logoPath, $logoFilename);
 
             // Put in Database
             $preview = new Preview();
             $preview->anime_id = $anime->id;
             $preview->preview_path = (string)$previewPath . $previewFilename;
             $preview->sub_preview_path = (string)$subPreviewPath . $subPreviewFilename;
+            $preview->logo_path = (string)$logoPath . $logoFilename;
             $preview->save();
-        }
-
-        $existingFilePathsPreview = Preview::pluck('preview_path')->toArray();
-        $allPreviewFiles = Storage::files('images/anime/previews');
-        foreach ($allPreviewFiles as $file) {
-            if (!in_array($file, $existingFilePathsPreview)) {
-                Storage::delete($file);
-            }
-        }
-
-        $existingFilePathsSubPreview = Preview::pluck('sub_preview_path')->toArray();
-        $allSubPreviewFiles = Storage::files('images/anime/sub-previews');
-        foreach ($allSubPreviewFiles as $file) {
-            if (!in_array($file, $existingFilePathsSubPreview)) {
-                Storage::delete($file);
-            }
         }
 
         // // Screenshots
@@ -129,15 +120,6 @@ class AnimeFormsController extends Controller
                 $screenshot->save();
             }
         }
-
-        $existingFilePathsScreenshots = Preview::pluck('sub_preview_path')->toArray();
-        $allScreenshotsFiles = Storage::files('images/anime/screenshots');
-        foreach ($allScreenshotsFiles as $file) {
-            if (!in_array($file, $existingFilePathsScreenshots)) {
-                Storage::delete($file);
-            }
-        }
-
 
         return back();
     }

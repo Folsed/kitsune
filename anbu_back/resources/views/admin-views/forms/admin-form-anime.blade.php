@@ -137,13 +137,13 @@
                                 </div>
                                 <div class="col-xl-6">
                                     <div class="form-group mb-3">
-                                        <label class="form-label" for="categories">Genres</label>
-                                        <select name="categories[]" id="categories"
-                                            class="@error('categories') is-invalid @enderror" multiple>
-                                            @foreach ($categories as $category)
-                                                <option value="{{ $category->name }}"
-                                                    {{ (is_array(old('categories')) and in_array($category->name, old('categories'))) ? 'selected' : '' }}>
-                                                    {{ $category->name }}</option>
+                                        <label class="form-label" for="genres">Genres</label>
+                                        <select name="genres[]" id="genres"
+                                            class="@error('genres') is-invalid @enderror" multiple>
+                                            @foreach ($genres as $genre)
+                                                <option value="{{ $genre->name }}"
+                                                    {{ (is_array(old('genres')) and in_array($genre->name, old('genres'))) ? 'selected' : '' }}>
+                                                    {{ $genre->name }}</option>
                                             @endforeach
                                         </select>
                                         @error('categories')
@@ -190,6 +190,17 @@
                                             class="form-control choose @error('sub-preview') is-invalid @enderror"
                                             id="" value="{{ old('sub_preview') }}">
                                         @error('sub-preview')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label class="form-label" for="">
+                                            Logo
+                                        </label>
+                                        <input type="file" name="logo"
+                                            class="form-control choose @error('logo') is-invalid @enderror"
+                                            id="" value="{{ old('logo') }}">
+                                        @error('logo')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>

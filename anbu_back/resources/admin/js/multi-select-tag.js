@@ -240,4 +240,4 @@ function MultiSelectTag (el, customs = {shadow: false, rounded:true}) {
         })
     }
 }
-new MultiSelectTag('categories');
+new MultiSelectTag('genres');

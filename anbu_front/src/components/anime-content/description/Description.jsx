@@ -14,15 +14,16 @@ const Description = () => {
     }
 
     const data = animeData.data
-    console.log(data)
+    console.log(animeData)
 
     const opts = {
         height: '230',
         width: '100%',
         playerVars: {
           // https://developers.google.com/youtube/player_parameters
-          autoplay: 1,
+          autoplay: 0,
         },
+        
       };
 
     return (
@@ -61,9 +62,9 @@ const Description = () => {
                                     {data.synopsis}
                                 </p>
                             </div>
-                            <div className={styles.categories}>
+                            <div className={styles.genres}>
                                     <div className={styles.categs}>
-                                        {data.categories.map((item, i) => (
+                                        {data.genres.map((item, i) => (
                                             <div className={styles.categDetailWrap} key={i}>
                                                 <NavLink to={`#`}>
                                                     <div className={styles.categDetail}>
@@ -103,7 +104,7 @@ const Description = () => {
                         </div>
 
                         <div className={styles.nextSection}>
-                            <YouTube videoId="-J9fTPgJbBM" opts={opts}/>
+                            <YouTube videoId={data.trailer} opts={opts}/>
                             <OrangeButton title={`Почати перегляд`} className={styles.actBtn} watch/>
                         </div>
                     </div>

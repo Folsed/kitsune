@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\AnimeResource;
+use App\Models\Anime;
 use Illuminate\Http\Request;
 
 class AnimeController extends Controller
@@ -14,7 +16,7 @@ class AnimeController extends Controller
      */
     public function index()
     {
-        //
+        return AnimeResource::collection(Anime::all());
     }
 
     /**
@@ -46,7 +48,7 @@ class AnimeController extends Controller
      */
     public function show($id)
     {
-        //
+        return new AnimeResource(Anime::findOrFail($id));
     }
 
     /**

@@ -18,10 +18,10 @@ class SetEncoding
     {
         $response = $next($request);
 
-        if ($response instanceof \Illuminate\Http\Response) {
-            return $response;
-        } else {
-            return $response->setEncodingOptions(JSON_UNESCAPED_UNICODE);
+        if ($response instanceof \Illuminate\Http\JsonResponse) {
+            $response->setEncodingOptions(JSON_UNESCAPED_UNICODE);
         }
+
+        return $response;
     }
 }

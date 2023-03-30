@@ -12,7 +12,7 @@ const Anime = () => {
     const { animeId } = useParams()
 
     const { isLoading, isError, data } = useAnime(animeId)
-
+    
 
     const value = {
         isLoading,

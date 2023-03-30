@@ -8,7 +8,7 @@ export const useAnime = (id) => {
         () => AnimeService.getById(id),
         {
             keepPreviousData: true,
-            refetchOnWindowFocus: false,
+            refetchOnWindowFocus: true,
             onError: (error) => {
                 alert(error.message)
             },

@@ -18,6 +18,7 @@ class AnimeResource extends JsonResource
             'id' => $this->id,
             'ua_title' => $this->ua_title,
             'en_title' => $this->en_title,
+            'alias' => $this->alias,
             'aired' => $this->aired,
             'country' => $this->country,
             'episodes' => $this->episodes,
@@ -28,7 +29,7 @@ class AnimeResource extends JsonResource
             'duration' => $this->duration,
             'synopsis' => $this->synopsis,
             'trailer' => $this->trailer,
-            'categories' => $this->categories,
+            'genres' => $this->genres,
             'preview' => PreviewResource::collection($this->previews)
         ];
     }
