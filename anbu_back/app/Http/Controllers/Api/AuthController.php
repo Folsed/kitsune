@@ -18,7 +18,7 @@ class AuthController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'password' => ['required', Rules\Password::defaults()],
         ]);
 
         $user = User::create([
@@ -29,7 +29,7 @@ class AuthController extends Controller
 
         $user->assignRole('admin');
 
-        $token = $user->createToken('main')->accessToken;
+        $token = $user->createToken('main')->plainTextToken;
 
         event(new Registered($user));
 
@@ -57,7 +57,7 @@ class AuthController extends Controller
         }
 
         $user = Auth::user();
-        $token = $user->createToken('main')->accessToken;
+        $token = $user->createToken('main')->plainTextToken;
 
         return response([
             'user' => $user,

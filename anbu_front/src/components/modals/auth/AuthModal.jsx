@@ -6,21 +6,39 @@ import styles from './auth.module.css'
 
 
 const AuthModal = ({ toggleClass }) => {
-    const [action, setAction] = useState(0)
+    const [action, setAction, error] = useState(0)
 
     // Auth States
-    const { mutate, isError, isLoading } = useLogin()
+    // const { mutate, isError, isLoading } = useLogin()
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [error, setError] = useState({__html: ''})
+    // const [error, setError] = useState({__html: ''})
+    const login = useLogin()
 
+    const token = 'asdasd123'
     const onSubmit = (e) => {
         e.preventDefault();
         // setError({__html: ''})
+        const payload = {
+            name: name,
+            email: email,
+            password: password,
+        };
 
-        mutate({ name, email, password })
+        login.mutateAsync(payload)
+            .then((response) => {
+                console.log(response)
+            })
+            .catch((error) => {
+                if(error.response) {
+                    error.response.data.errors
+                }
+                console.log(error)
+            })
+
     }
+
 
     return (
         <div
@@ -29,7 +47,7 @@ const AuthModal = ({ toggleClass }) => {
             <div className={styles.authCanvas}>
                 <Logo />
                 {action === 0 ?
-                // Login Form
+                    // Login Form
                     <form action="" method='post'>
                         <div className={styles.formLogIn}>
                             <div className={styles.input}>
@@ -70,9 +88,9 @@ const AuthModal = ({ toggleClass }) => {
                                 <input
                                     id="name"
                                     type="text"
-                                    required="required"
+                                    required
                                     name="name"
-                                    value={name}
+                                    // value={name}
                                     onChange={(e) => setName(e.target.value)}
                                 />
                                 <span>Name</span>
@@ -82,9 +100,9 @@ const AuthModal = ({ toggleClass }) => {
                                 <input
                                     id="email"
                                     type="text"
-                                    required="required"
+                                    required
                                     name="email"
-                                    // value={email || ''}
+                                    // value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                 />
                                 <span>Email</span>
@@ -95,8 +113,8 @@ const AuthModal = ({ toggleClass }) => {
                                     id="password"
                                     type="password"
                                     name="password"
-                                    // value={password || ''}
-                                    required="required"
+                                    // value={password}
+                                    required
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
                                 <span>Password</span>

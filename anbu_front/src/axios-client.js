@@ -4,18 +4,17 @@ const axiosClient = axios.create({
     baseURL: import.meta.env.VITE_API_BASE_URL
 })
 
+// axiosClient.defaults.withCredentials = true
+
+
 axiosClient.interceptors.request.use((config) => {
-    token = '1234'
+    const token = '123sdfsdfsd4'
     config.headers.Authorization = `Bearer ${token}`
     return config
 })
 
 axiosClient.interceptors.response.use(response => {
     return response
-}, error => {
-    if (error.response && error.response.status === 401) {
-        return error
-    }
 })
 
 export default axiosClient

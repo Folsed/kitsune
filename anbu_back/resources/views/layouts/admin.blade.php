@@ -10,6 +10,7 @@
     <title>Admin</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
         name='viewport' />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!--     Fonts and icons     -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
     <!-- CSS Files -->
@@ -29,7 +30,8 @@
                         Forms:
                     </div>
                 </a>
-                <a href="{{ route('admin-forms-anime') }}" class="nav-item @if(Route::is('admin-forms-anime')) {{ 'active' }} @endif" >
+                <a href="{{ route('admin-forms-anime') }}"
+                    class="nav-item @if (Route::is('admin-forms-anime')) {{ 'active' }} @endif">
                     <div class="item-wrap">
                         Anime
                     </div>
@@ -44,7 +46,8 @@
                         Tables:
                     </div>
                 </a>
-                <a href="{{ route('admin-tables-anime') }}" class="nav-item @if(Route::is('admin-tables-anime')) {{ 'active' }} @endif"">
+                <a href="{{ route('admin-tables-anime') }}"
+                    class="nav-item @if (Route::is('admin-tables-anime')) {{ 'active' }} @endif"">
                     <div class="item-wrap">
                         Anime
                     </div>

@@ -6,14 +6,15 @@ import { AuthService } from "../services/auth.service";
 
 
 export const useLogin = () => {
-    const { mutate, isLoading, isError } = useMutation(
-        ['login'],
-        (formData) => axiosClient.post('/registered', formData),
-        {
-            onError: (error) => {
-                console.log(error);
-            },
+    return useMutation(
+        'registration',
+        (formData) => {
+            return axiosClient.post('/registered', formData)
+            .then(res => res.data)
+            .catch(err => {
+                console.log(err)
+            })
+            
         }
     )
-    return { mutate, isError, isLoading }
 }
