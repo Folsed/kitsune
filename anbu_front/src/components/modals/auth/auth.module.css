@@ -126,6 +126,14 @@
     font-size: 0.75em;
 }
 
+.input.uncorrect .shalf {
+    background-color: red;
+}
+
+.input.uncorrect input:valid~.shalf,
+.input.uncorrect input:focus~.shalf {
+    background-color: red;
+}
 
 
 

@@ -4,15 +4,15 @@ import axiosClient from "../axios-client";
 import { userAuthContext } from "../providers/AuthProvider";
 
 
-export const useLogin = (setActive) => {
+export const useRegistration = (setActive) => {
     const [errors, setErrors] = useState()
     const {setCurrentUser, setUserToken} = userAuthContext()
 
 
-    const login = useMutation(
-        'login',
+    const registration = useMutation(
+        'registration',
         async (formData) => {
-            axiosClient.post('/login', formData)
+            axiosClient.post('/registered', formData)
                 .then(({ data }) => {
                     setCurrentUser(data.user)
                     setUserToken(data.token)
@@ -27,5 +27,5 @@ export const useLogin = (setActive) => {
         }
 
     )
-    return { login, errors, setErrors }
+    return { registration, errors, setErrors }
 }
