@@ -1,31 +1,20 @@
-import { useState } from "react";
 import { useMutation } from "react-query";
+import { AnimeService } from "../services/AnimeData.service";
 import axiosClient from "../axios-client";
-import { userAuthContext } from "../providers/AuthProvider";
+import axios from "axios";
+import { AuthService } from "../services/auth.service";
 
 
-export const useLogin = (setActive) => {
-    const [errors, setErrors] = useState()
-    const {setCurrentUser, setUserToken} = userAuthContext()
-
-
-    const login = useMutation(
-        'login',
-        async (formData) => {
-            axiosClient.post('/login', formData)
-                .then(({ data }) => {
-                    setCurrentUser(data.user)
-                    setUserToken(data.token)
-                    setActive(false)
-                })
-                .catch((error) => {
-                    if (error.response) {
-                        const finalErrors = error.response.data.errors
-                        setErrors(finalErrors)
-                    }
-                })
+export const useLogin = () => {
+    return useMutation(
+        'registration',
+        (formData) => {
+            return axiosClient.post('/registered', formData)
+            .then(res => res.data)
+            .catch(err => {
+                console.log(err)
+            })
+            
         }
-
     )
-    return { login, errors, setErrors }
 }

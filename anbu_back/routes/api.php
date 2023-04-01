@@ -27,22 +27,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-
-
+Route::middleware('auth:sanctum')->get('/api/user', function (Request $request) {
+    return $request->user()->all()->toArray();
+});
 
 // Auth
-
-Route::controller(AuthController::class)->group(function () {
-    Route::post('api/registered', 'registered')->name('api-registered');
-    Route::post('api/login', 'login')->name('api-login');
-
-
-    Route::middleware('auth:sanctum')->group(function() {
-        Route::post('api/logout', 'logout')->name('api-logout');
-        Route::get('api/user', 'user')->name('api-logout');
-    });
-});
+Route::post('api/registered', [AuthController::class, 'registered'])->name('api-registered');
 
 // Anime API
 
@@ -52,6 +42,6 @@ Route::controller(AnimeController::class)->group(function () {
 });
 
 
-Route::get('api/anime/genres/list', function () {
+Route::get('api/anime/genres/list', function() {
     return GenreResourse::collection(Genre::all());
 })->name('show-genres');
