@@ -1,5 +1,4 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { useCurrentUser } from "../hooks/useCurrentUser";
 
 const AuthContext = createContext({
     currentUser: {},
@@ -11,24 +10,20 @@ const AuthContext = createContext({
 
 
 export const AuthProvider = ({ children }) => {
-    const { data, isLoading } = useCurrentUser()
-    const [currentUser, setCurrentUser] = useState({})
+    const parsedUserData = JSON.parse(localStorage.getItem('USER_INFO'))
+    const [currentUser, _setCurrentUser] = useState(parsedUserData || '')
     const [userToken, _setUserToken] = useState(localStorage.getItem('TOKEN') || '')
 
-    useEffect(() => {
-        if (!isLoading) {
-            setCurrentUser(data.data)
-            console.log(currentUser.name)
 
+
+    const setCurrentUser = (data) => {
+        if (data) {
+            localStorage.setItem('USER_INFO', JSON.stringify(data))
+        } else {
+            localStorage.removeItem('USER_INFO')
         }
-    })
-
-    // if(isLoading) {
-    //     return null
-    // }
-
-
-
+        _setCurrentUser(data)
+    }
 
     const setUserToken = (token) => {
         if (token) {
