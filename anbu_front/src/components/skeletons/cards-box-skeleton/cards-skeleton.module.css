@@ -1,0 +1,24 @@
+.skeleton-wrapper {
+    width: 1043px;
+    margin: 0 auto;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.skeleton-container {
+    display: grid;
+    grid-template-columns: repeat(6, 153px);
+    gap: 25px;
+}
+
+.skeleton-title {
+    width: 23rem;
+    height: 17px;
+}
+
+.skeleton-sub-title {
+    width: 30rem;
+    height: 14px;
+}

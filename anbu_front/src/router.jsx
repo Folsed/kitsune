@@ -14,8 +14,9 @@ const router = createBrowserRouter([
         errorElement: <NotFound />,
         children: [
             {
-                element: <Home />,
                 index: true,
+                element: <Home />,
+                // loader
             },
             {
                 path: ROUTES.animePage(),

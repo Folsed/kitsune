@@ -1,5 +1,7 @@
 import styles from './header.module.css'
 
+import avatar from './../../img/avatar.jpg'
+
 import { Link } from 'react-router-dom';
 import { Logo } from '../../assets/logo/Logo';
 import search from './../../assets/icons/search.svg'
@@ -8,6 +10,7 @@ import BrowseModal from '../modals/BrowseModal';
 import AuthModal from '../modals/auth/AuthModal';
 import { userAuthContext } from '../../providers/AuthProvider';
 import { useLogout } from '../../hooks/useLogout';
+import UserActionsModal from '../modals/UserActionsModal';
 
 const Header = () => {
     const [active, setActive] = useState(false)
@@ -17,8 +20,6 @@ const Header = () => {
         auth: false,
     });
     const { currentUser, userToken } = userAuthContext()
-    const { logout } = useLogout()
-
 
     const handleClick = (state) => {
         setActive(true);
@@ -37,12 +38,6 @@ const Header = () => {
         document.body.classList.remove('scroll-blocked')
     }
 
-    const onLogout = (ev) => {
-        ev.preventDefault()
-
-        logout.mutateAsync()
-
-    }
 
     return (
         <header className={styles.header}>
@@ -86,18 +81,17 @@ const Header = () => {
                         {userToken ?
                             <div className={styles.dropdownMenuBox}>
                                 <div
-                                    className={`${styles.menuItem} ${toggleClass === 'anime' ? styles.activeTab : ''}`}
-                                    onClick={() => handleClick('anime')}
+                                    className={`${styles.menuItem} ${toggleClass === 'user' ? styles.activeTab : ''}`}
+                                    onClick={() => handleClick('user')}
                                 >
                                     <span>{currentUser.name}</span>
-                                    <div className="header-svg menu-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" id="account"><path d="M15.71,12.71a6,6,0,1,0-7.42,0,10,10,0,0,0-6.22,8.18,1,1,0,0,0,2,.22,8,8,0,0,1,15.9,0,1,1,0,0,0,1,.89h.11a1,1,0,0,0,.88-1.1A10,10,0,0,0,15.71,12.71ZM12,12a4,4,0,1,1,4-4A4,4,0,0,1,12,12Z">
-                                        </path>
-                                        </svg>
+                                    <div className={styles.avatar}>
+                                        <div className={styles.avatarWrapper}>
+                                            <img src={avatar} alt="" />
+                                        </div>
                                     </div>
                                 </div>
-                                <BrowseModal toggleClass={toggleClass} setToggleClass={setToggleClass} />
-                                <div className={styles.menuItem} onClick={(ev) => onLogout(ev)}><h4>Logout</h4></div>
+                                <UserActionsModal toggleClass={toggleClass} setToggleClass={setToggleClass} setActive={setActive}/>
                             </div>
 
                             :

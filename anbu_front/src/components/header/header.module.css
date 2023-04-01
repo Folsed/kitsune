@@ -210,3 +210,20 @@
     transform: scale(1);
 }
 
+.avatar {
+    height: 30px;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 5px;
+}
+
+.avatar-wrapper {
+    background-color:#252525;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    overflow: hidden;
+    object-fit: cover;
+}

@@ -12,7 +12,7 @@ const AuthModal = ({ toggleClass, setActive }) => {
 
     return (
         <div
-            className={`${styles.authModal} ${toggleClass === 'auth' ? styles.activeAuthBox : ''} ${action === 0 ? styles.login : styles.register}`}
+            className={`${styles.authModal} ${toggleClass === 'auth' ? styles.activeAuthBox : ''}`}
         >
             <div className={styles.authCanvas}>
 
