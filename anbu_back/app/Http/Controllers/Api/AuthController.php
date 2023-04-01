@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
@@ -17,7 +18,7 @@ class AuthController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', Rules\Password::defaults()],
         ]);
 
@@ -46,15 +47,28 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request)
     {
-        $credentials = $request->validated();
-        $remember = $credentials['remember'] ?? false;
-        unset($credentials['remember']);
+        // $credentials = $request->validated();
+        // $remember = $credentials['remember'] ?? false;
+        // unset($credentials['remember']);
 
-        if(!Auth::attempt($credentials, $remember)) {
-            return response([
-                'error' => 'The Provided credentials are not correct.'
-            ], 422);
-        }
+        // if (!Auth::attempt($credentials, $remember)) {
+        //     throw ValidationException::withMessages([
+        //         'password' => ['Перевірте дані для входу'],
+        //     ]);
+        // }
+
+        // $user = Auth::user();
+        // $token = $user->createToken('main')->plainTextToken;
+
+        // return response([
+        //     'user' => $user,
+        //     'token' => $token,
+
+        // ]);
+
+        $request->authenticate();
+
+        $request->session()->regenerate();
 
         $user = Auth::user();
         $token = $user->createToken('main')->plainTextToken;
@@ -64,31 +78,25 @@ class AuthController extends Controller
             'token' => $token,
 
         ]);
-
-        // $request->authenticate();
-
-        // $request->session()->regenerate();
-
-        // return redirect()->back();
     }
 
 
 
     public function logout(Request $request)
     {
-        // Auth::guard('web')->logout();
+        Auth::guard('web')->logout();
 
-        // $request->session()->invalidate();
+        $request->session()->invalidate();
 
-        // $request->session()->regenerateToken();
-
-        // return redirect()->back();
-
-        $user = Auth::user();
-        $user->currentAccessToken()->delete();
+        $request->session()->regenerateToken();
 
         return response([
             'success' => true
         ]);
+    }
+
+    public function user(Request $request)
+    {
+        return $request->user();
     }
 }

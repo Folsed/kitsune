@@ -1,20 +1,43 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import { useCurrentUser } from "../hooks/useCurrentUser";
 
 const AuthContext = createContext({
     currentUser: {},
     setCurrentUser: null,
-    userToken: () => {},
-    setUserToken: () => {}
+    userToken: () => { },
+    setUserToken: () => { }
 })
 
 
 
 export const AuthProvider = ({ children }) => {
-    const [currentUser, setCurrentUser] = useState({
-        name: 'Folsedasd',
-        email: 'folsed@gmail.com'
+    const { data, isLoading } = useCurrentUser()
+    const [currentUser, setCurrentUser] = useState({})
+    const [userToken, _setUserToken] = useState(localStorage.getItem('TOKEN') || '')
+
+    useEffect(() => {
+        if (!isLoading) {
+            setCurrentUser(data.data)
+            console.log(currentUser.name)
+
+        }
     })
-    const [userToken, setUserToken] = useState('')
+
+    // if(isLoading) {
+    //     return null
+    // }
+
+
+
+
+    const setUserToken = (token) => {
+        if (token) {
+            localStorage.setItem('TOKEN', token)
+        } else {
+            localStorage.removeItem('TOKEN')
+        }
+        _setUserToken(token)
+    }
 
     return (
         <AuthContext.Provider value={{
