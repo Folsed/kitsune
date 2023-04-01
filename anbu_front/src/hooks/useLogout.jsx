@@ -13,7 +13,7 @@ export const useLogout = () => {
         async () => {
             axiosClient.post('/logout')
                 .then(((res) => {
-                    setCurrentUser(null)
+                    setCurrentUser({})
                     setUserToken(null)
                 }))
         }
