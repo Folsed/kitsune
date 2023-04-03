@@ -1,0 +1,69 @@
+.wrapper {
+    grid-area: info;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.wrapper h4 {
+    font-weight: 400;
+}
+
+.info-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.avatar-wrapper {
+    display: flex;    
+}
+
+.avatar {
+    border-radius: 50%;
+    overflow: hidden;
+    object-fit:cover;
+    background-color: #181818;
+    height: 240px;
+    width: 240px;
+}
+
+.avatar img{
+    height: 100%;
+    width: 100%;
+}
+
+.pronouns {
+    font-size: 12px;
+    color: gray;
+}
+
+.name-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.permission {
+    font-style: italic;
+    color: var(--main-color);
+}
+
+
+.next-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.next-info span{
+    color: rgb(140, 140, 140);
+}
+
+.edit-btn {
+    padding: 2px 10px;
+    font-size: 13px;
+    font-weight: 400;
+    border: 1px solid var(--main-color);
+    /* font-style; */
+}

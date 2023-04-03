@@ -53,6 +53,12 @@
                     </div>
                 </a>
             </nav>
+            <a href="{{ route('admin-logout') }}"
+                class="nav-exit">
+                <div class="exit-btn">
+                    Exit
+                </div>
+            </a>
         </div>
 
         <div class="main-panel">

@@ -20,7 +20,7 @@ const DefaultLayout = () => {
       }, [location]);
 
     return (
-        <>
+        <div>
             <Header />
             {/* <ScrollRestoration /> */}
 
@@ -30,7 +30,7 @@ const DefaultLayout = () => {
 
 
             <Footer />
-        </>
+        </div>
     )
 }
 

@@ -3,7 +3,6 @@ import styles from './header.module.css'
 import React, { useContext } from 'react'
 import AnimeContext from '../../../providers/AnimeProvider'
 
-import logo from './../../../img/nier-logo3.png'
 import HeaderSkeleton from '../../skeletons/anime-page-skeleton/HeaderSkeleton'
 
 const Header = () => {
@@ -15,10 +14,12 @@ const Header = () => {
 
     const data = animeData.data
 
+    console.log(data)
+
     return (
         <header className={styles.header}>
             <div className={styles.wrapper}>
-                {animeData.isLoading ? <HeaderSkeleton/> :
+                {animeData.isLoading ? <HeaderSkeleton /> :
                     <div className={styles.subWrapper}>
                         <div className={styles.subPreviewBackgroundWrapper}>
                             <div className={styles.subPreviewBackground}>
@@ -29,6 +30,7 @@ const Header = () => {
                                         src={`http://127.0.0.1:8000/${data.preview[0].sub_preview_path}`}
                                         alt=""
                                         title=""
+                                        loading="lazy"
                                     />
                                 </picture>
                             </div>
@@ -38,7 +40,12 @@ const Header = () => {
                                 <div className={styles.desc}>
                                     <div className={styles.aniLogo}>
                                         <picture>
-                                            <img className={styles.logo} src={logo} alt="" />
+                                            <img
+                                                className={styles.logo}
+                                                src={`http://127.0.0.1:8000/${data.preview[0].logo_path}`}
+                                                loading="lazy"
+                                                alt=""
+                                            />
                                         </picture>
                                     </div>
 

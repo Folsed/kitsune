@@ -80,7 +80,6 @@ p {
     margin: 0;
 }
 
-
 body {
     font-family: 'Chakra Petch', sans-serif;
     font-weight: 400;
@@ -182,6 +181,8 @@ img {
     background-color: rgb(40, 40, 40);
 }
 
+
+
 .nav-item.active {
     border-left: 3px solid white;
     background-color: rgb(40, 40, 40);
@@ -204,6 +205,11 @@ img {
     opacity: .6;
 }
 
+.nav-exit {
+    margin: 5px;
+    position: absolute;
+    bottom: 0;
+}
 /* ======================================================= */
 
 .main-panel {

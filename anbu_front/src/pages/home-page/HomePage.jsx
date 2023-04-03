@@ -10,6 +10,7 @@ import NewsBanner from '../../components/home-content/banners/news/NewsBanner'
 import BannerPromo from '../../components/home-content/banners/promo-banners/BannerPromo'
 import BestSeason from '../../components/home-content/cards/BestSeason'
 import Recently from '../../components/home-content/cards/Recently'
+import { LazyLoadComponent } from 'react-lazy-load-image-component'
 
 
 const Home = () => {
@@ -17,22 +18,38 @@ const Home = () => {
     return (
         <div className="home-content-wrapper home">
             <CarouselGeneral />
-            
+
             <div className="dynamic-wrapper">
-                <Recently/>
+                <Recently />
                 <BannerOrange />
                 <Recently />
                 <BestSeason />
-                <NewsBanner />
-                <BestSeason />
-                <BannerPromo/>
-                <BestSeason />
-                <BestSeason />
-                <BannerBlue />
-                <BestSeason />
+                <LazyLoadComponent>
+                    <NewsBanner />
+                </LazyLoadComponent>
+                <LazyLoadComponent>
+                    <BestSeason />
+                </LazyLoadComponent>
+                <LazyLoadComponent>
+                    <BannerPromo />
+                </LazyLoadComponent>
+                <LazyLoadComponent>
+                    <BestSeason />
+                </LazyLoadComponent>
+                <LazyLoadComponent>
+                    <BestSeason />
+                </LazyLoadComponent>
+                <LazyLoadComponent>
+                    <BannerBlue />
+                </LazyLoadComponent>
+                <LazyLoadComponent>
+                    <BestSeason />
+                </LazyLoadComponent>
+
+
             </div>
             <div className="view-all__wrapper">
-                <ViewAll/>
+                <ViewAll />
             </div>
         </div>
     )

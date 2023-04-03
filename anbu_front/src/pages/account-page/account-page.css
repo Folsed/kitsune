@@ -1,0 +1,16 @@
+.account-page__wrapper {
+    width: 1067px;
+    margin: 0 auto;
+    margin-top: 3rem;
+}
+
+.account-page__grid {
+    display: grid;
+    grid-template-areas: 
+    "info navbar"
+    "info content";
+    grid-template-columns: 15rem;
+    grid-template-rows: 3rem;
+    gap: 20px;
+}
+

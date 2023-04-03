@@ -9,7 +9,6 @@ import { useEffect, useState } from 'react';
 import BrowseModal from '../modals/BrowseModal';
 import AuthModal from '../modals/auth/AuthModal';
 import { userAuthContext } from '../../providers/AuthProvider';
-import { useLogout } from '../../hooks/useLogout';
 import UserActionsModal from '../modals/UserActionsModal';
 
 const Header = () => {
@@ -22,7 +21,7 @@ const Header = () => {
     const { currentUser, userToken } = userAuthContext()
 
     const handleClick = (state) => {
-        setActive(true);
+        setActive(true)
         setToggleClass(state)
     }
 
@@ -90,8 +89,13 @@ const Header = () => {
                                             <img src={avatar} alt="" />
                                         </div>
                                     </div>
+                                    <div className="header-svg menu-icon">
+                                        <svg className="header-svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="4 4 14 14" data-t="dropdown-svg" aria-labelledby="dropdown-svg" aria-hidden="true" role="img">
+                                            <path d="M7 10h10l-5 5z"></path>
+                                        </svg>
+                                    </div>
                                 </div>
-                                <UserActionsModal toggleClass={toggleClass} setToggleClass={setToggleClass} setActive={setActive}/>
+                                <UserActionsModal toggleClass={toggleClass} setToggleClass={setToggleClass} setActive={setActive} />
                             </div>
 
                             :
@@ -108,7 +112,7 @@ const Header = () => {
                                         </svg>
                                     </div>
                                 </div>
-                                <AuthModal toggleClass={toggleClass} setToggleClass={setToggleClass} setActive={setActive}/>
+                                <AuthModal toggleClass={toggleClass} setToggleClass={setToggleClass} setActive={setActive} />
                             </div>
                         }
 

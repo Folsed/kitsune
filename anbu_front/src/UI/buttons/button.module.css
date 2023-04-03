@@ -49,10 +49,10 @@
 .watch-btn {
     display: flex;
     align-items: center;
-    background-color: #f47521;
+    background-color: var(--main-color);
     font-weight: 600;
     font-size: 18px;
-    height: 50px;
+    height: 100%;
     transition: background-color .5s;
     border: 2px solid #f47521;
     padding: 10px;

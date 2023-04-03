@@ -11,7 +11,7 @@
             <div class="sub-preview">
                 <div class="sub-preview-child">
                     @foreach ($data->previews as $preview)
-                        <div class="sub-preview-bg_img" style="background-image: url('{{ asset($preview->preview_path) }}');">
+                        <div class="sub-preview-bg_img" style="background-image: url('{{ asset($preview->sub_preview_path) }}');">
                     @endforeach
                 </div>
                 <div class="head-title text-center">
@@ -46,9 +46,9 @@
                             <div class="product__item__text">
                                 <strong>Genre:</strong>
                                 <ul>
-                                    @foreach ($data->categories as $category)
+                                    @foreach ($data->genres as $genre)
                                         <a href="#">
-                                            <li><a href="#">{{ $category->name }}</a></li>
+                                            <li><a href="#">{{ $genre->name }}</a></li>
                                         </a>
                                     @endforeach
 

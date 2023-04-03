@@ -4,10 +4,12 @@ import { useContext } from 'react'
 import AnimeContext from '../../../providers/AnimeProvider'
 import CommentInput from './comment-input/CommentInput'
 import Feedback from './comment-feedback/Feedback'
+import { userAuthContext } from '../../../providers/AuthProvider'
+import Warning from '../../../UI/warning/Warning'
 
 const Comments = () => {
     const animeData = useContext(AnimeContext)
-
+    const {currentUser, userToken} = userAuthContext()
     if (animeData.isLoading) {
         return <p>Loading</p>
     }
@@ -21,7 +23,8 @@ const Comments = () => {
                 <h2>Що скажеш про аніме "{data.ua_title}" ?</h2>
             </div>
 
-            <CommentInput />
+            {userToken ? <CommentInput /> : <Warning/>}
+            
 
             <Feedback />
         </div>

@@ -1,0 +1,25 @@
+
+.warning-wrapper {
+    width: 100%;
+    grid-column: span 2;
+    padding: 5px;
+    border: 1px dashed #181818;
+}
+
+.warning {
+    display: flex;
+    align-items: center;
+    background-color: #181818a8;
+    padding: 10px;
+    gap: 10px;
+}
+
+.warning-icon {
+    width: 50px;
+}
+
+
+.warning-info h3{
+    font-style: italic;
+    color: var(--main-color);
+}
