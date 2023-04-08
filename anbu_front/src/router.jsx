@@ -5,6 +5,7 @@ import Anime from "./pages/anime-page/AnimePage";
 import Home from "./pages/home-page/HomePage";
 import { NotFound } from "./pages/not-found/NotFound";
 import { ROUTES } from "./router/routes";
+import BrowsePage from "./pages/browse-page/BrowsePage";
 
 
 const router = createBrowserRouter([
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
             {
                 path: ROUTES.account,
                 element: <AccountPage/>
+            },
+            {
+                path: ROUTES.anime,
+                element: <BrowsePage/>
             },
 
         ]

@@ -1,7 +1,8 @@
 export const ROUTES = {
     home: '/',
-    animePage: (animeId = null, animeAlias = null) => (animeId ? `anime/${animeId}/${animeAlias}` : `anime/:animeId/:animeAlias`),
+    animePage: (animeId = null, animeAlias = null) => (animeId ? `/anime/${animeId}/${animeAlias}` : `anime/:animeId/:animeAlias`),
     account: '/account',
+    anime: '/animes',
 
     login: '/login',
     registration: 'registration',

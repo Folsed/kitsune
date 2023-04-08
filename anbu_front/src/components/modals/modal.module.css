@@ -37,11 +37,17 @@
 .dropdown-content {
     width: 1167px;
     margin: 0 auto;
-
+    display: flex;
+    
 }
 
 .text {
     opacity: .6;
+}
+
+.genres-wrapper {
+    flex: 1;
+    padding-left: 2.75rem;
 }
 
 .genres {
@@ -60,8 +66,41 @@
 }
 
 .genre:hover {
-    background-color: rgb(35, 35, 35);
+    background-color: rgb(18, 18, 18);
 }
+
+.genre:active {
+    background-color: rgb(14, 14, 14);
+}
+
+.menu-wrapper {
+    display: flex;
+    flex: 0 0 9rem;
+    border-right: 1px solid rgba(255, 255, 255, 0.076);
+    padding-right: 2.75rem;
+}
+
+.menu {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.menu-item {
+    display: block;
+    padding: 5px 5px;
+    position: relative;
+}
+
+.menu-item:hover {
+    background-color: rgb(18, 18, 18);
+}
+
+.menu-item:active {
+    background-color: rgb(14, 14, 14);
+}
+
 
 
 /* User */
@@ -135,6 +174,10 @@
 .actions li:hover {
     background-color: rgba(255, 255, 255, 0.1);
     cursor: pointer;
+}
+
+.actions li:active {
+    background-color: rgb(18, 18, 18);
 }
 
 .actions svg {

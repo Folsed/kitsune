@@ -48,6 +48,9 @@ Route::controller(AuthController::class)->group(function () {
 Route::controller(AnimeController::class)->group(function () {
     Route::get('api/anime', 'index')->name('api-anime-all');
     Route::get('api/anime/{id}', 'show')->name('api-anime-byId');
+
+    // Search
+    Route::get('api/search/anime', 'search')->name('api-anime-search');
 });
 
 

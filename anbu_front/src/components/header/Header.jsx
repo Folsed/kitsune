@@ -4,12 +4,12 @@ import avatar from './../../img/avatar.jpg'
 
 import { Link } from 'react-router-dom';
 import { Logo } from '../../assets/logo/Logo';
-import search from './../../assets/icons/search.svg'
 import { useEffect, useState } from 'react';
 import BrowseModal from '../modals/BrowseModal';
 import AuthModal from '../modals/auth/AuthModal';
 import { userAuthContext } from '../../providers/AuthProvider';
 import UserActionsModal from '../modals/UserActionsModal';
+import LiveSearch from '../live-serach/LiveSearch';
 
 const Header = () => {
     const [active, setActive] = useState(false)
@@ -21,8 +21,17 @@ const Header = () => {
     const { currentUser, userToken } = userAuthContext()
 
     const handleClick = (state) => {
-        setActive(true)
+        if (state === toggleClass) {
+            setActive(false)
+        } else {
+            setActive(true)
+        }
         setToggleClass(state)
+    }
+
+    const destroyStates = () => {
+        setToggleClass('')
+        setActive(false)
     }
 
     useEffect(() => {
@@ -43,7 +52,7 @@ const Header = () => {
             <div className={styles.headerSection}>
                 <div className={styles.headerContent}>
                     <div className={styles.leftMenu}>
-                        <Link className={styles.logo} to={'/'}><Logo /></Link>
+                        <Link className={styles.logo} to={'/'} onClick={() => destroyStates()}><Logo /></Link>
 
                         <div
                             className={styles.dropdownMenuBox}
@@ -65,15 +74,7 @@ const Header = () => {
                         <Link className={styles.menuItem}><span>Новини</span></Link>
                     </div>
                     <div className={styles.centerMenu}>
-                        <div className={styles.searchContainer}>
-                            <div className={styles.searchIcon}>
-                                <img src={search} alt="" />
-                            </div>
-                            <label className={styles.search}>
-                                <input type="text" placeholder="Пошук аніме" />
-                            </label>
-                        </div>
-
+                        <LiveSearch/>
                     </div>
                     <div className={styles.rightMenu}>
 

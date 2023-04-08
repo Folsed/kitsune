@@ -12,19 +12,6 @@ const BestSeason = ({ }) => {
 
     const { isLoading, isError, data } = useAnimes()
 
-
-
-    // if (isLoading) {
-    //     return <h3>Loading..</h3>
-    // }
-    // if (isError) {
-    //     return <h3>Loading..</h3>
-    // }
-    // if (!data) {
-    //     return <h3>Loading..</h3>
-    // }
-
-
     return (
         <>
             <div>
@@ -38,7 +25,6 @@ const BestSeason = ({ }) => {
                             </div>
                         </div>
                         <CardsCarousel>
-                            {isLoading && <p>Loading...</p>}
                             {data.map((item) => (
                                 <div
                                     className={`${styles.contentContainer}`}

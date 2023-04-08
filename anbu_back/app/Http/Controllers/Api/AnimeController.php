@@ -51,6 +51,27 @@ class AnimeController extends Controller
         return new AnimeResource(Anime::findOrFail($id));
     }
 
+    public function search(Request $request)
+    {
+        $validatedData = $request->validate([
+            'title' => ['required'],
+            // 'fetchCached' => ['boolean'],
+        ]);
+
+        // $fetchCached = $validatedData['fetchCached'];
+        $title = $validatedData['title'];
+
+
+        $animes = Anime::where('en_title', 'like', "%{$title}%")->orWhere('ua_title', 'like', "%{$title}%")->get();
+
+        // return response()->json([
+        //     'data' => [
+        //         'movies' => $movies,
+        //     ],
+        // ]);
+        return $animes;
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
