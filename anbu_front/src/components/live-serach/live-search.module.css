@@ -25,3 +25,8 @@
     color: #ff7b00;
     font-style: italic;
 }
+
+.search-autocomplete {
+    position: absolute;
+    top:50px;
+}

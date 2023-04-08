@@ -64,12 +64,11 @@ class AnimeController extends Controller
 
         $animes = Anime::where('en_title', 'like', "%{$title}%")->orWhere('ua_title', 'like', "%{$title}%")->get();
 
-        // return response()->json([
-        //     'data' => [
-        //         'movies' => $movies,
-        //     ],
-        // ]);
-        return $animes;
+        return response()->json([
+            'data' => [
+                'movies' => $animes,
+            ],
+        ]);
     }
 
     /**

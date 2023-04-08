@@ -5,16 +5,11 @@ import { useAnimeSearch } from '../../hooks/useAnimeSearch'
 
 const LiveSearch = () => {
     const [query, setQuery] = useState('')
-    const { isLoading, isError, data } = useAnimeSearch({title: query})
+    const { isLoading, isError, data, status } = useAnimeSearch({ title: query })
 
-
-    useEffect(() => {
-      if(query) {
-      }
-    
- 
-    }, [query])
-    
+    if( status === 'idle' ) {
+        console.log('empty')
+    }
 
     return (
         <div className={styles.searchContainer}>
@@ -22,8 +17,16 @@ const LiveSearch = () => {
                 <img src={search} alt="" />
             </div>
             <label className={styles.search}>
-                <input type="text" placeholder="Пошук аніме" onChange={({target}) => setQuery(target.value)}/>
+                <input type="text" placeholder="Пошук аніме" onChange={({ target }) => setQuery(target.value)} />
             </label>
+            <ul className={styles.searchAutocomplete}>
+                {status === 'success' ? data.data.movies.map((item, i) => (
+                    <li key={i}>{item.ua_title}</li>
+                )) : ''}
+                {/* {status === 'success' ? 'loading':data.data.movies.map((item, i) => (
+                    <li key={i}>{item.ua_title}</li>
+                ))} */}
+            </ul>
         </div>
     )
 }
