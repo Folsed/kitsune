@@ -17,7 +17,7 @@ export const useAnimeSearch = ({title}) => {
             onError: (error) => {
                 alert(error.message)
             },
-            select: ({ data }) => data,
+            select: ({ data }) => data.data.animes,
             enabled: !!title,
 
         }

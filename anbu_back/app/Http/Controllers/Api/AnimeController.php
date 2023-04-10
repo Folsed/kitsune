@@ -62,11 +62,11 @@ class AnimeController extends Controller
         $title = $validatedData['title'];
 
 
-        $animes = Anime::where('en_title', 'like', "%{$title}%")->orWhere('ua_title', 'like', "%{$title}%")->get();
+        $animes = Anime::where('en_title', 'like', "%{$title}%")->orWhere('ua_title', 'like', "%{$title}%")->get(['id', 'ua_title', 'en_title', 'aired','alias']);
 
         return response()->json([
             'data' => [
-                'movies' => $animes,
+                'animes' => $animes,
             ],
         ]);
     }
