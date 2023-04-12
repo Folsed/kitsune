@@ -26,7 +26,7 @@ const Anime = () => {
                 <Header />
                 <Description/>
                 <Player/>
-                <Comments/>
+                <Comments animeId={animeId}/>
             </div>
         </AnimeContext.Provider>
     )

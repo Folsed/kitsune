@@ -12,10 +12,6 @@ const LiveSearch = () => {
     const [focus, setFocus] = useState(false)
     const { isLoading, isError, data: animes, status } = useAnimeSearch({ title: query })
 
-    // if(animes.length === 0) {
-    //     console.log('empty')
-    // }
-
     return (
         <div className={styles.searchContainer}>
             <div className={`${styles.searchField} ${isLoading ? styles.focused : focus === true && animes ? styles.focused : ''}`}>

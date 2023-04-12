@@ -11,6 +11,7 @@ class Genre extends Model
 
     protected $fillable = [
         'name',
+        'en_name',
     ];
 
     public function animes()

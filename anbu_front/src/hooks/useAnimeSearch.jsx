@@ -1,6 +1,7 @@
 import { useQuery } from "react-query";
 import axiosClient from "../axios-client";
 import axios from "axios";
+import { AnimeService } from "../services/animeData.service";
 
 export const useAnimeSearch = ({title}) => {
 
@@ -10,14 +11,14 @@ export const useAnimeSearch = ({title}) => {
 
     const { data, isLoading, isError, status} = useQuery(
         ['anime', title],
-        () => axios.get(`http://localhost:8000/api/search/anime?${searchParams}`),
+        () => AnimeService.searchAnime(searchParams),
         {
             keepPreviousData: false,
             refetchOnWindowFocus: true,
             onError: (error) => {
                 alert(error.message)
             },
-            select: ({ data }) => data.data.animes,
+            select: ({ data }) => data.animes,
             enabled: !!title,
 
         }

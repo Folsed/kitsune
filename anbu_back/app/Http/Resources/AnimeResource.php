@@ -30,7 +30,7 @@ class AnimeResource extends JsonResource
             'synopsis' => $this->synopsis,
             'trailer' => $this->trailer,
             'genres' => $this->genres,
-            'preview' => PreviewResource::collection($this->previews)
+            'preview' => PreviewResource::collection($this->previews),
         ];
     }
 }

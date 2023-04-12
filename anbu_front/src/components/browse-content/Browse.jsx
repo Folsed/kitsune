@@ -1,13 +1,26 @@
 import './browse.module.css'
 
 import Animes from './animes-every/Animes'
+import { useLocation, useParams } from 'react-router-dom'
+import { ROUTES } from '../../router/routes'
+import AnimesByGenre from './animes-by-genre/AnimesByGenre'
 
 const Browse = () => {
-  return (
-    <div>
-        <Animes/>
-    </div>
-  )
+    const location = useLocation()
+    const { genre } = useParams()
+
+    return (
+        <div>
+            {
+                location.pathname === ROUTES.anime ? <Animes />
+                    :
+                    location.pathname === ROUTES.animeByGenre(genre) ? <AnimesByGenre/>
+                        :
+                        ''
+            }
+
+        </div>
+    )
 }
 
 export default Browse

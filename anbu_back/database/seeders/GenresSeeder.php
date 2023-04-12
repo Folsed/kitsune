@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class GenresSeeder extends Seeder
 {
-        /**
+    /**
      * Run the database seeds.
      *
      * @return void
@@ -16,38 +16,28 @@ class GenresSeeder extends Seeder
     public function run()
     {
         $genres = [
-            'Бойовик',
-            'Комедія',
-            'Драма',
-            'Фентезі',
-            'Жахи',
-            'Меха',
-            'Романтика',
-            'Наукова фантастика',
-            'Спорт',
-            'Пригоди',
-            'Трилер',
-            'Історичний',
-            'Містика',
-            'Музичний',
-            'Психологічний',
-            'Шкільний',
-            'Сейнен',
-            'Хентай',
-            'Етті',
-            'Сеннен',
-            'Йояй',
-            'Бара',
-            'Гурлит',
-            'Дзайн',
-            'Демони',
-            'Зомбі',
+            ['en_name' => 'Action', 'name' => 'Екшн'],
+            ['en_name' => 'Adventure', 'name' => 'Пригоди'],
+            ['en_name' => 'Comedy', 'name' => 'Комедія'],
+            ['en_name' => 'Drama', 'name' => 'Драма'],
+            ['en_name' => 'Fantasy', 'name' => 'Фентезі'],
+            ['en_name' => 'Horror', 'name' => 'Жахи'],
+            ['en_name' => 'Mecha', 'name' => 'Меха'],
+            ['en_name' => 'Mystery', 'name' => 'Містика'],
+            ['en_name' => 'Romance', 'name' => 'Романтика'],
+            ['en_name' => 'Sci-Fi', 'name' => 'Наукова фантастика'],
+            ['en_name' => 'Seinen', 'name' => 'Сейнен'],
+            ['en_name' => 'Sports', 'name' => 'Спорт'],
+            ['en_name' => 'Supernatural', 'name' => 'Надприродне'],
+            ['en_name' => 'Thriller', 'name' => 'Трилер'],
+            ['en_name' => 'Psychological', 'name' => 'Психологічний'],
+            ['en_name' => 'Music', 'name' => 'Музика'],
+            ['en_name' => 'Historical', 'name' => 'Історичний'],
+            ['en_name' => 'Subtitles', 'name' => 'Субтитри'],
+            ['en_name' => 'Shoujo', 'name' => 'Шодзьо'],
+            ['en_name' => 'Shounen', 'name' => 'Шьонен'],
         ];
 
-        foreach ($genres as $genre) {
-            DB::table('genres')->insert([
-                'name' => $genre,
-            ]);
-        }
+        DB::table('genres')->insert($genres);
     }
 }

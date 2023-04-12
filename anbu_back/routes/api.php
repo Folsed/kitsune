@@ -31,7 +31,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-// Auth
+// Auth API
 
 Route::controller(AuthController::class)->group(function () {
     Route::post('api/registered', 'registered')->name('api-registered');
@@ -49,11 +49,17 @@ Route::controller(AnimeController::class)->group(function () {
     Route::get('api/anime', 'index')->name('api-anime-all');
     Route::get('api/anime/{id}', 'show')->name('api-anime-byId');
 
+    // Comment
+    Route::get('api/comments/anime/{id}', 'comments')->name('api-anime-comments');
+    Route::post('api/comment/leave', 'comment')->name('api-anime-comment');
     // Search
     Route::get('api/search/anime', 'search')->name('api-anime-search');
+    // Browse
+    Route::get('api/anime/genre/{genre}', 'showByGenre')->name('api-anime-by-genre');
+
 });
 
-
+// Assets
 Route::get('api/anime/genres/list', function () {
     return GenreResourse::collection(Genre::all());
 })->name('show-genres');

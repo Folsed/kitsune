@@ -1,5 +1,6 @@
 import axios from "axios"
-import { API_URL } from "../../config"
+
+const API_URL = import.meta.env.VITE_API_BASE_URL
 
 export const AnimeService =  {
     async getAll() {
@@ -16,6 +17,24 @@ export const AnimeService =  {
 
     async getGenres() {
         const data = await axios.get(`${API_URL}/anime/genres/list`)
+
+        return data.data
+    },
+
+    async searchAnime(searchParams) {
+        const data = await axios.get(`${API_URL}/search/anime?${searchParams}`)
+
+        return data.data
+    },
+
+    async getComments(id) {
+        const data = await axios.get(`${API_URL}/comments/anime/${id}`)
+
+        return data.data
+    },
+
+    async getByGenre(genre) {
+        const data = await axios.get(`${API_URL}/anime/genre/${genre}`)
 
         return data.data
     },

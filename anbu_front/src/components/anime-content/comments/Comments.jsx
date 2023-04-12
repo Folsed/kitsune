@@ -6,16 +6,16 @@ import CommentInput from './comment-input/CommentInput'
 import Feedback from './comment-feedback/Feedback'
 import { userAuthContext } from '../../../providers/AuthProvider'
 import Warning from '../../../UI/warning/Warning'
+import { LazyLoadComponent } from 'react-lazy-load-image-component'
 
-const Comments = () => {
+const Comments = ({ animeId }) => {
     const animeData = useContext(AnimeContext)
-    const {currentUser, userToken} = userAuthContext()
+    const { currentUser, userToken } = userAuthContext()
     if (animeData.isLoading) {
-        return <p>Loading</p>
+        return null
     }
 
     const data = animeData.data
-    console.log(data)
 
     return (
         <div className={styles.commentsSection}>
@@ -23,10 +23,12 @@ const Comments = () => {
                 <h2>Що скажеш про аніме "{data.ua_title}" ?</h2>
             </div>
 
-            {userToken ? <CommentInput /> : <Warning/>}
-            
+            {userToken ? <CommentInput animeId={animeId} /> : <Warning />}
 
-            <Feedback />
+
+            <LazyLoadComponent>
+                <Feedback animeId={animeId} />
+            </LazyLoadComponent>
         </div>
     )
 }

@@ -4,48 +4,29 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\AnimeResource;
+use App\Http\Resources\CommentResource;
 use App\Models\Anime;
+use App\Models\Comment;
+use App\Models\Genre;
 use Illuminate\Http\Request;
 
 class AnimeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return AnimeResource::collection(Anime::all());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         return new AnimeResource(Anime::findOrFail($id));
@@ -55,51 +36,67 @@ class AnimeController extends Controller
     {
         $validatedData = $request->validate([
             'title' => ['required'],
-            // 'fetchCached' => ['boolean'],
         ]);
 
-        // $fetchCached = $validatedData['fetchCached'];
         $title = $validatedData['title'];
 
-
-        $animes = Anime::where('en_title', 'like', "%{$title}%")->orWhere('ua_title', 'like', "%{$title}%")->get(['id', 'ua_title', 'en_title', 'aired','alias']);
+        $animes = Anime::where('en_title', 'like', "%{$title}%")->orWhere('ua_title', 'like', "%{$title}%")->get(['id', 'ua_title', 'en_title', 'aired', 'alias']);
 
         return response()->json([
             'data' => [
                 'animes' => $animes,
             ],
+            'status' => 'success',
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function comments($id)
+    {
+        return CommentResource::collection(Comment::where('anime_id', $id)->orderBy('created_at', 'desc')->get());
+    }
+
+    public function comment(Request $request)
+    {
+        if ($request->comment) {
+            $comment = new Comment();
+            $comment->user_id = $request->user_id;
+            $comment->anime_id = $request->anime_id;
+            $comment->comment = $request->comment;
+            $comment->save();
+
+            return response(['status' => 'success']);
+        } else {
+            return response(['status' => 'comment is empty']);
+        }
+    }
+
+    public function showByGenre(Request $request)
+    {
+        $genre = $request->genre;
+        $animes = AnimeResource::collection(Anime::whereHas('genres', function ($query) use ($genre) {
+            $query->where('en_name', $genre);
+        })->get());
+        $genreInfo = Genre::where('en_name', $genre)->get(['name', 'en_name']);
+
+        return response()->json([
+            'data' => [
+                'animes' => $animes,
+                'genre' => $genreInfo,
+            ],
+            'status' => 'success',
+        ]);
+    }
+
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //

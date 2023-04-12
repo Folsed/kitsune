@@ -2,15 +2,21 @@ import styles from './modal.module.css'
 import { useGenres } from '../../hooks/useGenres'
 import { Link } from 'react-router-dom'
 import { ROUTES } from '../../router/routes'
+import { useState } from 'react'
 
 
 const BrowseModal = ({ toggleClass, setActive }) => {
     const { isLoading, isError, data } = useGenres()
+    const [ genre, setGenre ] = useState('')
 
     if (isLoading) {
         return null
     }
 
+    const handleGenre = (genreName) => {
+        setActive(false)
+        setGenre(genreName)
+    }
 
     return (
         <div
@@ -58,7 +64,11 @@ const BrowseModal = ({ toggleClass, setActive }) => {
                     <ul className={styles.genres}>
                         {data.map((item, i) => (
                             <li className={styles.genreBox} key={i}>
-                                <Link className={styles.genre}>
+                                <Link
+                                    to={ROUTES.animeByGenre(item.en_name.toLowerCase())}
+                                    className={styles.genre}
+                                    onClick={() => handleGenre(item.en_name)}
+                                >
                                     {item.name}
                                 </Link>
                             </li>

@@ -137,6 +137,11 @@ textarea {
     outline: none;
 }
 
+input,
+textarea {
+    font-family: Roboto, sans-serif;
+}
+
 button {
     background-color: transparent;
     border: none;
