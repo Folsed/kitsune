@@ -10,19 +10,19 @@ import Header from '../header/Header'
 const DefaultLayout = () => {
     const location = useLocation();
 
-    useEffect(() => {
-        window.scrollTo({
-          top: 0,
-          left: 0,
-          behavior: 'instant', // or 'instant'
-          block: 'nearest' // or 'nearest'
-        });
-      }, [location]);
+    // useEffect(() => {
+    //     window.scrollTo({
+    //       top: 0,
+    //       left: 0,
+    //       behavior: 'instant', // or 'instant'
+    //       block: 'nearest' // or 'nearest'
+    //     });
+    //   }, [location]);
 
     return (
         <div>
             <Header />
-            {/* <ScrollRestoration /> */}
+            <ScrollRestoration />
 
             <main className="main">
                 <Outlet />

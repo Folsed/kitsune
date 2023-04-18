@@ -10,7 +10,7 @@ const Browse = () => {
     const { genre } = useParams()
 
     return (
-        <div>
+        <>
             {
                 location.pathname === ROUTES.anime ? <Animes />
                     :
@@ -19,7 +19,7 @@ const Browse = () => {
                         ''
             }
 
-        </div>
+        </>
     )
 }
 

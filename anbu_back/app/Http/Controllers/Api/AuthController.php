@@ -28,7 +28,7 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        $user->assignRole('admin');
+        $user->assignRole('Visitor');
 
         $token = $user->createToken('main')->plainTextToken;
 
@@ -42,7 +42,6 @@ class AuthController extends Controller
 
         ]);
     }
-
 
 
     public function login(LoginRequest $request)
@@ -70,11 +69,12 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
+        /** @var \App\Models\User $user **/
         $user = Auth::user();
         $token = $user->createToken('main')->plainTextToken;
 
         return response([
-            'user' => $user,
+            'user' => $user->load('roles'),
             'token' => $token,
 
         ]);
@@ -91,12 +91,13 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
 
         return response([
-            'success' => true
+            'status' => 'success',
         ]);
     }
 
     public function user(Request $request)
     {
-        return $request->user();
+        $user = $request->user()->with('roles');
+        return $user;
     }
 }

@@ -20,7 +20,7 @@ class IsAdmin
     public function handle(Request $request, Closure $next)
     {
         $id = Auth::user()->id;
-        if(Auth::user() && User::find($id)->hasRole('admin')){
+        if(Auth::user() && User::find($id)->hasRole('Administrator')){
             return $next($request);
         }
         return abort(403);

@@ -18,7 +18,9 @@ const UserInfo = () => {
                 <div className={styles.title}>
                     <div className={styles.nameBox}>
                         <h1>{currentUser.name}</h1>
-                        <span className={styles.permission}>Відвідувач</span>
+                        <span className={styles.permission}>
+                            {currentUser.roles[0].name}
+                        </span>
                     </div>
                     <div className={styles.pronouns}>
                         <span>he/him</span>
@@ -38,7 +40,7 @@ const UserInfo = () => {
                 </div>
             </div>
             <div className={styles.editBtnWrapper}>
-                <BlackButton title={`Редагувати профіль`} className={styles.editBtn}/>
+                <BlackButton title={`Редагувати профіль`} className={styles.editBtn} />
             </div>
         </div>
     )

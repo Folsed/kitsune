@@ -171,15 +171,20 @@
     padding: 1.34rem 1.2rem;
 }
 
-.actions li:hover {
+.action-box:hover {
     background-color: rgba(255, 255, 255, 0.1);
     cursor: pointer;
 }
 
-.actions li:active {
+.action-box:active {
     background-color: rgb(18, 18, 18);
 }
 
 .actions svg {
     width: 20px;
+}
+
+.admin-nav {
+    border-top: 1px solid #dadada3b;
+    border-bottom: 1px solid #dadada3b;
 }

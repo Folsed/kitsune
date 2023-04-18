@@ -59,7 +59,6 @@ Route::controller(AnimeController::class)->group(function () {
 
 });
 
-// Assets
 Route::get('api/anime/genres/list', function () {
     return GenreResourse::collection(Genre::all());
-})->name('show-genres');
+})->name('api-show-genres');
