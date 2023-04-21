@@ -1,0 +1,32 @@
+.nav-wrapper {
+    grid-area: nav;
+}
+
+.nav {
+    grid-area: nav;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+}
+
+.nav-btn {
+    width: 100%;
+    padding: 7px 5px;
+    color: #dadada;
+    text-align: start;
+    transition: background-color .1s;
+    border-left: 1px solid transparent;
+}
+
+.nav-btn:hover {
+    background-color: #181818;
+}
+
+.nav-btn:active {
+    background-color: rgb(14, 14, 14);
+}
+
+.active {
+    border-left: 1px solid var(--main-color);
+}

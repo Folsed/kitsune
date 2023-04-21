@@ -1,0 +1,73 @@
+.action-body {
+    min-height: auto;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+thead tr {
+    background-color: #0e0e0e;
+}
+
+.thead, .tbody:not(:last-child) {
+    border-bottom: 1px solid #dadada47;
+}
+
+.thead th:not(:last-child), .tbody td:not(:last-child) {
+    border-right: 1px solid #dadada47;
+}
+
+.thead th, .tbody td {
+    padding: 5px;
+}
+
+tbody tr:hover {
+    background-color: #181818;
+}
+
+
+.title {
+    max-width: 200px;
+    min-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.actions {
+    text-align: end;
+}
+
+.actions button{
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.nav-btns {
+    text-align: end;
+}
+
+.arrow {
+    width: 24px;
+    height: 24px;
+    fill: #dadada;
+}
+
+.arrow-left {
+    transform: scaleX(-1);
+}
+
+.second-body {
+    display: grid;
+    grid-template-rows: auto 30rem auto;
+    gap: 1rem;
+}
+
+.table-search-wrapper {
+    text-align: end;
+}

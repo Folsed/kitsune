@@ -3,7 +3,7 @@ import axios from "axios"
 const API_URL = import.meta.env.VITE_API_BASE_URL
 
 export const AnimeService =  {
-    async getAll() {
+    async getAll(size) {
         const data = await axios.get(`${API_URL}/anime`)
 
         return data.data
@@ -35,6 +35,12 @@ export const AnimeService =  {
 
     async getByGenre(genre) {
         const data = await axios.get(`${API_URL}/anime/genre/${genre}`)
+
+        return data.data
+    },
+
+    async getWithPagination(size, page) {
+        const data = await axios.get(`${API_URL}/anime/?size=${size}&page=${page}`)
 
         return data.data
     },

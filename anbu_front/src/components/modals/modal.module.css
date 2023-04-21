@@ -38,7 +38,7 @@
     width: 1167px;
     margin: 0 auto;
     display: flex;
-    
+
 }
 
 .text {
@@ -124,13 +124,25 @@
 }
 
 .user-info {
+    border-bottom: rgba(255, 255, 255, 0.138) solid 1px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 1rem 1rem 1rem;
+}
+
+.user-info-wrap {
     display: flex;
     justify-content: start;
     align-items: center;
-    width: 100%;
-    border-bottom: rgba(255, 255, 255, 0.138) solid 1px;
-    padding: 0 1rem 1rem 1rem;
     font-size: 18px;
+}
+
+.is-admin {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    color: var(--main-color);
 }
 
 .user-dropdown-content {

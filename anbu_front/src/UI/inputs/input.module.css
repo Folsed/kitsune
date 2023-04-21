@@ -1,0 +1,85 @@
+.input-field {
+    position: relative;
+}
+
+.input-field input, textarea {
+    font-family: 'Montserrat', sans-serif;
+    position: relative;
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 5px 0;
+    color: #dadada;
+    font-size: 1em;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid #dadada29;
+}
+
+textarea {
+    height: 5rem;
+}
+
+.input-field span {
+    position: absolute;
+    color: gray;
+    left: 0;
+    top: 6px;
+    font-size: 1em;
+    pointer-events: none;
+    letter-spacing: 0.05em;
+    transition: 0.5s;
+}
+
+.input-field input:valid~span,
+.input-field input:focus~span {
+    color: gray;
+    transform: translateY(-20px);
+    font-size: 0.75em;
+}
+
+.input-field textarea:valid~span,
+.input-field textarea:focus~span {
+    color: gray;
+    transform: translateY(-20px);
+    font-size: 0.75em;
+}
+
+.uploader-box {
+    position: relative;
+}
+
+.file-uploader {
+    padding: 10px 0;
+    position: relative;
+    border: 1px solid #dadada29;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.file-uploader .uploader-icon {
+    transition: fill .3s;
+}
+
+.file-uploader:hover .uploader-icon{
+    fill: var(--main-color);
+}
+
+
+.destroy {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    transition: fill .3s;
+}
+
+.destroy:hover {
+    fill: #181818;
+}
+
+.destroy:active {
+    fill: #2f2f2f;
+}

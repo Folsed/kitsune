@@ -12,9 +12,16 @@ use Illuminate\Http\Request;
 
 class AnimeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return AnimeResource::collection(Anime::all());
+        if($request->size) {
+            return response()->json([
+                'data' => AnimeResource::collection(Anime::paginate($request->size)),
+                'total' => Anime::count(),
+            ]);
+        } else {
+            return AnimeResource::collection(Anime::all());
+        }
     }
 
     public function create()

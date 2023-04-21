@@ -1,0 +1,24 @@
+.admin-page__wrapper {
+    width: 1067px;
+    margin: 0 auto;
+    margin-top: 3rem;
+}
+
+.admin-page__grid {
+    display: grid;
+    grid-template-areas:
+        "action-nav action-nav"
+        "nav content";
+    grid-template-columns: 10rem auto;
+    grid-template-rows: auto auto;
+    gap: 1rem 3rem;
+}
+
+.admin-page_dynamic-menu {
+    grid-area: action-nav;
+    border-bottom: 1px solid #dadada29;
+    display: grid;
+    grid-template-areas: "empty action-nav";
+    grid-template-columns: 10rem auto;
+    gap: 3rem;
+}

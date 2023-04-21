@@ -1,0 +1,33 @@
+.nav-wrapper {
+    display: grid;
+    grid-template-areas: "empty action-nav";
+    grid-template-columns: 10rem auto;
+    gap: 3rem;
+}
+
+.nav {
+    grid-area: action-nav;
+    display: flex;
+    align-items: flex-start;
+
+}
+
+.nav-btn {
+    padding: 7px 10px;
+    color: #dadada;
+    text-align: start;
+    transition: background-color .1s;
+    border-bottom: 1px solid transparent;
+}
+
+.nav-btn:hover {
+    background-color: #181818;
+}
+
+.nav-btn:active {
+    background-color: rgb(14, 14, 14);
+}
+
+.active {
+    border-bottom: 1px solid var(--main-color);
+}

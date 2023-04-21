@@ -95,6 +95,7 @@ const Header = () => {
                                             <path d="M7 10h10l-5 5z"></path>
                                         </svg>
                                     </div>
+                                    
                                 </div>
                                 <UserActionsModal toggleClass={toggleClass} setToggleClass={setToggleClass} setActive={setActive} />
                             </div>

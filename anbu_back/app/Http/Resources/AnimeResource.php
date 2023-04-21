@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class AnimeResource extends JsonResource
@@ -30,6 +31,8 @@ class AnimeResource extends JsonResource
             'synopsis' => $this->synopsis,
             'trailer' => $this->trailer,
             'genres' => $this->genres,
+            'created_at' => Carbon::parse($this->updated_at)->format('Y/m/d H:m:s'),
+            'updated_at' => Carbon::parse($this->updated_at)->format('Y/m/d H:m:s'),
             'preview' => PreviewResource::collection($this->previews),
         ];
     }
