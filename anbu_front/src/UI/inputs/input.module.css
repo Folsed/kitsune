@@ -83,3 +83,10 @@ textarea {
 .destroy:active {
     fill: #2f2f2f;
 }
+
+.multi-select {
+    grid-column-start: -3;
+    grid-column-end: -1;
+    color: #dadada;
+}
+

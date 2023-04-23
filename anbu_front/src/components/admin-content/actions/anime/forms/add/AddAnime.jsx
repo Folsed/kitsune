@@ -1,32 +1,95 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import AdminFormInput from '../../../../../../UI/inputs/AdminFormInput'
 import AdminFormTextarea from '../../../../../../UI/inputs/AdminFormTextarea'
 import styles from './../forms.module.css'
 import ImageUploader from '../../../../../../UI/inputs/ImageUploader'
 import { BlackButton } from '../../../../../../UI/buttons/BlackButton'
 import { ReactComponent as ActiveCheckIcon } from './../../../../../../assets/icons/dot.svg'
+import SelectInput from '../../../../../../UI/inputs/SelectInput'
+import { useGenres } from '../../../../../../hooks/useGenres'
+import { useAnimeCreate } from '../../../../../../hooks/admin/useAnimeCreate'
+import Preloader from '../../../../../../UI/loader/Preloader'
 
 const AddAnime = () => {
+    const { isLoading, isError, data: genresSelect } = useGenres()
+    const { animeCreate, errors, status } = useAnimeCreate()
+
     const [uaTitle, setUaTitle] = useState('')
     const [enTitle, setEnTitle] = useState('')
-    const [aired, setAired] = useState()
+    const [aired, setAired] = useState('')
     const [country, setCountry] = useState('')
-    const [episodes, setEpisodes] = useState()
-    const [totalEpisodes, setTotalEpisodes] = useState()
-    const [director, setDirector] = useState()
-    const [studio, setStudio] = useState()
-    const [translated, setTranslated] = useState()
-    const [duration, setDuration] = useState()
-    const [genres, setGenres] = useState()
-    const [trailer, setTrailer] = useState()
-    const [synopsis, setSynopsis] = useState()
+    const [episodes, setEpisodes] = useState('')
+    const [totalEpisodes, setTotalEpisodes] = useState('')
+    const [director, setDirector] = useState('')
+    const [studio, setStudio] = useState('')
+    const [translated, setTranslated] = useState('')
+    const [trailer, setTrailer] = useState('')
+    const [genres, setGenres] = useState([])
+    const [synopsis, setSynopsis] = useState('')
     const [activeCheck, setActiveCheck] = useState(1)
+    const [previewImage, setPreviewImage] = useState(null)
+    const [subPreviewImage, setSubPreviewImage] = useState(null)
+    const [logoImage, setLogoImage] = useState(null)
+
+    const onSubmit = (e) => {
+        e.preventDefault()
+
+        const formData = new FormData();
+        formData.append('preview', previewImage);
+        formData.append('sub_preview', subPreviewImage);
+        formData.append('logo', logoImage);
+        genres.forEach(genre => formData.append('genres[]', genre.value))
+
+        const payload = {
+            ua_title: uaTitle,
+            en_title: enTitle,
+            aired: aired,
+            country: country,
+            episodes: episodes,
+            total_episodes: totalEpisodes,
+            director: director,
+            studio: studio,
+            translated: translated,
+            trailer: trailer,
+            synopsis: synopsis,
+            active: activeCheck,
+        }
+
+        for (const key in payload) {
+            if (payload.hasOwnProperty(key)) {
+                formData.append(key, payload[key]);
+            }
+        }
+        animeCreate.mutateAsync(formData);
+    }
+
+    useEffect(() => {
+        if (status === 'success') {
+            setUaTitle('');
+            setEnTitle('');
+            setAired('');
+            setCountry('');
+            setEpisodes('');
+            setTotalEpisodes('');
+            setDirector('');
+            setStudio('');
+            setTranslated('');
+            setTrailer('');
+            setGenres([]);
+            setSynopsis('');
+            setActiveCheck(1);
+            setPreviewImage(null);
+            setSubPreviewImage(null);
+            setLogoImage(null);
+        }
+    }, [status]);
 
     return (
-        <form action="" noValidate>
+        <form onSubmit={onSubmit} noValidate>
             <div className={styles.formContainer}>
                 <div className={styles.inputsBox}>
                     <AdminFormInput
+                        className={errors && errors.ua_title ? styles.error : ''}
                         type='text'
                         name='ua_title'
                         id='ua_title'
@@ -36,6 +99,7 @@ const AddAnime = () => {
 
                     />
                     <AdminFormInput
+                        className={errors && errors.en_title ? styles.error : ''}
                         type='text'
                         name='en_title'
                         id='en_title'
@@ -44,6 +108,7 @@ const AddAnime = () => {
                         onChange={(e) => setEnTitle(e.target.value)}
                     />
                     <AdminFormInput
+                        className={errors && errors.aired ? styles.error : ''}
                         type='text'
                         name='aired'
                         id='aired'
@@ -52,6 +117,7 @@ const AddAnime = () => {
                         onChange={(e) => setAired(e.target.value)}
                     />
                     <AdminFormInput
+                        className={errors && errors.country ? styles.error : ''}
                         type='text'
                         name='country'
                         id='country'
@@ -60,6 +126,7 @@ const AddAnime = () => {
                         onChange={(e) => setCountry(e.target.value)}
                     />
                     <AdminFormInput
+                        className={errors && errors.episodes ? styles.error : ''}
                         type='text'
                         name='episodes'
                         id='episodes'
@@ -68,6 +135,7 @@ const AddAnime = () => {
                         onChange={(e) => setEpisodes(e.target.value)}
                     />
                     <AdminFormInput
+                        className={errors && errors.total_episodes ? styles.error : ''}
                         type='text'
                         name='total_episodes'
                         id='total_episodes'
@@ -76,6 +144,7 @@ const AddAnime = () => {
                         onChange={(e) => setTotalEpisodes(e.target.value)}
                     />
                     <AdminFormInput
+                        className={errors && errors.director ? styles.error : ''}
                         type='text'
                         name='director'
                         id='director'
@@ -84,6 +153,7 @@ const AddAnime = () => {
                         onChange={(e) => setDirector(e.target.value)}
                     />
                     <AdminFormInput
+                        className={errors && errors.studio ? styles.error : ''}
                         type='text'
                         name='studio'
                         id='studio'
@@ -92,6 +162,7 @@ const AddAnime = () => {
                         onChange={(e) => setStudio(e.target.value)}
                     />
                     <AdminFormInput
+                        className={errors && errors.translated ? styles.error : ''}
                         type='text'
                         name='translated'
                         id='translated'
@@ -100,35 +171,30 @@ const AddAnime = () => {
                         onChange={(e) => setTranslated(e.target.value)}
                     />
                     <AdminFormInput
-                        type='text'
-                        name='duration'
-                        id='duration'
-                        placeholder='Duration'
-                        value={duration}
-                        onChange={(e) => setDuration(e.target.value)}
-                    />
-                    <AdminFormInput
-                        type='text'
-                        name='genres'
-                        id='genres'
-                        placeholder='Genres'
-                        value={uaTitle}
-                        onChange={(e) => setUaTitle(e.target.value)}
-                    />
-                    <AdminFormInput
+                        className={errors && errors.trailer ? styles.error : ''}
                         type='text'
                         name='trailer'
                         id='trailer'
                         placeholder='Trailer Link'
-                        value={uaTitle}
-                        onChange={(e) => setUaTitle(e.target.value)}
+                        value={trailer}
+                        onChange={(e) => setTrailer(e.target.value)}
+                    />
+                    <SelectInput
+                        error={errors && errors.genres ? errors.genres : ''}
+                        options={isLoading ? [] : genresSelect}
+                        placeholder={`Genres`}
+                        setValue={setGenres}
+                        value={genres}
+                        isLoading={isLoading}
                     />
                     <AdminFormTextarea
+                        className={`${styles.textarea} ${errors && errors.synopsis ? styles.error : ''}`}
                         type='text'
                         name='synopsis'
                         id='synopsis'
                         placeholder='Synopsis'
-                        className={styles.textarea}
+                        value={synopsis}
+                        onChange={(e) => setSynopsis(e.target.value)}
                     />
                     <div className={styles.actionBtns}>
                         <div className={styles.activeCheck}>
@@ -143,16 +209,23 @@ const AddAnime = () => {
                 </div>
                 <div className={styles.imagesBox}>
                     <ImageUploader
+                        className={`${styles.previewImage} ${errors && errors.preview ? styles.errorFile : ''}`}
                         placeholder={'Upload Preview'}
-                        className={styles.previewImage}
+                        image={previewImage}
+                        setImage={setPreviewImage}
+
                     />
                     <ImageUploader
+                        className={`${styles.subPreviewImage} ${errors && errors.sub_preview ? styles.errorFile : ''}`}
                         placeholder={'Upload Sub-Preview'}
-                        className={styles.subPreviewImage}
+                        image={subPreviewImage}
+                        setImage={setSubPreviewImage}
                     />
                     <ImageUploader
+                        className={`${styles.logoImage} ${errors && errors.logo ? styles.errorFile : ''}`}
                         placeholder={'Upload Logo'}
-                        className={styles.logoImage}
+                        image={logoImage}
+                        setImage={setLogoImage}
                     />
                 </div>
 

@@ -1,6 +1,6 @@
 import styles from './input.module.css'
 
-const AdminFormTextarea = ({ type, id, name, value, className, placeholder }) => {
+const AdminFormTextarea = ({ type, id, name, value, className, placeholder, onClick, onChange }) => {
     return (
         <div className={`${styles.inputField} ${className ? className : ''}`}>
             <textarea
@@ -9,6 +9,8 @@ const AdminFormTextarea = ({ type, id, name, value, className, placeholder }) =>
                 name={name}
                 required
                 value={value}
+                onClick={onClick}
+                onChange={onChange}
             />
             <span>{placeholder}</span>
         </div>

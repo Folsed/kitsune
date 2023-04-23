@@ -71,3 +71,7 @@ tbody tr:hover {
 .table-search-wrapper {
     text-align: end;
 }
+
+.active-post svg{
+    fill: var(--main-color);
+}

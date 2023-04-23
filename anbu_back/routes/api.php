@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Api\AnimeFormsController;
 use App\Http\Controllers\Api\AnimeController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\PreviewController;
@@ -28,7 +29,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+// Admin API
 
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('api/create/anime', [AnimeFormsController::class, 'create'])->name('api-anime-create');
+    Route::post('api/destroy/anime', [AnimeFormsController::class, 'destroy'])->name('api-anime-delete');
+});
 
 
 // Auth API
@@ -38,7 +44,7 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('api/login', 'login')->name('api-login');
 
 
-    Route::middleware('auth:sanctum')->group(function() {
+    Route::middleware('auth:sanctum')->group(function () {
         Route::post('api/logout', 'logout')->name('api-logout');
         Route::get('api/user', 'user')->name('api-logout');
     });
@@ -56,7 +62,6 @@ Route::controller(AnimeController::class)->group(function () {
     Route::get('api/search/anime', 'search')->name('api-anime-search');
     // Browse
     Route::get('api/anime/genre/{genre}', 'showByGenre')->name('api-anime-by-genre');
-
 });
 
 Route::get('api/anime/genres/list', function () {

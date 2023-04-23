@@ -1,16 +1,17 @@
 import styles from './input.module.css'
 import { ReactComponent as ImageUploaderIcon } from '../../assets/icons/uploader.svg'
 import { ReactComponent as DestroyImage } from '../../assets/icons/delete.svg'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
-const ImageUploader = ({ name, className, placeholder, imageWidth, imageHeight }) => {
-    const [image, setImage] = useState(null)
+const ImageUploader = ({ name, className, placeholder, image, setImage }) => {
     const imageInputRef = useRef()
+    const [preview, setPreview] = useState(null)
 
     const handleFileChange = (event) => {
         const file = event.target.files[0]
         if (file) {
-            setImage(URL.createObjectURL(file))
+            setPreview(URL.createObjectURL(file))
+            setImage(file)
         }
     }
 
@@ -24,6 +25,11 @@ const ImageUploader = ({ name, className, placeholder, imageWidth, imageHeight }
             imageInputRef.current.click()
         }
     }
+
+    useEffect(() => {
+        imageInputRef.current.value = "";
+    }, [image])
+
 
     return (
         <div className={styles.uploaderBox}>
@@ -41,7 +47,7 @@ const ImageUploader = ({ name, className, placeholder, imageWidth, imageHeight }
                     onChange={handleFileChange}
                 />
                 {image ?
-                    <img src={image} alt="" />
+                    <img src={preview} alt="" />
                     :
                     <ImageUploaderIcon fill='#dadada' width={`15%`} className={styles.uploaderIcon} />
                 }

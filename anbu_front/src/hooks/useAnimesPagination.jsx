@@ -3,7 +3,7 @@ import { AnimeService } from "../services/AnimeData.service";
 
 
 export const useAnimesPagination = (size, page) => {
-    const { data, isLoading, isError } = useQuery(
+    const { data, isLoading, isError, refetch } = useQuery(
         ['anime', size, page],
         () => AnimeService.getWithPagination(size, page),
         {
@@ -12,9 +12,7 @@ export const useAnimesPagination = (size, page) => {
             onError: (error) => {
                 alert(error.message)
             },
-            // select: ({ data }) => data
-
         }
     )
-    return { isLoading, isError, data }
+    return { isLoading, isError, data, refetch }
 }

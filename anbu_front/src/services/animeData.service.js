@@ -2,7 +2,7 @@ import axios from "axios"
 
 const API_URL = import.meta.env.VITE_API_BASE_URL
 
-export const AnimeService =  {
+export const AnimeService = {
     async getAll(size) {
         const data = await axios.get(`${API_URL}/anime`)
 
@@ -44,4 +44,5 @@ export const AnimeService =  {
 
         return data.data
     },
+
 }

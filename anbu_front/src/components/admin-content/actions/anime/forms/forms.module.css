@@ -64,3 +64,16 @@
     padding: 4px;
     letter-spacing: 1px;
 }
+
+.span-column {
+    grid-column-start: -3;
+    grid-column-end: -1;
+}
+
+.error input, .error textarea{
+    border-bottom: 1px solid red;
+}
+
+.error-file {
+    border: 1px solid red;
+}
