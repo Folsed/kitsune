@@ -47,7 +47,16 @@
     border-bottom: 1px solid #dadada14;
 }
 
-.autocomplete-item {
+/* .autocomplete-item{
+    padding: 7px;
+    position: relative;
+} */
+
+
+
+.autocomplete-item a{
+    display: block;
+    width: 100%;
     padding: 7px;
 }
 
@@ -62,7 +71,7 @@
 }
 
 
-.autocomplete-item:active {
+.autocomplete-item a:active {
     background-color: #212121;
 }
 

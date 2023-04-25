@@ -11,15 +11,18 @@ thead tr {
     background-color: #0e0e0e;
 }
 
-.thead, .tbody:not(:last-child) {
+.thead,
+.tbody:not(:last-child) {
     border-bottom: 1px solid #dadada47;
 }
 
-.thead th:not(:last-child), .tbody td:not(:last-child) {
+.thead th:not(:last-child),
+.tbody td:not(:last-child) {
     border-right: 1px solid #dadada47;
 }
 
-.thead th, .tbody td {
+.thead th,
+.tbody td {
     padding: 5px;
 }
 
@@ -38,9 +41,10 @@ tbody tr:hover {
 
 .actions {
     text-align: end;
+    display: flex;
 }
 
-.actions button{
+.actions button {
     width: 16px;
     height: 16px;
     margin-right: 5px;
@@ -64,14 +68,50 @@ tbody tr:hover {
 
 .second-body {
     display: grid;
-    grid-template-rows: auto 30rem auto;
+    grid-template-rows: auto auto auto;
     gap: 1rem;
 }
 
-.table-search-wrapper {
-    text-align: end;
+.table-area {
+    min-height: 28.125rem;
 }
 
-.active-post svg{
+.active-post svg {
     fill: var(--main-color);
+}
+
+.table-search-wrapper {
+    display: flex;
+    justify-content: end;
+}
+
+.table-search {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #dadada29;
+}
+
+.search-field {
+    background-color: transparent;
+    border: 0;
+    padding: 2px 5px;
+    color: #dadada;
+    width: 15rem;
+    font-style: italic;
+}
+
+.search-icon {
+    width: 20px;
+    text-align: center;
+    position: relative;
+    /* padding: 2px 5px; */
+}
+
+.search-icon:before {
+    content: "";
+    position: absolute;
+    right: -1.3px;
+    height: 15px;
+    width: 1px;
+    border-right: 1px solid #dadada29;
 }

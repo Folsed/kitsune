@@ -14,13 +14,19 @@ class AnimeController extends Controller
 {
     public function index(Request $request)
     {
-        if($request->size) {
+        $query = Anime::where('active', 1);
+
+        if ($request->size) {
+            $query = $query->orderBy('created_at', 'desc')->paginate($request->size);
+
             return response()->json([
-                'data' => AnimeResource::collection(Anime::paginate($request->size)),
+                'data' => AnimeResource::collection($query),
                 'total' => Anime::count(),
             ]);
         } else {
-            return AnimeResource::collection(Anime::all());
+            $query = $query->orderBy('created_at', 'desc')->get();
+
+            return AnimeResource::collection($query);
         }
     }
 

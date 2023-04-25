@@ -14,6 +14,8 @@ const AccountPage = () => {
     const { currentUser, userToken } = userAuthContext()
     const [active, setActive] = useState('anime')
     const [action, setAction] = useState('anime-tables')
+    const [subAction, setSubAction] = useState('')
+
 
 
     if (!userToken) {
@@ -25,7 +27,7 @@ const AccountPage = () => {
     }
 
     return (
-        <AnimeContext.Provider value={{ active, setActive, action, setAction }} >
+        <AnimeContext.Provider value={{ active, setActive, action, setAction, subAction, setSubAction}} >
             <div className='admin-page__wrapper'>
                 <div className="admin-page__grid">
                     <Navigation />

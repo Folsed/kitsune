@@ -62,8 +62,8 @@ const BrowseModal = ({ toggleClass, setActive }) => {
                         <h4>Аніме за жанром</h4>
                     </div>
                     <ul className={styles.genres}>
-                        {data.map((item, i) => (
-                            <li className={styles.genreBox} key={i}>
+                        {data.map((item) => (
+                            <li className={styles.genreBox} key={item.id}>
                                 <Link
                                     to={ROUTES.animeByGenre(item.en_name.toLowerCase())}
                                     className={styles.genre}

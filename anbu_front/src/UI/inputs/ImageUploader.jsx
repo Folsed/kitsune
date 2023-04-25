@@ -39,7 +39,7 @@ const ImageUploader = ({ name, className, placeholder, image, setImage }) => {
             >
                 <input
                     type='file'
-                    accept='image/*'
+                    accept='image/*,.jpe'
                     id='file-uploader'
                     name={name}
                     hidden

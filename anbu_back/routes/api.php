@@ -1,20 +1,11 @@
 <?php
 
 use App\Http\Controllers\Admin\Api\AnimeFormsController;
+use App\Http\Controllers\Admin\Api\AnimeTablesController;
 use App\Http\Controllers\Api\AnimeController;
 use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\Api\PreviewController;
-use App\Http\Controllers\Auth\RegisteredUserController;
-use App\Http\Resources\AnimeCollection;
-use App\Http\Resources\AnimeResource;
-use App\Http\Resources\CategoriesResource;
 use App\Http\Resources\GenreResourse;
-use App\Http\Resources\PreviewResource;
-use App\Models\Anime;
-use App\Models\Category;
 use App\Models\Genre;
-use App\Models\Preview;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,8 +23,13 @@ use Illuminate\Support\Facades\Route;
 // Admin API
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::post('api/create/anime', [AnimeFormsController::class, 'create'])->name('api-anime-create');
-    Route::post('api/destroy/anime', [AnimeFormsController::class, 'destroy'])->name('api-anime-delete');
+    Route::controller(AnimeFormsController::class)->group(function () {
+        Route::post('api/create/anime', 'create')->name('api-anime-create');
+        Route::post('api/destroy/anime', 'destroy')->name('api-anime-delete');
+    });
+
+
+    Route::get('api/table/search/anime', [AnimeTablesController::class, 'tableSearch'])->name('api-anime-delete');
 });
 
 

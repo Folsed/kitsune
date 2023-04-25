@@ -22,6 +22,11 @@
     color: #fd9047;
 }
 
+.btn:active {
+    border-color: #fd9047;
+    color: #fd9047;
+}
+
 .watchlist-btn {
     display: flex;
     gap: 3px;
@@ -46,6 +51,10 @@
     color: #fd9047;
 }
 
+.watchlist-btn:active {
+    border-color: #ff6600;
+}
+
 .watch-btn {
     display: flex;
     align-items: center;
@@ -66,5 +75,10 @@
 
 .watch-btn:hover {
     background-color: #fd9047;
+
+}
+
+.watch-btn:active {
+    background-color: #ff6600;
 
 }

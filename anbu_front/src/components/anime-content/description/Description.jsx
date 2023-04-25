@@ -8,11 +8,13 @@ import AnimeContext from '../../../providers/AnimeProvider'
 import { OrangeButton } from '../../../UI/buttons/OrangeButton'
 import { WatchlistButton } from '../../../UI/buttons/WatchlistButton'
 import DescriptionSkeleton from '../../skeletons/anime-page-skeleton/DescriptionSkeleton'
+import { ROUTES } from '../../../router/routes'
 
 const Description = () => {
     const animeData = useContext(AnimeContext)
 
     const data = animeData.data
+    console.log(data)
 
     const opts = {
         height: '230',
@@ -63,9 +65,9 @@ const Description = () => {
                                 </div>
                                 <div className={styles.genres}>
                                     <div className={styles.categs}>
-                                        {data.genres.map((item, i) => (
-                                            <div className={styles.categDetailWrap} key={i}>
-                                                <NavLink to={`#`}>
+                                        {data.genres.map((item) => (
+                                            <div className={styles.categDetailWrap} key={item.id}>
+                                                <NavLink to={ROUTES.animeByGenre(item.en_name.toLowerCase())}>
                                                     <div className={styles.categDetail}>
                                                         {item.name}
                                                     </div>
@@ -104,7 +106,6 @@ const Description = () => {
 
                             <div className={styles.nextSection}>
                                 <YouTube videoId={data.trailer} opts={opts} />
-                                <OrangeButton title={`Почати перегляд`} className={styles.actBtn} watch />
                             </div>
                         </div>
                     }

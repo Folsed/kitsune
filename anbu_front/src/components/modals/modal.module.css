@@ -200,3 +200,18 @@
     border-top: 1px solid #dadada3b;
     border-bottom: 1px solid #dadada3b;
 }
+
+
+/* Confirm Modal */
+
+.confirm-wrapper {
+    position: absolute;
+    transform: translateY(-40px);
+    background-color: #252525;
+    padding: 5px;
+}
+
+.confirm-actions {
+    display: flex;
+    justify-content: space-between;
+}

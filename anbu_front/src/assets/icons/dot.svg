@@ -1,3 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#252525" class="bi bi-dot" viewBox="0 0 24 24">
-  <path d="M12.433 18.362a6.75 6.75 90 100-13.5 6.75 6.75 90 00-.076 13.5z"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#252525" className="bi bi-dot"
+    viewBox="0 0 24 24">
+    <path d="M12.433 18.362a6.75 6.75 90 100-13.5 6.75 6.75 90 00-.076 13.5z" />
 </svg>

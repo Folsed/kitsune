@@ -10,6 +10,11 @@
 
 }
 
+.nav-point {
+    width: 100%;
+}
+
+
 .nav-btn {
     width: 100%;
     padding: 7px 5px;
@@ -29,4 +34,31 @@
 
 .active {
     border-left: 1px solid var(--main-color);
+}
+
+.dropdown-wrapper {
+    padding: 0 0 0 20px;
+}
+
+.dropdown button {
+    color: #dadada;
+    width: 100%;
+    text-align: start;
+    padding: 7px 5px;
+}
+
+.dropdown-item {
+    border-left: 1px solid transparent;
+}
+
+.active {
+    border-left: 1px solid var(--main-color);
+}
+
+.dropdown-item:hover {
+    background-color: #181818;
+}
+
+.dropdown-item:active {
+    background-color: rgb(14, 14, 14);
 }
