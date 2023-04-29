@@ -41,6 +41,7 @@ const BestSeason = ({ }) => {
                                                             key={preview.id}
                                                             src={`http://127.0.0.1:8000/${preview.preview_path}`}
                                                             alt=""
+                                                            effect='blur'
                                                             title={item.ua_title}
                                                         />
 

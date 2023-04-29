@@ -43,4 +43,9 @@ class Anime extends Model
     {
         return $this->belongsToMany(Genre::class, 'anime_genres');
     }
+
+    public function carousel()
+    {
+        return $this->belongsTo(Carousel::class, 'anime_id');
+    }
 }

@@ -4,9 +4,7 @@ import './input.module.css'
 import Select from "react-select"
 
 
-const SelectInput = ({ options, placeholder, setValue, value, error, isLoading }) => {
-    const [loading, setLoading] = useState(false)
-
+const SelectInput = ({ options, placeholder, setValue, value, error, isLoading, isMulti, closeMenuOnSelect }) => {
     const labels = options.map((item) => ({
         value: item.id,
         label: item.name
@@ -16,10 +14,10 @@ const SelectInput = ({ options, placeholder, setValue, value, error, isLoading }
         <Select
             options={labels}
             isLoading={isLoading}
-            isMulti
+            isMulti={isMulti ? true : false}
             name="colors"
             className={styles.multiSelect}
-            closeMenuOnSelect={false}
+            closeMenuOnSelect={closeMenuOnSelect ? true : false}
             placeholder={placeholder}
             value={value}
             onChange={(val) => setValue(val)}
@@ -92,6 +90,10 @@ const SelectInput = ({ options, placeholder, setValue, value, error, isLoading }
                     '&:hover': {
                         color: '#dadada29',
                     },
+                }),
+                singleValue: (baseStyles) => ({
+                    ...baseStyles,
+                    color: '#dadada',
                 }),
 
             }}

@@ -31,5 +31,5 @@ export const useAnimeCreate = () => {
         }
 
     )
-    return { animeCreate, errors, status }
+    return { animeCreate, errors, status, setStatus }
 }

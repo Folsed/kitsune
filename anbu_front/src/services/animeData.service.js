@@ -45,4 +45,10 @@ export const AnimeService = {
         return data.data
     },
 
+    async getCarouselContent() {
+        const data = await axios.get(`${API_URL}/carousel/anime`)
+
+        return data.data
+    },
+
 }

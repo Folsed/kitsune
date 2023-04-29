@@ -11,6 +11,8 @@ import { ReactComponent as EditIcon } from '../../../../../../assets/icons/edit.
 import { ReactComponent as DeleteIcon } from '../../../../../../assets/icons/delete.svg'
 import { ReactComponent as DotIcon } from '../../../../../../assets/icons/dot.svg'
 import { ReactComponent as VerticalDotsIcon } from '../../../../../../assets/icons/vertical-dots.svg'
+import EditModal from '../../../../../modals/admin/EditModal'
+import DetailsModal from '../../../../../modals/admin/DetailsModal'
 
 const AllAnimes = () => {
     const size = 15
@@ -19,8 +21,15 @@ const AllAnimes = () => {
     const { animeDestroy } = useAnimeDestroy(refetch)
     const [query, setQuery] = useState('')
     const { isLoading: searchLoading, isError: searchErrors, data: searchData, status } = useAnimeTableSearch({ title: query })
+    const [animeId, setAnimeId] = useState(null)
+    const [active, setActive] = useState(false)
+    const [toggleClass, setToggleClass] = useState('')
 
-
+    if (active) {
+        document.body.classList.add('scroll-blocked')
+    } else {
+        document.body.classList.remove('scroll-blocked')
+    }
 
     const handleDestroy = (id) => {
         const payload = {
@@ -32,6 +41,10 @@ const AllAnimes = () => {
     return (
         <div className={styles.secondBody}>
             <div className={styles.tableSearchWrapper}>
+                <div className={styles.totalPosts}>
+                    <p>Total:</p>
+                    <span>{animes ? animes.total : <SpinnerIcon />}</span>
+                </div>
                 <div className={styles.tableSearch}>
                     <div className={styles.searchIcon}>
                         {searchLoading ? <SpinnerIcon /> : <img src={search} alt="" />}
@@ -69,7 +82,10 @@ const AllAnimes = () => {
                                     <td><span>{item.created_at}</span></td>
                                     <td><span>{item.updated_at}</span></td>
                                     <td className={styles.actions}>
-                                        <button><EditIcon /></button>
+                                        <button
+                                            onClick={() => { setAnimeId(item.id) }}
+                                        >
+                                            <EditIcon /></button>
                                         <button
                                             onClick={() => handleDestroy(item.id)}
                                         >
@@ -80,13 +96,25 @@ const AllAnimes = () => {
                                         >
                                             <DotIcon />
                                         </button>
-                                        <button><VerticalDotsIcon /></button>
+                                        <button
+                                            onClick={() => { setActive(true); setToggleClass('details'); setAnimeId(item.id) }}
+                                        >
+                                            <VerticalDotsIcon /></button>
                                     </td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
                 }
+                <DetailsModal
+                    setActive={setActive}
+                    active={active}
+                    setToggleClass={setToggleClass}
+                    toggleClass={toggleClass}
+                    animeId={animeId}
+                    setAnimeId={setAnimeId}
+                />
+
             </div>
             <div className={styles.navBtns}>
                 <Arrow

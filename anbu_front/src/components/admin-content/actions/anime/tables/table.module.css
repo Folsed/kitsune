@@ -82,7 +82,19 @@ tbody tr:hover {
 
 .table-search-wrapper {
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
+}
+
+.total-posts{
+    display: flex;
+}
+
+.total-posts p::after {
+    content: '\00a0';
+}
+
+.total-posts p{
+    color: gray;
 }
 
 .table-search {

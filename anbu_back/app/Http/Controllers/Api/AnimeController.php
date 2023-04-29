@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\AnimeResource;
+use App\Http\Resources\CarouselResource;
 use App\Http\Resources\CommentResource;
 use App\Models\Anime;
+use App\Models\Carousel;
 use App\Models\Comment;
 use App\Models\Genre;
 use Illuminate\Http\Request;
@@ -26,7 +28,10 @@ class AnimeController extends Controller
         } else {
             $query = $query->orderBy('created_at', 'desc')->get();
 
-            return AnimeResource::collection($query);
+            return response()->json([
+                'data' => AnimeResource::collection($query),
+                'total' => Anime::count(),
+            ]);
         }
     }
 
@@ -96,6 +101,43 @@ class AnimeController extends Controller
                 'animes' => $animes,
                 'genre' => $genreInfo,
             ],
+            'status' => 'success',
+        ]);
+    }
+
+    public function carousel()
+    {
+        return response()->json([
+            'data' => [
+                'carousel' => CarouselResource::collection(Carousel::orderBy('created_at', 'desc')->limit(6)->get()),
+            ],
+            'status' => 'success',
+        ]);
+
+    }
+
+    public function carouselMutate(Request $request)
+    {
+        if ($request->hasFile('slide')) {
+            $alias = Anime::where('id', $request->anime)->value('alias');
+
+            $slidePath = 'images/anime/carousel/slides/';
+
+            // slide
+            $slideExtension = $request->file('slide')->extension();
+            $slideFilename = $request->anime . '-' . $alias . '.' . $slideExtension;
+
+            // Put in Storage
+            $request->slide->storeAs($slidePath, $slideFilename);
+
+            // Put in Database
+            $carousel = new Carousel();
+            $carousel->anime_id = $request->input('anime');
+            $carousel->content_path = (string)$slidePath . $slideFilename;
+            $carousel->save();
+        }
+
+        return response()->json([
             'status' => 'success',
         ]);
     }

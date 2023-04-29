@@ -58,6 +58,9 @@ Route::controller(AnimeController::class)->group(function () {
     Route::get('api/search/anime', 'search')->name('api-anime-search');
     // Browse
     Route::get('api/anime/genre/{genre}', 'showByGenre')->name('api-anime-by-genre');
+    // Carousel
+    Route::post('api/carousel/anime/mutate', 'carouselMutate')->name('api-carousel-mutate');
+    Route::get('api/carousel/anime', 'carousel')->name('api-carousel');
 });
 
 Route::get('api/anime/genres/list', function () {

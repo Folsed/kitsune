@@ -4,14 +4,14 @@ import AnimeContext from '../../../providers/AnimeProvider'
 import Dropdown from './Dropdown'
 
 const Navigation = () => {
-    const { active, setActive, setSubAction } = useContext(AnimeContext)
+    const { active, setActive, setSubAction, setAction } = useContext(AnimeContext)
 
     return (
         <div className={styles.navWrapper}>
             <div className={styles.nav}>
                 <div className={styles.navPoint}>
                     <button
-                        onClick={() => { setActive('anime'); setSubAction('') }}
+                        onClick={() => { setActive('anime'); setSubAction(''); setAction('anime-tables') }}
                         className={`${styles.navBtn} ${active === 'anime' ? styles.active : ''}`}
                     >
                         Аніме
@@ -27,10 +27,10 @@ const Navigation = () => {
                 </div>
                 <div className={styles.navPoint}>
                     <button
-                        onClick={() => { setActive('news'); setSubAction('') }}
-                        className={`${styles.navBtn} ${active === 'news' ? styles.active : ''}`}
+                        onClick={() => { setActive('carousel'); setSubAction(''); setAction('carousel-tables') }}
+                        className={`${styles.navBtn} ${active === 'carousel' ? styles.active : ''}`}
                     >
-                        Новини
+                        Карусель
                     </button>
                 </div>
                 <div className={styles.navPoint}>

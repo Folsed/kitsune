@@ -38,9 +38,9 @@ const Recently = () => {
                                                 <div className={styles.preview}>
                                                     {item.preview.map(preview => (
                                                         <LazyLoadImage
-                                                            // loading='lazy'
                                                             key={preview.id}
                                                             src={`http://127.0.0.1:8000/${preview.preview_path}`}
+                                                            effect='blur'
                                                             alt=""
                                                             title={item.ua_title}
                                                         />

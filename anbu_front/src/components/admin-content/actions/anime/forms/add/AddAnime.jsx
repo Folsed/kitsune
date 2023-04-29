@@ -12,7 +12,7 @@ import Preloader from '../../../../../../UI/loader/Preloader'
 
 const AddAnime = () => {
     const { isLoading, isError, data: genresSelect } = useGenres()
-    const { animeCreate, errors, status } = useAnimeCreate()
+    const { animeCreate, errors, status, setStatus } = useAnimeCreate()
 
     const [uaTitle, setUaTitle] = useState('')
     const [enTitle, setEnTitle] = useState('')
@@ -34,10 +34,10 @@ const AddAnime = () => {
     const onSubmit = (e) => {
         e.preventDefault()
 
-        const formData = new FormData();
-        formData.append('preview', previewImage);
-        formData.append('sub_preview', subPreviewImage);
-        formData.append('logo', logoImage);
+        const formData = new FormData()
+        formData.append('preview', previewImage)
+        formData.append('sub_preview', subPreviewImage)
+        formData.append('logo', logoImage)
         genres.forEach(genre => formData.append('genres[]', genre.value))
 
         const payload = {
@@ -65,22 +65,23 @@ const AddAnime = () => {
 
     useEffect(() => {
         if (status === 'success') {
-            setUaTitle('');
-            setEnTitle('');
-            setAired('');
-            setCountry('');
-            setEpisodes('');
-            setTotalEpisodes('');
-            setDirector('');
-            setStudio('');
-            setTranslated('');
-            setTrailer('');
-            setGenres([]);
-            setSynopsis('');
-            setActiveCheck(1);
-            setPreviewImage(null);
-            setSubPreviewImage(null);
-            setLogoImage(null);
+            setUaTitle('')
+            setEnTitle('')
+            setAired('')
+            setCountry('')
+            setEpisodes('')
+            setTotalEpisodes('')
+            setDirector('')
+            setStudio('')
+            setTranslated('')
+            setTrailer('')
+            setGenres([])
+            setSynopsis('')
+            setActiveCheck(1)
+            setPreviewImage(null)
+            setSubPreviewImage(null)
+            setLogoImage(null)
+            setStatus('')
         }
     }, [status]);
 
@@ -186,6 +187,7 @@ const AddAnime = () => {
                         setValue={setGenres}
                         value={genres}
                         isLoading={isLoading}
+                        isMulti
                     />
                     <AdminFormTextarea
                         className={`${styles.textarea} ${errors && errors.synopsis ? styles.error : ''}`}

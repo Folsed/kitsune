@@ -5,7 +5,6 @@ import AnimeContext from '../../../providers/AnimeProvider'
 const Dropdown = ({ items }) => {
     const { subAction, setSubAction, active } = useContext(AnimeContext)
 
-    console.log(active)
     return (
         <div className={styles.dropdownWrapper}>
             <ul className={styles.dropdown}>

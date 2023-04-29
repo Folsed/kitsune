@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import styles from './nav.module.css'
+import styles from './../../nav.module.css'
 import AnimeContext from '../../../../../providers/AnimeProvider'
 
 const AnimeNav = () => {

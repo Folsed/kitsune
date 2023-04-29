@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 
 import styles from './carousel.module.css'
+import { NavLink } from "react-router-dom";
+import { ROUTES } from "../../router/routes";
 
 
-export const CarouselSlide = ({ children, width, currentIndex, index }) => {
+const CarouselSlide = ({ children, width, currentIndex, index, animeId, alias }) => {
     const [isHidden, setIsHidden] = useState(false)
 
     useEffect(() => {
@@ -20,8 +22,12 @@ export const CarouselSlide = ({ children, width, currentIndex, index }) => {
     return (
         <div className={`${styles.carouselContentContainer} ${isHidden ? styles.hiddenCarouselSlide : ''}`}>
             <div className={styles.carouselContentWrapper}>
-                <div className={styles.carouselContentBox}>{children}</div>
+                <NavLink to={ROUTES.animePage(animeId, alias)}>
+                    <div className={styles.carouselContentBox}>{children}</div>
+                </NavLink>
             </div>
         </div>
     );
 };
+
+export default CarouselSlide

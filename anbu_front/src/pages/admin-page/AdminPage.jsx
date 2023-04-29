@@ -8,6 +8,8 @@ import { useContext, useState } from 'react'
 import AnimeNav from '../../components/admin-content/actions/anime/nav/AnimeNav'
 import AnimeContext from '../../providers/AnimeProvider'
 import AnimeAction from '../../components/admin-content/actions/anime/AnimeAction'
+import CarouselNav from '../../components/admin-content/actions/carousel/nav/CarouselNav'
+import CarouselAction from '../../components/admin-content/actions/carousel/CarouselAction'
 
 
 const AccountPage = () => {
@@ -27,7 +29,7 @@ const AccountPage = () => {
     }
 
     return (
-        <AnimeContext.Provider value={{ active, setActive, action, setAction, subAction, setSubAction}} >
+        <AnimeContext.Provider value={{ active, setActive, action, setAction, subAction, setSubAction }} >
             <div className='admin-page__wrapper'>
                 <div className="admin-page__grid">
                     <Navigation />
@@ -35,7 +37,10 @@ const AccountPage = () => {
                         {active === 'anime' ?
                             <AnimeNav />
                             :
-                            active === 'news' ? 'news' : ''
+                            active === 'carousel' ?
+                                <CarouselNav />
+                                :
+                                ''
                         }
 
                     </div>
@@ -43,7 +48,10 @@ const AccountPage = () => {
                         {active === 'anime' ?
                             <AnimeAction />
                             :
-                            ''
+                            active === 'carousel' ?
+                                <CarouselAction />
+                                :
+                                ''
                         }
                     </div>
                 </div>

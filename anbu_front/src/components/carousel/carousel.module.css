@@ -38,6 +38,7 @@
 .arrow-wrapper {
     display: grid;
     grid-area: viewbox;
+    z-index: 0;
 }
 
 
@@ -80,6 +81,7 @@
 .carousel-main-container {
     grid-area: viewbox;
     width: 1000px;
+    z-index: 1;
 }
 
 
@@ -160,10 +162,10 @@
 .carousel-tab {
     position: relative;
     background-color: #1e1f24;
-    padding: 0.8rem 0.5rem;
+    padding: .6875rem .5rem;;
     transition: background-color .2s ease;
     cursor: pointer;
-    text-align: start;
+    /* text-align: start; */
 }
 
 .active-tab {
@@ -203,8 +205,15 @@
 }
 
 .carousel-tab-text {
-    color: whitesmoke;
+    color: #dadada;
     font-weight: 100;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    color: #fff;
+    display: -webkit-box;
+    max-height: 2rem;
+    overflow: hidden;
+    text-align: left;
 }
 
 

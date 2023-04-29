@@ -10,7 +10,7 @@ import { Arrow } from '../../utils/helpers/Arrow';
 import styles from "./carousel.module.css";
 
 
-const CarouselLogic = ({ children, title }) => {
+const CarouselLogic = ({ children, title, slides }) => {
     const [currentIndex, setCurrentIndex] = useState(0)
     const [isPaused, setIsPaused] = useState(false);
     const innerCarouselTrackRef = useRef(null);
@@ -34,11 +34,6 @@ const CarouselLogic = ({ children, title }) => {
         }
 
         tabIndices.push(newIndex);
-
-        // const prevTab = document.getElementById(`.carousel_tab_code-FFf1Y`);
-        // if (prevTab) {
-        //     prevTab.classList.remove('active-tab');
-        // }
 
         tabIndices.forEach((index, i) => {
             setTimeout(() => {
@@ -117,7 +112,7 @@ const CarouselLogic = ({ children, title }) => {
             </div>
             <div className={styles.carouselNavigation}>
                 <div className={styles.carouselTabs}>
-                    {Children.map(children, (child, index) => {
+                    {slides.map((item, index) => {
                         return (
                             <button
                                 id='carousel_tab_code-FFf1Y'
@@ -125,9 +120,10 @@ const CarouselLogic = ({ children, title }) => {
                                 onClick={() => {
                                     updateIndex(index);
                                 }}
+                                key={item.id}
                             >
                                 <div className={styles.carouselTabIndicator} />
-                                <span className={styles.carouselTabText}>Атака титанів: Фінальний сезон</span>
+                                <span className={styles.carouselTabText}>{item.title}</span>
                             </button>
                         )
                     })}
