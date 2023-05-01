@@ -94,3 +94,13 @@
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 }
+
+.view-all-li {
+    background-color: #131313;
+    text-align: center;
+}
+
+.view-all-li a{
+    color:gray;
+    font-style: italic;
+}

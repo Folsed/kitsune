@@ -15,14 +15,15 @@ const AuthModal = ({ toggleClass, setActive }) => {
             className={`${styles.authModal} ${toggleClass === 'auth' ? styles.activeAuthBox : ''}`}
         >
             <div className={styles.authCanvas}>
-
-                <Logo />
+                <div className={styles.logoWrapper}>
+                    <Logo />
+                </div>
                 {action === 0 ?
                     // Login Form
                     <Login setAction={setAction} setActive={setActive} />
                     :
                     // Register Form
-                    <Registration setAction={setAction}  setActive={setActive}/>
+                    <Registration setAction={setAction} setActive={setActive} />
                 }
 
 

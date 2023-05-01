@@ -62,59 +62,64 @@ const AllAnimes = () => {
                 {isLoading ?
                     <TablesSkeleton />
                     :
-                    <table className={styles.table}>
-                        <thead>
-                            <tr className={styles.thead}>
-                                <th>ID</th>
-                                <th>Назва(ua)</th>
-                                <th>Назва(en)</th>
-                                <th>Додано</th>
-                                <th>Редагування</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {(query && searchData ? searchData.data.animes : animes.data).map((item) => (
-                                <tr className={styles.tbody} key={item.id}>
-                                    <td><span>{item.id}</span></td>
-                                    <td className={styles.title}><span>{item.ua_title}</span></td>
-                                    <td className={styles.title}><span>{item.en_title}</span></td>
-                                    <td><span>{item.created_at}</span></td>
-                                    <td><span>{item.updated_at}</span></td>
-                                    <td className={styles.actions}>
-                                        <button
-                                            onClick={() => { setAnimeId(item.id) }}
-                                        >
-                                            <EditIcon /></button>
-                                        <button
-                                            onClick={() => handleDestroy(item.id)}
-                                        >
-                                            <DeleteIcon />
-                                        </button>
-                                        <button
-                                            className={`${item.active === 1 ? styles.activePost : ''}`}
-                                        >
-                                            <DotIcon />
-                                        </button>
-                                        <button
-                                            onClick={() => { setActive(true); setToggleClass('details'); setAnimeId(item.id) }}
-                                        >
-                                            <VerticalDotsIcon /></button>
-                                    </td>
+                    <>
+                        <table className={styles.table}>
+                            <thead>
+                                <tr className={styles.thead}>
+                                    <th>ID</th>
+                                    <th>Назва(ua)</th>
+                                    <th>Назва(en)</th>
+                                    <th>Додано</th>
+                                    <th>Редагування</th>
+                                    <th></th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                }
-                <DetailsModal
-                    setActive={setActive}
-                    active={active}
-                    setToggleClass={setToggleClass}
-                    toggleClass={toggleClass}
-                    animeId={animeId}
-                    setAnimeId={setAnimeId}
-                />
+                            </thead>
+                            <tbody>
+                                {(query && searchData ? searchData.data.animes : animes.data).map((item, index) => (
+                                    <tr className={styles.tbody} key={item.id}>
+                                        <td><span>{item.id}</span></td>
+                                        <td className={styles.title}><span>{item.ua_title}</span></td>
+                                        <td className={styles.title}><span>{item.en_title}</span></td>
+                                        <td><span>{item.created_at}</span></td>
+                                        <td><span>{item.updated_at}</span></td>
+                                        <td className={styles.actions}>
+                                            <button
+                                                onClick={() => { setAnimeId(item.id) }}
+                                                title='Редагувати'
+                                            >
+                                                <EditIcon /></button>
+                                            <button
+                                                onClick={() => handleDestroy(item.id)}
+                                                title='Видалити'
+                                            >
+                                                <DeleteIcon />
+                                            </button>
+                                            <button
+                                                className={`${item.active === 1 ? styles.activePost : ''}`}
+                                                title='Змінити статус'
+                                            >
+                                                <DotIcon />
+                                            </button>
+                                            <button
+                                                onClick={() => { setActive(true); setToggleClass('details'); setAnimeId(item.id) }}
+                                                title='Деталі'
+                                            >
+                                                <VerticalDotsIcon /></button>
 
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                        <DetailsModal
+                            setActive={setActive}
+                            active={active}
+                            setToggleClass={setToggleClass}
+                            toggleClass={toggleClass}
+                            data={(query && searchData ? searchData.data.animes : animes.data).find(anime => anime.id === animeId)}
+                        />
+                    </>
+                }
             </div>
             <div className={styles.navBtns}>
                 <Arrow

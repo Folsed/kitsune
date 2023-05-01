@@ -29,7 +29,22 @@
 }
 
 .logo {
+    display: flex;
+    align-items: center;
     height: 50px;
+}
+
+.logo img {
+    transition: filter .1s ease-in-out;
+}
+
+.logo:hover img{
+    filter: hue-rotate(142deg);
+}
+
+.logo img {
+    min-width: 110px;
+    width: 110px;
 }
 
 .logo-svg {

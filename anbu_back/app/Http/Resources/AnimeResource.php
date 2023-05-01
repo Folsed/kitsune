@@ -27,7 +27,6 @@ class AnimeResource extends JsonResource
             'director' => $this->director,
             'studio' => $this->studio,
             'translated' => $this->translated,
-            'duration' => $this->duration,
             'synopsis' => $this->synopsis,
             'trailer' => $this->trailer,
             'genres' => $this->genres,

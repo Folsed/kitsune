@@ -5,6 +5,7 @@ export const ROUTES = {
     account: '/account',
     anime: '/animes',
     animeByGenre: (genre = null) => (genre ? `/animes/genre/${genre}` : `/animes/genre/:genre`),
+    searchedAnimes: (searchParam = null) => (searchParam ? `/anime/search/${searchParam}` : `/anime/search/:searchParam`),
     // Auth routes
     login: '/login',
     registration: 'registration',

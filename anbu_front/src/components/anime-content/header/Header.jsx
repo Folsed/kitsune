@@ -25,12 +25,11 @@ const Header = () => {
                             <div className={styles.subPreviewBackground}>
                                 <picture>
                                     <img
-                                        // loading='lazy'
                                         key=""
                                         src={`http://127.0.0.1:8000/${data.preview[0].sub_preview_path}`}
                                         alt=""
                                         title=""
-                                        loading="lazy"
+                                        // loading="lazy"
                                     />
                                 </picture>
                             </div>
@@ -48,8 +47,6 @@ const Header = () => {
                                             />
                                         </picture>
                                     </div>
-
-
                                 </div>
                             </div>
                         </div>

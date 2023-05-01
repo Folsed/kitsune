@@ -9,7 +9,6 @@ const CarouselGeneral = () => {
     const [imageLoaded, setImageLoaded] = useState(false)
 
 
-    console.log(imageLoaded)
     return (
         <div>
             {isLoading ? <CarouselSkeleton /> :
