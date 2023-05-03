@@ -48,4 +48,9 @@ class Anime extends Model
     {
         return $this->belongsTo(Carousel::class, 'anime_id');
     }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
 }

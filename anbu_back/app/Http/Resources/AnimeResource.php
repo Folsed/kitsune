@@ -30,6 +30,7 @@ class AnimeResource extends JsonResource
             'synopsis' => $this->synopsis,
             'trailer' => $this->trailer,
             'genres' => $this->genres,
+            'rating' => round($this->reviews->avg('stars'), 2),
             'created_at' => Carbon::parse($this->created_at)->toDateTimeString(),
             'updated_at' => Carbon::parse($this->updated_at)->toDateTimeString(),
             'preview' => PreviewResource::collection($this->previews),

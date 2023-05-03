@@ -10,7 +10,9 @@ use App\Models\Anime;
 use App\Models\Carousel;
 use App\Models\Comment;
 use App\Models\Genre;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AnimeController extends Controller
 {
@@ -33,16 +35,6 @@ class AnimeController extends Controller
                 'total' => Anime::count(),
             ]);
         }
-    }
-
-    public function create()
-    {
-        //
-    }
-
-    public function store(Request $request)
-    {
-        //
     }
 
     public function show($id)
@@ -113,7 +105,6 @@ class AnimeController extends Controller
             ],
             'status' => 'success',
         ]);
-
     }
 
     public function carouselMutate(Request $request)
@@ -142,18 +133,57 @@ class AnimeController extends Controller
         ]);
     }
 
-    public function edit($id)
+    public function queries(Request $request)
     {
-        //
-    }
+        // Recent
+        if ($request->q === 'recent') {
+            return response()->json([
+                'data' => [
+                    'animes' => AnimeResource::collection(Anime::orderBy('created_at', 'desc')->get()),
+                ],
+            ]);
+        }
+        // Best
+        if ($request->q === 'best') {
+            return response()->json([
+                'data' => [
+                    'animes' => AnimeResource::collection(
+                        Anime::join('reviews', 'animes.id', '=', 'reviews.anime_id')
+                            ->selectRaw('animes.*, avg(stars) as avg_stars')
+                            ->groupBy('animes.id')
+                            ->orderByDesc('avg_stars')
+                            ->get()
+                    ),
+                ],
+            ]);
+        }
+        // Popular
+        if ($request->q === 'popular') {
+            // return response()->json([
+            //     'data' => [
+            //         'animes' => AnimeResource::collection(Anime::whereHas('reviews', function ($query) {
+            //             $query->select('anime_id', DB::raw('count(user_id) as review_count'))
+            //                   ->groupBy('anime_id')
+            //                   ->orderByDesc('review_count');
+            //         })->get()),
+            //     ],
+            // ]);
 
-    public function update(Request $request, $id)
-    {
-        //
-    }
+            $animes = Anime::whereHas('reviews', function ($query) {
+                $query->selectRaw('count(user_id) as counted_review')->orderByDesc('counted_review');
+            })->get();
 
-    public function destroy($id)
-    {
-        //
+            return AnimeResource::collection($animes);
+        }
+
+
+
+
+
+        if ($request->q === 'test') {
+
+
+            return Anime::with('reviews')->limit(1)->get();
+        }
     }
 }
