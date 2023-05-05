@@ -3,14 +3,14 @@ import styles from './cards-carousel.module.css'
 import CardsCarousel from './CardsCarousel';
 import { NavLink } from 'react-router-dom';
 import { ROUTES } from '../../../router/routes';
-import { useAnimes } from '../../../hooks/useAnimes';
 import CardsBoxSkeleton from '../../skeletons/cards-box-skeleton/CardsBoxSkeleton';
+import { useAnimesByGenre } from '../../../hooks/useAnimesByGenre';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { useAnimesByQuery } from '../../../hooks/useAnimesByQuery';
 
 
-const BestSeason = ({ }) => {
-
-    const { isLoading, isError, data } = useAnimes()
+const CardsTrack = ({ query, title, subTitle, shalfColor, genre }) => {
+    const { isLoading, data: carouselData } = genre ? useAnimesByGenre(genre) : useAnimesByQuery(query)
 
     return (
         <>
@@ -19,13 +19,19 @@ const BestSeason = ({ }) => {
                     <div className="dfsa">
                         <div className={styles.headingWrapper}>
                             <div className={styles.feedHeading}>
-                                <h2 className={styles.feedHeadingTitle}>Найкращі аніме цього сезону!</h2>
-                                <p className={styles.feedHeadingText}>Найкраще серед кращого!</p>
-                                <div className={`${styles.feedHeadingShalf} ${styles.bestShalf}`}></div>
+                                <h2 className={styles.feedHeadingTitle}>{title ? title : ''}</h2>
+                                <p className={styles.feedHeadingText}>{subTitle ? subTitle : ''}</p>
+                                <div
+                                    className={styles.feedHeadingShalf}
+                                    style={{
+                                        background: shalfColor
+                                    }}
+                                >
+                                </div>
                             </div>
                         </div>
                         <CardsCarousel>
-                            {data.map((item) => (
+                            {(genre ? carouselData.animes : carouselData).map((item) => (
                                 <div
                                     className={`${styles.contentContainer}`}
                                     key={item.id}
@@ -35,17 +41,12 @@ const BestSeason = ({ }) => {
                                         <NavLink to={ROUTES.animePage(item.id, item.alias)}>
                                             <div className={styles.innerContentContainer}>
                                                 <div className={styles.preview}>
-                                                    {item.preview.map(preview => (
-                                                        <LazyLoadImage
-                                                            loading='lazy'
-                                                            key={preview.id}
-                                                            src={`http://127.0.0.1:8000/${preview.preview_path}`}
-                                                            alt=""
-                                                            effect='blur'
-                                                            title={item.ua_title}
-                                                        />
-
-                                                    ))}
+                                                    <LazyLoadImage
+                                                        src={`http://127.0.0.1:8000/${item.preview_path}`}
+                                                        effect='blur'
+                                                        alt=""
+                                                        title={item.ua_title}
+                                                    />
                                                 </div>
                                                 <div className={styles.description}>
                                                     <h4>{item.ua_title}</h4>
@@ -60,10 +61,11 @@ const BestSeason = ({ }) => {
                             ))}
                         </CardsCarousel>
                     </div>
+
                 }
             </div>
         </>
     )
 }
 
-export default BestSeason
+export default CardsTrack

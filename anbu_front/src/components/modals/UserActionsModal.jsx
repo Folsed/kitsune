@@ -34,7 +34,7 @@ const UserActionsModal = ({ toggleClass, setActive }) => {
                             </div>
                             <span>{currentUser.name}</span>
                         </div>
-                        {currentUser.roles[0].name === 'Administrator' ? <span className={styles.isAdmin}>A</span> : ''}
+                        {/* {currentUser.roles[0].name === 'Administrator' ? <span className={styles.isAdmin}>A</span> : ''} */}
                     </div>
                     <ul className={styles.actions}>
 

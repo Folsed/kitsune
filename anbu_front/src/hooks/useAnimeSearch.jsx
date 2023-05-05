@@ -3,7 +3,7 @@ import axiosClient from "../axios-client";
 import axios from "axios";
 import { AnimeService } from "../services/AnimeData.service";
 
-export const useAnimeSearch = ({title}) => {
+export const useAnimeSearch = (title) => {
 
     const searchParams = new URLSearchParams({
         title,

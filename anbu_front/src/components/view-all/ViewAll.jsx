@@ -2,6 +2,8 @@ import styles from './view-all.module.css'
 
 import { BlackButton } from '../../UI/buttons/BlackButton'
 import cat from './../../img/view-all-cat.png'
+import { NavLink } from 'react-router-dom'
+import { ROUTES } from '../../router/routes'
 
 export const ViewAll = () => {
     return (
@@ -9,10 +11,12 @@ export const ViewAll = () => {
             <img src={cat} alt="" />
             <h3>
                 Все ще шукаєте, що подивитися?
-                <br/>
+                <br />
                 Перегляньте нашу повну бібліотеку
             </h3>
-            <BlackButton title="Дивитись все" className={`view-all`}/>
+            <NavLink to={ROUTES.anime}>
+                <BlackButton title="Дивитись все" className={`view-all`} />
+            </NavLink>
         </div>
     )
 }

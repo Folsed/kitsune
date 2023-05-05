@@ -5,18 +5,28 @@ import { useAnimeSearch } from '../../hooks/useAnimeSearch'
 import { NavLink, useLocation } from 'react-router-dom'
 import { ROUTES } from '../../router/routes';
 import LiveSearchSkeleton from '../skeletons/live-search-skeleton/LiveSearchSkeleton'
+import { useCallback } from 'react'
+import useDebounce from '../../helpers/useDebounce'
 
 
 const LiveSearch = () => {
     const [query, setQuery] = useState('')
     const [focus, setFocus] = useState(false)
-    const { isLoading, isError, data: animes, status } = useAnimeSearch({ title: query })
+    const debouncedQuery = useDebounce(query, 100)
+    const { isLoading, isError, data: animes, status } = useAnimeSearch(debouncedQuery)
 
     const location = useLocation();
 
     useEffect(() => {
         setQuery('');
     }, [location]);
+
+
+    const handleInput = useCallback(async (e) => {
+        setQuery(e.target.value)
+    }, [])
+
+    console.log(debouncedQuery)
 
     return (
         <div className={styles.searchContainer}>
@@ -29,9 +39,10 @@ const LiveSearch = () => {
                     type="text"
                     placeholder="Пошук аніме"
                     value={query}
-                    onChange={({ target }) => setQuery(target.value)}
+                    onChange={handleInput}
                     onBlur={() => { setFocus(false) }}
                     onFocus={() => { setFocus(true) }}
+                    maxLength={200}
                 />
             </div>
             <ul className={`${styles.searchAutocomplete} ${focus === true ? styles.active : ''}`}>

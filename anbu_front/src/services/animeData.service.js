@@ -39,6 +39,12 @@ export const AnimeService = {
         return data.data
     },
 
+    async getByQuery(queryParams) {
+        const data = await axios.get(`${API_URL}/query/anime?${queryParams}`)
+
+        return data.data
+    },
+
     async getWithPagination(size, page) {
         const data = await axios.get(`${API_URL}/anime/?size=${size}&page=${page}`)
 
@@ -50,5 +56,7 @@ export const AnimeService = {
 
         return data.data
     },
+
+
 
 }

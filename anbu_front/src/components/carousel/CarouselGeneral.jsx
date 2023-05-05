@@ -6,7 +6,6 @@ import { useState } from "react";
 
 const CarouselGeneral = () => {
     const { isLoading, isError, data: slides } = useCarousel()
-    const [imageLoaded, setImageLoaded] = useState(false)
 
 
     return (
@@ -21,8 +20,7 @@ const CarouselGeneral = () => {
                                     loading="lazy"
                                     src={`http://127.0.0.1:8000/${item.content_path}`}
                                     alt=""
-                                    title={item.title}
-                                    onLoad={() => setImageLoaded(true)}
+                                    title={item.title}                                    
                                 />
                             </picture>
                         </CarouselSlide>

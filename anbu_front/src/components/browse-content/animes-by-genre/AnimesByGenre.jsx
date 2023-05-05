@@ -8,7 +8,7 @@ import { useAnimesByGenre } from '../../../hooks/useAnimesByGenre'
 const AnimesByGenre = () => {
     const { genre } = useParams()
     const { data, isLoading, isError } = useAnimesByGenre(genre)
-
+    console.log(data)
 
     return (
         <>
@@ -28,16 +28,12 @@ const AnimesByGenre = () => {
                                     <NavLink to={ROUTES.animePage(item.id, item.alias)}>
                                         <div className={styles.innerContentContainer}>
                                             <div className={styles.preview}>
-                                                {item.preview.map(preview => (
-                                                    <LazyLoadImage
-                                                        loading='lazy'
-                                                        key={preview.id}
-                                                        src={`http://127.0.0.1:8000/${preview.preview_path}`}
-                                                        alt=""
-                                                        title={item.ua_title}
-                                                    />
-
-                                                ))}
+                                                <LazyLoadImage
+                                                    loading='lazy'
+                                                    src={`http://127.0.0.1:8000/${item.preview_path}`}
+                                                    alt=""
+                                                    title={item.ua_title}
+                                                />
                                             </div>
                                             <div className={styles.description}>
                                                 <h4>{item.ua_title}</h4>

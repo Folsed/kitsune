@@ -8,9 +8,17 @@ import BannerBlue from '../../components/home-content/banners/colored-banners/Ba
 import BannerOrange from '../../components/home-content/banners/colored-banners/BannerOrange'
 import NewsBanner from '../../components/home-content/banners/news/NewsBanner'
 import BannerPromo from '../../components/home-content/banners/promo-banners/BannerPromo'
-import BestSeason from '../../components/home-content/cards/BestSeason'
-import Recently from '../../components/home-content/cards/Recently'
 import { LazyLoadComponent } from 'react-lazy-load-image-component'
+import CardsTrack from '../../components/home-content/cards/CardsTrack'
+
+/* 
+Cards shalf colors:
+    var(--cards-shalf-color-green)
+    var(--cards-shalf-color-orange)
+    var(--cards-shalf-color-white-black)
+    var(--cards-shalf-color-blue)
+    or any others...
+*/
 
 
 const Home = () => {
@@ -20,37 +28,64 @@ const Home = () => {
             <CarouselGeneral />
 
             <div className="dynamic-wrapper">
-                <Recently />
-                <BannerOrange />
-                <Recently />
-                <BestSeason />
-                <LazyLoadComponent>
-                    <NewsBanner />
-                </LazyLoadComponent>
-                <LazyLoadComponent>
-                    <BestSeason />
-                </LazyLoadComponent>
-                <LazyLoadComponent>
-                    <BannerPromo />
-                </LazyLoadComponent>
-                <LazyLoadComponent>
-                    <BestSeason />
-                </LazyLoadComponent>
-                <LazyLoadComponent>
-                    <BestSeason />
-                </LazyLoadComponent>
+                <CardsTrack
+                    query={'recently'}
+                    title={'Новинки'}
+                    subTitle={'Нещодавно додані аніме на сайті'}
+                    shalfColor={'var(--cards-shalf-color-white-black)'}
+                />
+                <CardsTrack
+                    query={'best'}
+                    title={'Найкраще'}
+                    subTitle={'Дивіться найкраще аніме на думку користувачів'}
+                    shalfColor={'var(--cards-shalf-color-orange)'}
+                />
+                <BannerPromo />
+                <CardsTrack
+                    query={'popular'}
+                    title={'Найпопулярніші'}
+                    subTitle={'Більше всього відгуків тут'}
+                    shalfColor={'var(--cards-shalf-color-blue)'}
+                />
                 <LazyLoadComponent>
                     <BannerBlue />
+                    <CardsTrack
+                        genre={'adventure'}
+                        title={'Цікаві пригоди'}
+                        subTitle={'Всі люблять пригоди, чи не так?'}
+                        shalfColor={'var(--cards-shalf-color-white-black)'}
+                    />
+                    <CardsTrack
+                        genre={'fantasy'}
+                        title={'Фантазійне фентезі'}
+                        subTitle={'Дракони, вампіри, середньовіччя...Чудеса'}
+                        shalfColor={'var(--cards-shalf-color-orange)'}
+                    />
                 </LazyLoadComponent>
                 <LazyLoadComponent>
-                    <BestSeason />
+                    <NewsBanner />
+                    <CardsTrack
+                        genre={'romance'}
+                        title={'Солодка любов'}
+                        subTitle={'Щось...'}
+                        shalfColor={'var(--cards-shalf-color-blue)'}
+                    />
                 </LazyLoadComponent>
-
-
+                <LazyLoadComponent>
+                    <BannerOrange />
+                    <BannerPromo />
+                    <CardsTrack
+                        genre={'shounen'}
+                        title={'Кінець сторінки'}
+                        shalfColor={'var(--cards-shalf-color-white-black)'}
+                    />
+                </LazyLoadComponent>
             </div>
-            <div className="view-all__wrapper">
-                <ViewAll />
-            </div>
+            <LazyLoadComponent>
+                <div className="view-all__wrapper">
+                    <ViewAll />
+                </div>
+            </LazyLoadComponent>
         </div>
     )
 }

@@ -10,6 +10,11 @@
     --cr-start-direction: left;
     --cr-end-direction: right;
     --main-color: #ff7b00;
+
+    --cards-shalf-color-green: linear-gradient(270deg, rgba(85,244,150,1) 0%, rgba(255,255,255,1) 63%, rgba(203,252,165,1) 100%);
+    --cards-shalf-color-orange: linear-gradient(90deg, rgba(148, 255, 0, 1) 0%, rgba(235, 21, 21, 1) 50%, rgba(72, 242, 0, 1) 100%);
+    --cards-shalf-color-white-black: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(0,0,0,1) 100%);
+    --cards-shalf-color-blue: linear-gradient(270deg, rgba(120,228,255,1) 0%, rgba(4,190,252,1) 55%, rgba(168,239,255,1) 100%);
 }
 
 svg:not(:root) {
