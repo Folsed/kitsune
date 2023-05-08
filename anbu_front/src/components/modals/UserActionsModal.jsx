@@ -1,10 +1,10 @@
 import styles from './modal.module.css'
-import { useGenres } from '../../hooks/useGenres'
+import { useGenres } from '../../hooks/anime/useGenres'
 import { Link, NavLink } from 'react-router-dom'
 import avatar from './../../img/avatar.jpg'
 import { userAuthContext } from '../../providers/AuthProvider'
 import { ROUTES } from './../../router/routes'
-import { useLogout } from '../../hooks/useLogout'
+import { useLogout } from '../../hooks/user/useLogout'
 import admin from './../../assets/icons/icon-admin.svg'
 
 

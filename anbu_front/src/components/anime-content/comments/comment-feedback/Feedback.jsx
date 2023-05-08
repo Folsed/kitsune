@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom'
 import styles from './feedback.module.css'
-import { useAnimeComments } from '../../../../hooks/useAnimeComments'
+import { useAnimeComments } from '../../../../hooks/anime/useAnimeComments'
 import { LazyLoadComponent } from 'react-lazy-load-image-component'
 
 
@@ -13,8 +13,8 @@ const Feedback = ({ animeId }) => {
                 {isLoading ? 'Loading'
                     :
                     comments.map((item, i) => (
-                        <LazyLoadComponent>
-                            <div className={styles.comment} key={i}>
+                        <LazyLoadComponent key={i}>
+                            <div className={styles.comment} >
                                 <div className={styles.avatarWrap}>
                                     <div className={styles.avatar}></div>
                                 </div>

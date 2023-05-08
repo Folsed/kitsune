@@ -1,7 +1,5 @@
 import { useState } from 'react'
 import { Logo } from '../../../assets/logo/Logo'
-import { useRegistration } from '../../../hooks/useRegistration'
-import { OrangeButton } from '../../../UI/buttons/OrangeButton'
 import styles from './auth.module.css'
 import Login from './Login'
 import Registration from './Registration'

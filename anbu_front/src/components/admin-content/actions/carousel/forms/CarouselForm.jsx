@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
-import styles from './forms.module.css'
+import styles from '../../forms.module.css'
 import { BlackButton } from '../../../../../UI/buttons/BlackButton'
 import ImageUploader from '../../../../../UI/inputs/ImageUploader'
 import SelectInput from '../../../../../UI/inputs/SelectInput'
-import { useAnimes } from '../../../../../hooks/useAnimes'
-import { useCarouselMutate } from '../../../../../hooks/useCarouselMutate'
+import { useAnimes } from '../../../../../hooks/anime/useAnimes'
+import { useCarouselMutate } from '../../../../../hooks/anime/useCarouselMutate'
 
 
 const CarouselForm = () => {

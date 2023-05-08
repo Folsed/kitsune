@@ -5,15 +5,17 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\AnimeCutResource;
 use App\Http\Resources\AnimeResource;
+use App\Http\Resources\BannerResource;
 use App\Http\Resources\CarouselResource;
 use App\Http\Resources\CommentResource;
+use App\Http\Resources\PromoResource;
 use App\Models\Anime;
+use App\Models\Banner;
 use App\Models\Carousel;
 use App\Models\Comment;
 use App\Models\Genre;
-use Carbon\Carbon;
+use App\Models\Promo;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class AnimeController extends Controller
 {
@@ -41,6 +43,24 @@ class AnimeController extends Controller
     public function show($id)
     {
         return new AnimeResource(Anime::findOrFail($id));
+    }
+
+    public function getBanner($id)
+    {
+        return response()->json([
+            'data' => [
+                'banner' => BannerResource::collection(Banner::where('id', $id)->with('anime')->get()),
+            ],
+        ]);
+    }
+
+    public function getPromo($id)
+    {
+        return response()->json([
+            'data' => [
+                'banner' => PromoResource::collection(Promo::where('id', $id)->with('anime')->get()),
+            ],
+        ]);
     }
 
     public function search(Request $request)

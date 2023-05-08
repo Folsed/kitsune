@@ -6,7 +6,7 @@
     font-weight: 600;
     font-size: 18px;
     /* height: 50px; */
-    transition: all .5s;
+    transition: all .2s;
     padding: 10px;
     border: 2px solid #f47521;
     color: #f47521;
@@ -23,8 +23,8 @@
 }
 
 .btn:active {
-    border-color: #fd9047;
-    color: #fd9047;
+    border-color: #f47521;
+    color: #f47521;
 }
 
 .watchlist-btn {
@@ -35,7 +35,7 @@
     font-weight: 600;
     font-size: 18px;
     height: 50px;
-    transition: all .5s;
+    transition: all .2s;
     padding: 10px;
     border: 2px solid #f47521;
     color: #f47521;
@@ -62,7 +62,7 @@
     font-weight: 600;
     font-size: 18px;
     height: 100%;
-    transition: background-color .5s;
+    transition: background-color .2s;
     border: 2px solid #f47521;
     padding: 10px;
     width: 100%;

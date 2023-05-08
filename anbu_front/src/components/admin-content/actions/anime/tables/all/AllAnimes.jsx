@@ -1,5 +1,5 @@
-import styles from './../table.module.css'
-import { useAnimesPagination } from '../../../../../../hooks/useAnimesPagination'
+import styles from '../../../table.module.css'
+import { useAnimesPagination } from '../../../../../../hooks/anime/useAnimesPagination'
 import { useState } from 'react'
 import { Arrow } from '../../../../../../utils/helpers/Arrow'
 import { useAnimeDestroy } from '../../../../../../hooks/admin/useAnimeDestroy'

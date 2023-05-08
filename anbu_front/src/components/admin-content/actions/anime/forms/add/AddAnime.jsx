@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 import AdminFormInput from '../../../../../../UI/inputs/AdminFormInput'
 import AdminFormTextarea from '../../../../../../UI/inputs/AdminFormTextarea'
-import styles from './../forms.module.css'
+import styles from './../../../forms.module.css'
 import ImageUploader from '../../../../../../UI/inputs/ImageUploader'
 import { BlackButton } from '../../../../../../UI/buttons/BlackButton'
 import { ReactComponent as ActiveCheckIcon } from './../../../../../../assets/icons/dot.svg'
 import SelectInput from '../../../../../../UI/inputs/SelectInput'
-import { useGenres } from '../../../../../../hooks/useGenres'
+import { useGenres } from '../../../../../../hooks/anime/useGenres'
 import { useAnimeCreate } from '../../../../../../hooks/admin/useAnimeCreate'
 import Preloader from '../../../../../../UI/loader/Preloader'
 
@@ -97,7 +97,6 @@ const AddAnime = () => {
                         placeholder='Ukrainian title'
                         value={uaTitle}
                         onChange={(e) => setUaTitle(e.target.value)}
-
                     />
                     <AdminFormInput
                         className={errors && errors.en_title ? styles.error : ''}

@@ -76,7 +76,6 @@ class AuthController extends Controller
         return response([
             'user' => $user->load('roles'),
             'token' => $token,
-
         ]);
     }
 
@@ -95,9 +94,4 @@ class AuthController extends Controller
         ]);
     }
 
-    public function user(Request $request)
-    {
-        $user = $request->user()->with('roles');
-        return $user;
-    }
 }

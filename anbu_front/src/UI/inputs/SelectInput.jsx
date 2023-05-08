@@ -4,10 +4,10 @@ import './input.module.css'
 import Select from "react-select"
 
 
-const SelectInput = ({ options, placeholder, setValue, value, error, isLoading, isMulti, closeMenuOnSelect }) => {
+const SelectInput = ({ options, placeholder, setValue, value, error, isLoading, isMulti, closeMenuOnSelect, defaultValue }) => {
     const labels = options.map((item) => ({
         value: item.id,
-        label: item.name
+        label: item.name,
     }));
 
     return (
@@ -20,6 +20,7 @@ const SelectInput = ({ options, placeholder, setValue, value, error, isLoading, 
             closeMenuOnSelect={closeMenuOnSelect ? true : false}
             placeholder={placeholder}
             value={value}
+            defaultValue={defaultValue}
             onChange={(val) => setValue(val)}
             styles={{
                 control: (baseStyles, state) => ({
@@ -37,6 +38,7 @@ const SelectInput = ({ options, placeholder, setValue, value, error, isLoading, 
                 valueContainer: (baseStyles) => ({
                     ...baseStyles,
                     padding: 0,
+                    alignItems: 'end',
                 }),
                 indicatorSeparator: (baseStyles) => ({
                     ...baseStyles,

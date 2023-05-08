@@ -10,6 +10,8 @@ import AnimeContext from '../../providers/AnimeProvider'
 import AnimeAction from '../../components/admin-content/actions/anime/AnimeAction'
 import CarouselNav from '../../components/admin-content/actions/carousel/nav/CarouselNav'
 import CarouselAction from '../../components/admin-content/actions/carousel/CarouselAction'
+import BannersNav from '../../components/admin-content/actions/banners/nav/BannersNav'
+import BannersAction from '../../components/admin-content/actions/banners/BannersAction'
 
 
 const AccountPage = () => {
@@ -40,7 +42,9 @@ const AccountPage = () => {
                             active === 'carousel' ?
                                 <CarouselNav />
                                 :
-                                ''
+                                active === 'banners' ?
+                                    <BannersNav />
+                                    : ''
                         }
 
                     </div>
@@ -51,7 +55,10 @@ const AccountPage = () => {
                             active === 'carousel' ?
                                 <CarouselAction />
                                 :
-                                ''
+                                active === 'banners' ?
+                                    <BannersAction />
+                                    :
+                                    ''
                         }
                     </div>
                 </div>

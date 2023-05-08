@@ -1,5 +1,5 @@
 import styles from './modal.module.css'
-import { useGenres } from '../../hooks/useGenres'
+import { useGenres } from '../../hooks/anime/useGenres'
 import { Link } from 'react-router-dom'
 import { ROUTES } from '../../router/routes'
 import { useState } from 'react'

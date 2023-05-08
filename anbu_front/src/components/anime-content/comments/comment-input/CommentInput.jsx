@@ -3,8 +3,8 @@ import styles from './comment-input.module.css'
 import { userAuthContext } from '../../../../providers/AuthProvider'
 import { OrangeButton } from '../../../../UI/buttons/OrangeButton';
 import { useState } from 'react';
-import { useAnimeComments } from '../../../../hooks/useAnimeComments';
-import { useAnimeCommentMutate } from '../../../../hooks/useAnimeCommentMutate';
+import { useAnimeComments } from '../../../../hooks/anime/useAnimeComments';
+import { useAnimeCommentMutate } from '../../../../hooks/anime/useAnimeCommentMutate';
 
 
 const CommentInput = ({animeId}) => {

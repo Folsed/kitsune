@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useRegistration } from '../../../hooks/useRegistration'
+import { useRegistration } from '../../../hooks/user/useRegistration'
 import { OrangeButton } from '../../../UI/buttons/OrangeButton'
 import styles from './auth.module.css'
 

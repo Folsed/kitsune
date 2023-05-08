@@ -23,20 +23,20 @@ Content Routes
 */
 
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+// Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::controller(AnimeController::class)->group(function () {
-    Route::get('anime/{id}/{alias?}', 'show')->name('anime');
-    Route::post('anime/{id}/{alias?}', 'createComment')->middleware('auth')->name('anime-comment');
-});
+// Route::controller(AnimeController::class)->group(function () {
+//     Route::get('anime/{id}/{alias?}', 'show')->name('anime');
+//     Route::post('anime/{id}/{alias?}', 'createComment')->middleware('auth')->name('anime-comment');
+// });
 
-Route::get('news', [NewsController::class, 'index'])->name('news');
-
-
+// Route::get('news', [NewsController::class, 'index'])->name('news');
 
 
-//Test Route
-Route::get('test', [TestController::class, 'index'])->name('test');
+
+
+// //Test Route
+// Route::get('test', [TestController::class, 'index'])->name('test');
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/admin.php';

@@ -3,7 +3,7 @@ import styles from './../browse.module.css'
 import { ROUTES } from '../../../router/routes'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import EveryCardsBoxSkeleton from '../../skeletons/every-cards-skeleton/EveryCardsBoxSkeleton'
-import { useAnimesByGenre } from '../../../hooks/useAnimesByGenre'
+import { useAnimesByGenre } from '../../../hooks/anime/useAnimesByGenre'
 
 const AnimesByGenre = () => {
     const { genre } = useParams()

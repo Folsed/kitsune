@@ -1,5 +1,5 @@
-import styles from './../table.module.css'
-import { useAnimesPagination } from '../../../../../../hooks/useAnimesPagination'
+import styles from '../../../table.module.css'
+import { useAnimesPagination } from '../../../../../../hooks/anime/useAnimesPagination'
 import { useState } from 'react'
 import { Arrow } from '../../../../../../utils/helpers/Arrow'
 import { useAnimeDestroy } from '../../../../../../hooks/admin/useAnimeDestroy'
@@ -10,7 +10,7 @@ import { ReactComponent as SpinnerIcon } from '../../../../../../assets/icons/sp
 import { ReactComponent as EditIcon } from '../../../../../../assets/icons/edit.svg'
 import { ReactComponent as DeleteIcon } from '../../../../../../assets/icons/delete.svg'
 import { ReactComponent as VerticalDotsIcon } from '../../../../../../assets/icons/vertical-dots.svg'
-import { useGenres } from '../../../../../../hooks/useGenres'
+import { useGenres } from '../../../../../../hooks/anime/useGenres'
 
 const AnimeGenres = () => {
     const size = 15

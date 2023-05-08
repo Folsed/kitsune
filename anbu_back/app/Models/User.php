@@ -54,5 +54,9 @@ class User extends Authenticatable
         return $this->hasMany(Review::class);
     }
 
+    public function pronoun()
+    {
+        return $this->hasOne(Pronoun::class);
+    }
 
 }

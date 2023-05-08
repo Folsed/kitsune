@@ -1,4 +1,3 @@
-import React from 'react'
 import AddAnime from './add/AddAnime'
 
 const AnimeForms = () => {

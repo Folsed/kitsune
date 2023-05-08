@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\Api\AnimeFormsController;
 use App\Http\Controllers\Admin\Api\AnimeTablesController;
 use App\Http\Controllers\Api\AnimeController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\UserController;
 use App\Http\Resources\GenreResourse;
 use App\Models\Genre;
 use Illuminate\Support\Facades\Route;
@@ -24,47 +25,66 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::controller(AnimeFormsController::class)->group(function () {
-        Route::post('api/create/anime', 'create')->name('api-anime-create');
-        Route::post('api/destroy/anime', 'destroy')->name('api-anime-delete');
+        // Anime
+        Route::post('api/create/anime', 'create')->name('api_anime-create');
+        Route::post('api/destroy/anime', 'destroy')->name('api_anime-delete');
+
+        // Banners
+        Route::post('api/create/banner', 'bannerCreate')->name('api_banner-create');
+        Route::post('api/create/banner/promo', 'promoCreate')->name('promo-create');
     });
 
 
-    Route::get('api/table/search/anime', [AnimeTablesController::class, 'tableSearch'])->name('api-anime-delete');
+    Route::get('api/table/search/anime', [AnimeTablesController::class, 'tableSearch'])->name('api_anime-delete');
 });
 
 
 // Auth API
 
 Route::controller(AuthController::class)->group(function () {
-    Route::post('api/registered', 'registered')->name('api-registered');
-    Route::post('api/login', 'login')->name('api-login');
+    Route::post('api/registered', 'registered')->name('api_registered');
+    Route::post('api/login', 'login')->name('api_login');
 
 
     Route::middleware('auth:sanctum')->group(function () {
-        Route::post('api/logout', 'logout')->name('api-logout');
-        Route::get('api/user', 'user')->name('api-logout');
+        Route::post('api/logout', 'logout')->name('api_logout');
+    });
+});
+
+
+// User API
+
+Route::controller(UserController::class)->group(function () {
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::get('api/user', 'user')->name('api_logout');
+        Route::get('api/user/pronouns', 'getPronouns')->name('api_pronouns');
+
+        Route::put('api/user/info/update', 'updateInfo')->name('api_update-info');
     });
 });
 
 // Anime API
 Route::controller(AnimeController::class)->group(function () {
-    Route::get('api/anime', 'index')->name('api-anime-all');
-    Route::get('api/anime/{id}', 'show')->name('api-anime-byId');
+    Route::get('api/anime', 'index')->name('api_anime-all');
+    Route::get('api/anime/{id}', 'show')->name('api_anime-byId');
 
     // Comment
-    Route::get('api/comments/anime/{id}', 'comments')->name('api-anime-comments');
-    Route::post('api/comment/leave', 'comment')->name('api-anime-comment');
+    Route::get('api/comments/anime/{id}', 'comments')->name('api_anime-comments');
+    Route::post('api/comment/leave', 'comment')->name('api_anime-comment');
     // Search
-    Route::get('api/search/anime', 'search')->name('api-anime-search');
+    Route::get('api/search/anime', 'search')->name('api_anime-search');
     // Browse
-    Route::get('api/anime/genre/{genre}', 'showByGenre')->name('api-anime-by-genre');
+    Route::get('api/anime/genre/{genre}', 'showByGenre')->name('api_anime-by-genre');
     // Carousel
-    Route::post('api/carousel/anime/mutate', 'carouselMutate')->name('api-carousel-mutate');
-    Route::get('api/carousel/anime', 'carousel')->name('api-carousel');
+    Route::post('api/carousel/anime/mutate', 'carouselMutate')->name('api_carousel-mutate');
+    Route::get('api/carousel/anime', 'carousel')->name('api_carousel');
     // Queries
-    Route::get('api/query/anime', 'queries')->name('api-anime-by-query');
+    Route::get('api/query/anime', 'queries')->name('api_anime-by-query');
+    // Banners
+    Route::get('api/banner/anime/{id}', 'getBanner')->name('api_banner');
+    Route::get('api/banner/promo/anime/{id}', 'getPromo')->name('api_promo');
 });
 
 Route::get('api/anime/genres/list', function () {
     return GenreResourse::collection(Genre::all());
-})->name('api-show-genres');
+})->name('api_show-genres');

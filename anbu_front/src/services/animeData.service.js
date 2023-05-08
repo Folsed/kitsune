@@ -15,6 +15,12 @@ export const AnimeService = {
         return data.data
     },
 
+    async getBanner(id) {
+        const data = await axios.get(`${API_URL}/banner/anime/${id}`)
+
+        return data.data
+    },
+
     async getGenres() {
         const data = await axios.get(`${API_URL}/anime/genres/list`)
 
@@ -57,6 +63,11 @@ export const AnimeService = {
         return data.data
     },
 
+    async getPromo(id) {
+        const data = await axios.get(`${API_URL}/banner/promo/anime/${id}`)
+
+        return data.data
+    },
 
 
 }

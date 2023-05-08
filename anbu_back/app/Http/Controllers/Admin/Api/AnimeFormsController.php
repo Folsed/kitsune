@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Anime;
+use App\Models\Banner;
 use App\Models\Genre;
 use App\Models\Preview;
+use App\Models\Promo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -98,6 +100,66 @@ class AnimeFormsController extends Controller
     public function destroy(Request $request)
     {
         Anime::destroy($request->id);
+
+        return response([
+            'status' => 'success',
+        ]);
+    }
+
+    public function bannerCreate(Request $request)
+    {
+        $this->validate($request, [
+            'anime_id' => 'required',
+            'png_preview' => 'required|image|mimes:png',
+        ]);
+
+
+        $banner = new Banner();
+        $banner->anime_id = $request->input('anime_id');
+
+        $anime = Anime::where('id', $request->anime_id)->get(['id', 'alias']);
+
+        $pngPreviewPath = 'images/anime/png_previews/';
+        if($request->hasFile('png_preview')) {
+            $pngPreviewExtension = $request->file('png_preview')->extension();
+            $pngPreviewFilename = $anime[0]['id'] . '-' . $anime[0]['alias'] . '.' . $pngPreviewExtension;
+
+            $request->png_preview->storeAs($pngPreviewPath, $pngPreviewFilename);
+
+            $banner->png_preview = (string)$pngPreviewPath . $pngPreviewFilename;
+
+            $banner->save();
+        }
+
+        return response([
+            'status' => 'success',
+        ]);
+    }
+
+    public function promoCreate(Request $request)
+    {
+        $this->validate($request, [
+            'anime_id' => 'required',
+            'promo' => 'required|image|mimes:webp,png,svg,jpeg,avif',
+        ]);
+
+
+        $promo = new Promo();
+        $promo->anime_id = $request->input('anime_id');
+
+        $anime = Anime::where('id', $request->anime_id)->get(['id', 'alias']);
+
+        $promoPath = 'images/anime/promo/';
+        if($request->hasFile('promo')) {
+            $promoExtension = $request->file('promo')->extension();
+            $promoFilename = $anime[0]['id'] . '-' . $anime[0]['alias'] . '.' . $promoExtension;
+
+            $request->promo->storeAs($promoPath, $promoFilename);
+
+            $promo->promo_path = (string)$promoPath . $promoFilename;
+
+            $promo->save();
+        }
 
         return response([
             'status' => 'success',

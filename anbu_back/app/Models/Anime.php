@@ -53,4 +53,14 @@ class Anime extends Model
     {
         return $this->hasMany(Review::class);
     }
+
+    public function banners()
+    {
+        return $this->hasOne(Banner::class);
+    }
+
+    public function promo()
+    {
+        return $this->hasOne(Promo::class);
+    }
 }

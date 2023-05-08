@@ -16,14 +16,14 @@ const Navigation = () => {
                     >
                         Аніме
                     </button>
-                    {active === 'anime' ?
+                    {/* {active === 'anime' ?
                         <Dropdown
                             items={[
                                 { name: 'Жанри', label: 'genres' },
                                 { name: 'Коментарі', label: 'comments' },
                             ]}
                         />
-                        : ''}
+                        : ''} */}
                 </div>
                 <div className={styles.navPoint}>
                     <button
@@ -31,6 +31,14 @@ const Navigation = () => {
                         className={`${styles.navBtn} ${active === 'carousel' ? styles.active : ''}`}
                     >
                         Карусель
+                    </button>
+                </div>
+                <div className={styles.navPoint}>
+                    <button
+                        onClick={() => { setActive('banners'); setSubAction(''); setAction('banners-tables') }}
+                        className={`${styles.navBtn} ${active === 'banners' ? styles.active : ''}`}
+                    >
+                        Банери
                     </button>
                 </div>
                 <div className={styles.navPoint}>

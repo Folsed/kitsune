@@ -4,12 +4,11 @@ import disableKeyboardScroll from '../../helpers/disabledKeyboardScroll'
 // Components 
 import { ViewAll } from '../../components/view-all/ViewAll'
 import CarouselGeneral from '../../components/carousel/CarouselGeneral'
-import BannerBlue from '../../components/home-content/banners/colored-banners/BannerBlue'
-import BannerOrange from '../../components/home-content/banners/colored-banners/BannerOrange'
 import NewsBanner from '../../components/home-content/banners/news/NewsBanner'
 import BannerPromo from '../../components/home-content/banners/promo-banners/BannerPromo'
 import { LazyLoadComponent } from 'react-lazy-load-image-component'
 import CardsTrack from '../../components/home-content/cards/CardsTrack'
+import ColoredBanner from '../../components/home-content/banners/colored-banners/ColoredBanner'
 
 /* 
 Cards shalf colors:
@@ -40,7 +39,7 @@ const Home = () => {
                     subTitle={'Дивіться найкраще аніме на думку користувачів'}
                     shalfColor={'var(--cards-shalf-color-orange)'}
                 />
-                <BannerPromo />
+                <BannerPromo id={1}/>
                 <CardsTrack
                     query={'popular'}
                     title={'Найпопулярніші'}
@@ -48,7 +47,7 @@ const Home = () => {
                     shalfColor={'var(--cards-shalf-color-blue)'}
                 />
                 <LazyLoadComponent>
-                    <BannerBlue />
+                    <ColoredBanner id={2} backgroundColor={'blue'} />
                     <CardsTrack
                         genre={'adventure'}
                         title={'Цікаві пригоди'}
@@ -72,8 +71,8 @@ const Home = () => {
                     />
                 </LazyLoadComponent>
                 <LazyLoadComponent>
-                    <BannerOrange />
-                    <BannerPromo />
+                    <ColoredBanner id={3} backgroundColor={'orange'} />
+                    <BannerPromo id={2}/>
                     <CardsTrack
                         genre={'shounen'}
                         title={'Кінець сторінки'}

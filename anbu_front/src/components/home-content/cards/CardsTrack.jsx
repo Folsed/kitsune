@@ -4,9 +4,9 @@ import CardsCarousel from './CardsCarousel';
 import { NavLink } from 'react-router-dom';
 import { ROUTES } from '../../../router/routes';
 import CardsBoxSkeleton from '../../skeletons/cards-box-skeleton/CardsBoxSkeleton';
-import { useAnimesByGenre } from '../../../hooks/useAnimesByGenre';
+import { useAnimesByGenre } from '../../../hooks/anime/useAnimesByGenre';
+import { useAnimesByQuery } from '../../../hooks/anime/useAnimesByQuery';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { useAnimesByQuery } from '../../../hooks/useAnimesByQuery';
 
 
 const CardsTrack = ({ query, title, subTitle, shalfColor, genre }) => {

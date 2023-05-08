@@ -1,6 +1,6 @@
 import CarouselLogic from "./CarouselLogic"
 import CarouselSlide from "./CarouselSlide"
-import { useCarousel } from "../../hooks/useCarousel"
+import { useCarousel } from "../../hooks/anime/useCarousel"
 import CarouselSkeleton from "../skeletons/welcome-carousel-skeleton/CarouselSkeleton"
 import { useState } from "react";
 
@@ -15,8 +15,7 @@ const CarouselGeneral = () => {
                     {slides.carousel.map((item) => (
                         <CarouselSlide key={item.id} animeId={item.anime_id} alias={item.alias}>
                             <picture>
-                                <img
-                                    
+                                <img 
                                     loading="lazy"
                                     src={`http://127.0.0.1:8000/${item.content_path}`}
                                     alt=""

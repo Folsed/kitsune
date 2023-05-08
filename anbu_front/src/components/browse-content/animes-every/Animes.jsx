@@ -1,9 +1,9 @@
 import { NavLink } from 'react-router-dom'
-import { useAnimes } from '../../../hooks/useAnimes'
 import styles from './../browse.module.css'
 import { ROUTES } from '../../../router/routes'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import EveryCardsBoxSkeleton from '../../skeletons/every-cards-skeleton/EveryCardsBoxSkeleton'
+import { useAnimes } from '../../../hooks/anime/useAnimes'
 
 const Animes = () => {
     const { isLoading, isError, data } = useAnimes()

@@ -16,19 +16,19 @@
 }
 
 .avatar-wrapper {
-    display: flex;    
+    display: flex;
 }
 
 .avatar {
     border-radius: 50%;
     overflow: hidden;
-    object-fit:cover;
+    object-fit: cover;
     background-color: #181818;
     height: 240px;
     width: 240px;
 }
 
-.avatar img{
+.avatar img {
     height: 100%;
     width: 100%;
 }
@@ -56,7 +56,7 @@
     gap: 10px;
 }
 
-.next-info span{
+.next-info span {
     color: rgb(140, 140, 140);
 }
 
@@ -66,4 +66,20 @@
     font-weight: 400;
     border: 1px solid var(--main-color);
     /* font-style; */
+}
+
+.edit-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.edit-action-btns {
+    display: flex;
+    gap: 10px;
+}
+
+.edit-action-btns button {
+    font-size: 14px;
+    padding: 2px 3px;
 }
