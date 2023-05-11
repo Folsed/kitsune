@@ -19,30 +19,38 @@ use Illuminate\Http\Request;
 
 class AnimeController extends Controller
 {
+
+    private $anime;
+
+    public function __construct()
+    {
+        $this->anime = Anime::active();
+    }
+
     public function index(Request $request)
     {
-        $query = Anime::where('active', 1);
+        $query = $this->anime->where('active', 1);
 
         if ($request->size) {
             $query = $query->orderBy('created_at', 'desc')->paginate($request->size);
 
             return response()->json([
                 'data' => AnimeResource::collection($query),
-                'total' => Anime::count(),
+                'total' => $query->total(),
             ]);
         } else {
             $query = $query->orderBy('created_at', 'desc')->get();
 
             return response()->json([
                 'data' => AnimeResource::collection($query),
-                'total' => Anime::count(),
+                'total' => $this->anime->count(),
             ]);
         }
     }
 
     public function show($id)
     {
-        return new AnimeResource(Anime::findOrFail($id));
+        return new AnimeResource($this->anime->findOrFail($id));
     }
 
     public function getBanner($id)
@@ -71,7 +79,13 @@ class AnimeController extends Controller
 
         $title = $validatedData['title'];
 
-        $animes = Anime::where('en_title', 'like', "%{$title}%")->orWhere('ua_title', 'like', "%{$title}%")->get(['id', 'ua_title', 'en_title', 'aired', 'alias']);
+        $animes = Anime::where('active', true)
+            ->where(function ($query) use ($title) {
+                $query
+                    ->where('en_title', 'like', "%{$title}%")
+                    ->orWhere('ua_title', 'like', "%{$title}%");
+            })
+            ->get(['id', 'ua_title', 'en_title', 'aired', 'alias']);
 
         return response()->json([
             'data' => [
@@ -104,7 +118,7 @@ class AnimeController extends Controller
     public function showByGenre(Request $request)
     {
         $genre = $request->genre;
-        $animes = AnimeCutResource::collection(Anime::whereHas('genres', function ($query) use ($genre) {
+        $animes = AnimeCutResource::collection($this->anime->whereHas('genres', function ($query) use ($genre) {
             $query->where('en_name', $genre);
         })->get());
         $genreInfo = Genre::where('en_name', $genre)->get(['name', 'en_name']);
@@ -131,7 +145,7 @@ class AnimeController extends Controller
     public function carouselMutate(Request $request)
     {
         if ($request->hasFile('slide')) {
-            $alias = Anime::where('id', $request->anime)->value('alias');
+            $alias = $this->anime->where('id', $request->anime)->value('alias');
 
             $slidePath = 'images/anime/carousel/slides/';
 
@@ -167,7 +181,7 @@ class AnimeController extends Controller
             return response()->json([
                 'data' => [
                     'animes' => AnimeCutResource::collection(
-                        Anime::select(['animes.id', 'animes.ua_title', 'animes.alias', 'preview_path', 'animes.created_at'])
+                        $this->anime->select(['animes.id', 'animes.ua_title', 'animes.alias', 'preview_path', 'animes.created_at'])
                             ->join('previews', 'animes.id', '=', 'previews.anime_id')
                             ->orderByDesc('created_at', 'desc')->limit(12)->get()
                     ),
@@ -179,7 +193,7 @@ class AnimeController extends Controller
             return response()->json([
                 'data' => [
                     'animes' => AnimeCutResource::collection(
-                        Anime::selectRaw('animes.id, animes.alias, animes.ua_title, avg(stars) as avg_stars, preview_path')
+                        $this->anime->selectRaw('animes.id, animes.alias, animes.ua_title, avg(stars) as avg_stars, preview_path')
                             ->join('reviews', 'animes.id', '=', 'reviews.anime_id')
                             ->join('previews', 'animes.id', '=', 'previews.anime_id')
                             ->groupBy('animes.id')
@@ -195,7 +209,7 @@ class AnimeController extends Controller
             return response()->json([
                 'data' => [
                     'animes' =>  AnimeCutResource::collection(
-                        Anime::selectRaw('animes.id, animes.alias, animes.ua_title, count(user_id) as count_review, preview_path')
+                        $this->anime->selectRaw('animes.id, animes.alias, animes.ua_title, count(user_id) as count_review, preview_path')
                             ->join('reviews', 'animes.id', '=', 'reviews.anime_id')
                             ->join('previews', 'animes.id', '=', 'previews.anime_id')
                             ->groupBy('animes.id')

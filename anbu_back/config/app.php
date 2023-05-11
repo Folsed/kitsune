@@ -197,6 +197,7 @@ return [
 
         // Custom Providers
         App\Providers\DataServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
     ],
 
     /*

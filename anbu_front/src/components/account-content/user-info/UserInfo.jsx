@@ -21,7 +21,10 @@ const UserInfo = () => {
                 <>
                     <div className={styles.avatarWrapper}>
                         <div className={styles.avatar}>
-                            <img src={avatar} alt="" />
+                            <img
+                                src={`http://127.0.0.1:8000/${currentUser.avatar}`}
+                                alt=""
+                            />
                         </div>
                     </div>
                     <div className={styles.infoWrapper}>

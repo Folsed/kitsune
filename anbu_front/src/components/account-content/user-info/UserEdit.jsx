@@ -10,6 +10,8 @@ import { useEffect, useState } from 'react';
 import { usePronouns } from '../../../hooks/user/usePronouns';
 import SelectInput from '../../../UI/inputs/SelectInput';
 import useInfoUpdate from '../../../hooks/user/useInfoUpdate';
+import avatar from './../../../img/avatars/male.webp'
+import AvatarUploader from './AvatarUploader';
 
 
 const UserEdit = ({ setEditIsActive }) => {
@@ -21,21 +23,23 @@ const UserEdit = ({ setEditIsActive }) => {
 
     const [name, setName] = useState(currentUser.name)
     const [bio, setBio] = useState(currentUser.bio ? currentUser.bio : '')
-    
+
     const [selectData, setSelectData] = useState() // pronouns data
-    const [pronoun, setPronoun] = useState(currentUser.pronoun && {value: currentUser.pronoun, label: currentUser.pronoun})
+    const [pronoun, setPronoun] = useState(currentUser.pronoun && { value: currentUser.pronoun, label: currentUser.pronoun })
+
+    const [avatar, setAvatar] = useState(null)
 
     const { userInfo, errors, setErrors } = useInfoUpdate({ setEditIsActive })
 
     useEffect(() => {
         if (!isLoading) {
             setSelectData([
-                { id: null, name: '-'},
+                { id: null, name: '-' },
                 ...pronouns.map((item) => ({
-                  id: item.name,
-                  name: item.name,
+                    id: item.name,
+                    name: item.name,
                 }))
-              ])
+            ])
         }
     }, [pronouns])
 
@@ -47,16 +51,19 @@ const UserEdit = ({ setEditIsActive }) => {
         formData.append('new_name', name)
         formData.append('new_pronoun', pronoun.value ? pronoun.value : '')
         formData.append('new_bio', bio ? bio : '')
+        formData.append('avatar', avatar)
 
         userInfo.mutateAsync(formData)
     }
-    
+
     return (
         <form onSubmit={onSubmit} noValidate>
             <div className={styles.avatarWrapper}>
-                <div className={styles.avatar}>
-                    {/* <img src={''} alt="" /> */}
-                </div>
+                <AvatarUploader
+                    image={avatar}
+                    setImage={setAvatar} 
+                    currentAvatar={currentUser.avatar}
+                />
             </div>
             <div className={styles.editWrapper}>
                 <Input

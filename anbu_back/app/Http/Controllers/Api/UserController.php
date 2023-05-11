@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Pronoun;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
+
 
 class UserController extends Controller
 {
@@ -32,6 +35,20 @@ class UserController extends Controller
         $user->name = $request->input('new_name');
         $user->pronoun = $request->input('new_pronoun');
         $user->bio = $request->input('new_bio');
+
+        $avatarPath = 'images/avatars/';
+        if($request->hasFile('avatar')) {
+            $avatarFilename = $request->file('avatar')->hashName();
+
+            if ($user->avatar && Storage::exists($user->avatar)) {
+                Storage::delete($user->avatar);
+            }
+            $avatar = Image::make($request->file('avatar'))->resize(200, 200);
+
+            $avatar->storeAs($avatarPath, $avatarFilename);
+
+            $user->avatar = (string)$avatarPath . $avatarFilename;
+        }
 
         $user->save();
 

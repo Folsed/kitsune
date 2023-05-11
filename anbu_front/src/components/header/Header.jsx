@@ -74,7 +74,7 @@ const Header = () => {
                         <Link className={styles.menuItem}><span>Новини</span></Link>
                     </div>
                     <div className={styles.centerMenu}>
-                        <LiveSearch/>
+                        <LiveSearch />
                     </div>
                     <div className={styles.rightMenu}>
 
@@ -87,7 +87,10 @@ const Header = () => {
                                     <span>{currentUser.name}</span>
                                     <div className={styles.avatar}>
                                         <div className={styles.avatarWrapper}>
-                                            <img src={avatar} alt="" />
+                                            <img
+                                                src={`http://127.0.0.1:8000/${currentUser.avatar}`}
+                                                alt=""
+                                            />
                                         </div>
                                     </div>
                                     <div className="header-svg menu-icon">
@@ -95,7 +98,7 @@ const Header = () => {
                                             <path d="M7 10h10l-5 5z"></path>
                                         </svg>
                                     </div>
-                                    
+
                                 </div>
                                 <UserActionsModal toggleClass={toggleClass} setToggleClass={setToggleClass} setActive={setActive} />
                             </div>
