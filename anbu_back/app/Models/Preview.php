@@ -11,6 +11,7 @@ class Preview extends Model
 
     protected $fillable = [
         'preview_path',
+        'second_preview_path',
         'sub_preview_path',
         'logo_path',
     ];

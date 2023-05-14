@@ -14,8 +14,6 @@ const Header = () => {
 
     const data = animeData.data
 
-    console.log(data)
-
     return (
         <header className={styles.header}>
             <div className={styles.wrapper}>

@@ -53,13 +53,17 @@ Route::controller(AuthController::class)->group(function () {
 
 
 // User API
+Route::get('api/user', [UserController::class, 'user'])->name('api_user');
 
 Route::controller(UserController::class)->group(function () {
     Route::middleware('auth:sanctum')->group(function () {
-        Route::get('api/user', 'user')->name('api_logout');
         Route::get('api/user/pronouns', 'getPronouns')->name('api_pronouns');
 
         Route::put('api/user/info/update', 'updateInfo')->name('api_update-info');
+
+        // Watchlist
+        Route::post('api/watchlist/mylist', 'addToWatchlist')->name('api_watchlist-mylist');
+        Route::get('api/watchlist/get/{userId}', 'getMyList')->name('api_watchlist-get');
     });
 });
 

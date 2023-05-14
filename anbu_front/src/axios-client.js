@@ -11,17 +11,17 @@ axiosClient.interceptors.request.use((config) => {
     return config
 })
 
-// axiosClient.interceptors.response.use(response => {
-//     return response
-// }, error => {
-//     if (error.response && error.response.status === 401) {
-//       localStorage.removeItem('TOKEN')
-//       window.location.reload();
-//       // router.navigate('/login')
-//       return error;
-//     }
-//     throw error;
-//   }
-// )
+axiosClient.interceptors.response.use(response => {
+    return response
+}, error => {
+    if (error.response && error.response.status === 401) {
+      localStorage.removeItem('TOKEN')
+      window.location.reload();
+      // router.navigate('/login')
+      return error;
+    }
+    throw error;
+  }
+)
 
 export default axiosClient

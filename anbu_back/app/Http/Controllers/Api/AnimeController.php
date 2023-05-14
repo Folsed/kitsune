@@ -16,6 +16,7 @@ use App\Models\Comment;
 use App\Models\Genre;
 use App\Models\Promo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AnimeController extends Controller
 {

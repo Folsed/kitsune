@@ -1,14 +1,20 @@
 import './../../index.css'
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Outlet, ScrollRestoration, useLocation } from 'react-router-dom'
 import Footer from '../footer/Footer'
 import Header from '../header/Header'
+import AuthModalContext from '../../providers/AuthModalProvider'
+import AccountContext from '../../providers/AccountProvider'
 
 
 
 const DefaultLayout = () => {
-    const location = useLocation();
+    const location = useLocation()
+    const [active, setActive] = useState(false)
+    const [toggleClass, setToggleClass] = useState('')
+    const [activeTab, setActiveTab] = useState(0)
+
 
     // useEffect(() => {
     //     window.scrollTo({
@@ -21,15 +27,19 @@ const DefaultLayout = () => {
 
     return (
         <div>
-            <Header />
-            <ScrollRestoration />
+            <AuthModalContext.Provider value={{ active, setActive, toggleClass, setToggleClass }}>
+                <AccountContext.Provider value={{ activeTab, setActiveTab }}>
+                    <Header />
+                    <ScrollRestoration />
 
-            <main className="main">
-                <Outlet />
-            </main>
+                    <main className="main">
+                        <Outlet />
+                    </main>
 
 
-            <Footer />
+                    <Footer />
+                </AccountContext.Provider>
+            </AuthModalContext.Provider>
         </div>
     )
 }

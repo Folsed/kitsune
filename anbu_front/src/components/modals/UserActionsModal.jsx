@@ -5,12 +5,15 @@ import avatar from './../../img/avatar.jpg'
 import { userAuthContext } from '../../providers/AuthProvider'
 import { ROUTES } from './../../router/routes'
 import { useLogout } from '../../hooks/user/useLogout'
-import admin from './../../assets/icons/icon-admin.svg'
+import { useContext } from 'react'
+import AuthModalContext from '../../providers/AuthModalProvider'
 
 
 
-const UserActionsModal = ({ toggleClass, setActive }) => {
+const UserActionsModal = () => {
     const { currentUser, userToken } = userAuthContext()
+    const { setActive, toggleClass } = useContext(AuthModalContext)
+
     const { logout } = useLogout(setActive)
 
     const onLogout = (ev) => {
@@ -18,9 +21,6 @@ const UserActionsModal = ({ toggleClass, setActive }) => {
         logout.mutateAsync()
         setActive(false)
     }
-
-    console.log(currentUser)
-
     return (
         <div
             className={`${styles.userDropdown} ${toggleClass === 'user' ? styles.activeTabContent : ''}`}
@@ -31,7 +31,13 @@ const UserActionsModal = ({ toggleClass, setActive }) => {
                         <div className={styles.userInfoWrap}>
                             <div className={styles.avatar}>
                                 <div className={styles.avatarWrapper}>
-                                    <img src={avatar} alt="" />
+                                    {currentUser.avatar_softsize ?
+                                        <img
+                                            src={`http://127.0.0.1:8000/${currentUser.avatar_softsize}`}
+                                            alt=""
+                                        />
+                                        : ''
+                                    }
                                 </div>
                             </div>
                             <span>{currentUser.name}</span>

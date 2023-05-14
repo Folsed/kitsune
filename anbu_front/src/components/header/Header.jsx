@@ -4,20 +4,17 @@ import avatar from './../../img/avatar.jpg'
 
 import { Link } from 'react-router-dom';
 import { Logo } from '../../assets/logo/Logo';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import BrowseModal from '../modals/BrowseModal';
 import AuthModal from '../modals/auth/AuthModal';
 import { userAuthContext } from '../../providers/AuthProvider';
 import UserActionsModal from '../modals/UserActionsModal';
 import LiveSearch from '../live-serach/LiveSearch';
+import AuthModalContext from '../../providers/AuthModalProvider';
 
 const Header = () => {
-    const [active, setActive] = useState(false)
-    const [toggleClass, setToggleClass] = useState('')
-    const [activeItem, setActiveItem] = useState({
-        anime: false,
-        auth: false,
-    });
+    const { active, setActive, toggleClass, setToggleClass } = useContext(AuthModalContext)
+
     const { currentUser, userToken } = userAuthContext()
 
     const handleClick = (state) => {
@@ -87,10 +84,13 @@ const Header = () => {
                                     <span>{currentUser.name}</span>
                                     <div className={styles.avatar}>
                                         <div className={styles.avatarWrapper}>
-                                            <img
-                                                src={`http://127.0.0.1:8000/${currentUser.avatar}`}
-                                                alt=""
-                                            />
+                                            {currentUser.avatar_softsize ?
+                                                <img
+                                                    src={`http://127.0.0.1:8000/${currentUser.avatar_softsize}`}
+                                                    alt=""
+                                                />
+                                                : ''
+                                            }
                                         </div>
                                     </div>
                                     <div className="header-svg menu-icon">
@@ -100,7 +100,7 @@ const Header = () => {
                                     </div>
 
                                 </div>
-                                <UserActionsModal toggleClass={toggleClass} setToggleClass={setToggleClass} setActive={setActive} />
+                                <UserActionsModal />
                             </div>
 
                             :

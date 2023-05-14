@@ -8,7 +8,7 @@ export const useAnimeComments = (id) => {
         () => AnimeService.getComments(id),
         {
             keepPreviousData: true,
-            refetchOnWindowFocus: true,
+            refetchOnWindowFocus: false,
             onError: (error) => {
                 alert(error.message)
             },

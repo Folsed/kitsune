@@ -38,8 +38,6 @@ const AllAnimes = () => {
         animeDestroy.mutateAsync(payload)
     }
 
-    console.log(animes)
-
     return (
         <div className={styles.secondBody}>
             <div className={styles.tableSearchWrapper}>

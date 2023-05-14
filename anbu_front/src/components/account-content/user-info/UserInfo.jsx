@@ -21,10 +21,13 @@ const UserInfo = () => {
                 <>
                     <div className={styles.avatarWrapper}>
                         <div className={styles.avatar}>
-                            <img
-                                src={`http://127.0.0.1:8000/${currentUser.avatar}`}
-                                alt=""
-                            />
+                            {currentUser.avatar_softsize ?
+                                <img
+                                    src={`http://127.0.0.1:8000/${currentUser.avatar}`}
+                                    alt=""
+                                />
+                                : ''
+                            }
                         </div>
                     </div>
                     <div className={styles.infoWrapper}>

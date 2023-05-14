@@ -7,10 +7,11 @@ import CardsBoxSkeleton from '../../skeletons/cards-box-skeleton/CardsBoxSkeleto
 import { useAnimesByGenre } from '../../../hooks/anime/useAnimesByGenre';
 import { useAnimesByQuery } from '../../../hooks/anime/useAnimesByQuery';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-
+import { RiStarFill } from 'react-icons/ri'
 
 const CardsTrack = ({ query, title, subTitle, shalfColor, genre }) => {
     const { isLoading, data: carouselData } = genre ? useAnimesByGenre(genre) : useAnimesByQuery(query)
+
 
     return (
         <>
@@ -51,7 +52,9 @@ const CardsTrack = ({ query, title, subTitle, shalfColor, genre }) => {
                                                 <div className={styles.description}>
                                                     <h4>{item.ua_title}</h4>
                                                     <div className={styles.innerSubDesc}>
-                                                        <span>Серій: 12/12</span>
+                                                        <div className={styles.ratingBox}>
+                                                            <div className={styles.star}><RiStarFill/></div> {item.stars} | {item.genres[0].name}
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

@@ -69,4 +69,9 @@ class Anime extends Model
     {
         return $this->hasOne(Promo::class);
     }
+
+    public function watchlist()
+    {
+        return $this->hasMany(Watchlist::class);
+    }
 }

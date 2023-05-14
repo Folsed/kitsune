@@ -5,9 +5,13 @@ import { userAuthContext } from '../../providers/AuthProvider'
 import { ROUTES } from '../../router/routes'
 import UserInfo from '../../components/account-content/user-info/UserInfo'
 import AccountNavbar from '../../components/account-content/navbar/AccountNavbar'
+import { useState } from 'react'
+import AccountContext from '../../providers/AccountProvider'
+import Content from '../../components/account-content/content/Content'
 
 const AccountPage = () => {
     const { currentUser, userToken } = userAuthContext()
+
 
     if (!userToken) {
         return <Navigate to={ROUTES.home} replace={true} />
@@ -17,8 +21,8 @@ const AccountPage = () => {
         <div className='account-page__wrapper'>
             <div className="account-page__grid">
                 <UserInfo />
-                <AccountNavbar/>
-                <div className="three"></div>
+                <AccountNavbar />
+                <Content />
             </div>
         </div>
     )

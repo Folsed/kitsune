@@ -59,4 +59,8 @@ class User extends Authenticatable
         return $this->hasOne(Pronoun::class);
     }
 
+    public function watchlist()
+    {
+        return $this->hasMany(Watchlist::class);
+    }
 }

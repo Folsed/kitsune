@@ -49,7 +49,7 @@ const UserEdit = ({ setEditIsActive }) => {
         const formData = new FormData()
         formData.append('_method', 'PUT');
         formData.append('new_name', name)
-        formData.append('new_pronoun', pronoun.value ? pronoun.value : '')
+        formData.append('new_pronoun', pronoun && pronoun.value ? pronoun.value : '')
         formData.append('new_bio', bio ? bio : '')
         formData.append('avatar', avatar)
 

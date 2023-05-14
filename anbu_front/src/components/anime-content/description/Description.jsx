@@ -1,36 +1,35 @@
 import styles from './description.module.css'
-
-
 import { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
 import YouTube from 'react-youtube'
 import AnimeContext from '../../../providers/AnimeProvider'
-import { OrangeButton } from '../../../UI/buttons/OrangeButton'
-import { WatchlistButton } from '../../../UI/buttons/WatchlistButton'
 import DescriptionSkeleton from '../../skeletons/anime-page-skeleton/DescriptionSkeleton'
 import { ROUTES } from '../../../router/routes'
+import WatchlistButton from '../../../UI/buttons/WatchlistButton'
+import Stars from '../../../UI/review/Stars'
+import { AiOutlineUnorderedList } from "react-icons/ai";
+import AccountContext from '../../../providers/AccountProvider'
 
 const Description = () => {
     const animeData = useContext(AnimeContext)
+    const { setActiveTab } = useContext(AccountContext)
 
     const data = animeData.data
-    console.log(data)
 
     const opts = {
         height: '230',
         width: '100%',
         playerVars: {
-            // https://developers.google.com/youtube/player_parameters
             autoplay: 0,
         },
 
-    };
+    }
 
     return (
         <div>
             <div className={styles.body}>
                 <div className={styles.contentWrapper}>
-                    {animeData.isLoading ? <DescriptionSkeleton/> :
+                    {animeData.isLoading ? <DescriptionSkeleton /> :
                         <div className={styles.content}>
                             <div className={styles.descSection}>
                                 <div className={styles.heading}>
@@ -40,22 +39,24 @@ const Description = () => {
                                     <span>{data.translated}</span>
                                 </div>
                                 <div className={styles.starRating}>
-                                    <div className={styles.rate}>
-                                        <input type="radio" id="star5" name="rate" value="5" />
-                                        <label htmlFor="star5" title="text">5 stars</label>
-                                        <input type="radio" id="star4" name="rate" value="4" />
-                                        <label htmlFor="star4" title="text">4 stars</label>
-                                        <input type="radio" id="star3" name="rate" value="3" />
-                                        <label htmlFor="star3" title="text">3 stars</label>
-                                        <input type="radio" id="star2" name="rate" value="2" />
-                                        <label htmlFor="star2" title="text">2 stars</label>
-                                        <input type="radio" id="star1" name="rate" value="1" />
-                                        <label htmlFor="star1" title="text">1 star</label>
+                                    <div className={styles.rating}>
+                                        <div className={styles.starsControls}>
+                                            <Stars stars={data.review.stars} size={26} />
+                                        </div>
+                                        <div className={styles.avgRating}>
+                                            <span>Середня оцінка:</span>
+                                            <span className={styles.avgNumber}>{data.review.stars} ({data.review.reviews})</span>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className={styles.actions}>
-                                    <div className={styles.wlButton}>
-                                        <WatchlistButton />
+                                    <div className={styles.actionBtns}>
+                                        <WatchlistButton animeId={data.id} isLoading={animeData.isLoading} />
+                                        <NavLink to={ROUTES.account} onClick={setActiveTab(2)} className={styles.mylistLink}>
+                                            <button className={styles.mylistButton}><AiOutlineUnorderedList size={22} />
+                                                Переглянути мій список
+                                            </button>
+                                        </NavLink>
                                     </div>
                                 </div>
                                 <div className={styles.synopsis}>

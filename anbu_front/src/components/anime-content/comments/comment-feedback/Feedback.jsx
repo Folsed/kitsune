@@ -2,9 +2,11 @@ import { NavLink } from 'react-router-dom'
 import styles from './feedback.module.css'
 import { useAnimeComments } from '../../../../hooks/anime/useAnimeComments'
 import { LazyLoadComponent } from 'react-lazy-load-image-component'
+import { userAuthContext } from '../../../../providers/AuthProvider'
 
 
 const Feedback = ({ animeId }) => {
+    const { currentUser } = userAuthContext()
     const { isLoading, isError, data: comments } = useAnimeComments(animeId)
 
     return (
@@ -16,7 +18,15 @@ const Feedback = ({ animeId }) => {
                         <LazyLoadComponent key={i}>
                             <div className={styles.comment} >
                                 <div className={styles.avatarWrap}>
-                                    <div className={styles.avatar}></div>
+                                    <div className={styles.avatar}>
+                                        {item.user.user_avatar ?
+                                            <img
+                                                src={`http://127.0.0.1:8000/${item.user.user_avatar}`}
+                                                alt=""
+                                            />
+                                            : ''
+                                        }
+                                    </div>
                                 </div>
                                 <div className={styles.content}>
                                     <div className={styles.signature}>

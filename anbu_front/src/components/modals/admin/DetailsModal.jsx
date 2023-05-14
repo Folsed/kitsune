@@ -3,7 +3,6 @@ import { useAnime } from '../../../hooks/admin/useAnime';
 import styles from './modal.module.css'
 
 const DetailsModal = ({ setActive, active, setToggleClass, toggleClass, data }) => {
-    console.log(data)
 
     return (
         <div className={styles.modalDisplay}>

@@ -5,6 +5,9 @@ use App\Http\Controllers\Content\AnimeController;
 use App\Http\Controllers\Content\HomeController;
 use App\Http\Controllers\Content\NewsController;
 use App\Http\Controllers\TestController;
+use App\Models\Watchlist;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,8 +25,12 @@ use App\Http\Controllers\TestController;
 Content Routes
 */
 
-
-// Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
+Route::get('/',  function () {
+    return Watchlist::where('user_id', 1)->get('anime_id');
+})->name('home');
 
 // Route::controller(AnimeController::class)->group(function () {
 //     Route::get('anime/{id}/{alias?}', 'show')->name('anime');

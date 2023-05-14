@@ -33,7 +33,7 @@ class ReviewSeeder extends Seeder
                 DB::table('reviews')->insert([
                     'user_id' => $user->id,
                     'anime_id' => $anime->id,
-                    'stars' => rand(3, 5),
+                    'stars' => rand(2, 5),
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);

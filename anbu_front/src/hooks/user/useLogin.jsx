@@ -6,7 +6,7 @@ import { userAuthContext } from "../../providers/AuthProvider";
 
 export const useLogin = (setActive) => {
     const [errors, setErrors] = useState()
-    const { setCurrentUser, setUserToken } = userAuthContext()
+    const { setCurrentUser, setUserToken, setWatchlist } = userAuthContext()
 
 
     const login = useMutation(
@@ -17,6 +17,7 @@ export const useLogin = (setActive) => {
                     setCurrentUser(data.user)
                     setUserToken(data.token)
                     setActive(false)
+                    setWatchlist(data.mylist)
                 })
                 .catch((error) => {
                     if (error.response) {

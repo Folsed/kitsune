@@ -7,9 +7,9 @@ import { useAnimeComments } from '../../../../hooks/anime/useAnimeComments';
 import { useAnimeCommentMutate } from '../../../../hooks/anime/useAnimeCommentMutate';
 
 
-const CommentInput = ({animeId}) => {
+const CommentInput = ({ animeId }) => {
     const { currentUser } = userAuthContext()
-    const { comment: leaveComment, errors, setErrors  } = useAnimeCommentMutate(animeId)
+    const { comment: leaveComment, errors, setErrors } = useAnimeCommentMutate(animeId)
     const [comment, setComment] = useState('')
 
     const onSubmit = (e) => {
@@ -22,7 +22,7 @@ const CommentInput = ({animeId}) => {
             user_name: currentUser.name,
         };
 
-        
+
         leaveComment.mutateAsync(payload)
         // refetch()
         setComment('')
@@ -31,7 +31,15 @@ const CommentInput = ({animeId}) => {
     return (
         <div className={styles.inputWrapper}>
             <div className={styles.avatarWrap}>
-                <div className={styles.avatar}></div>
+                <div className={styles.avatar}>
+                    {currentUser.avatar_softsize ?
+                        <img
+                            src={`http://127.0.0.1:8000/${currentUser.avatar_softsize}`}
+                            alt=""
+                        />
+                        : ''
+                    }
+                </div>
             </div>
             <div className={styles.textareaWrap}>
                 <div className={styles.signature}>
@@ -45,7 +53,7 @@ const CommentInput = ({animeId}) => {
                             id="comment"
                             placeholder='Залишити коментар'
                             value={comment}
-                            onChange={(e) => {setComment(e.target.value)}}
+                            onChange={(e) => { setComment(e.target.value) }}
                         ></textarea>
                     </div>
                     <div className={styles.controls}>

@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Auth;
 
 class AnimeResource extends JsonResource
 {
@@ -15,6 +16,7 @@ class AnimeResource extends JsonResource
      */
     public function toArray($request)
     {
+
         return [
             'id' => $this->id,
             'ua_title' => $this->ua_title,
@@ -30,7 +32,10 @@ class AnimeResource extends JsonResource
             'synopsis' => $this->synopsis,
             'trailer' => $this->trailer,
             'genres' => $this->genres,
-            'rating' => round($this->reviews->avg('stars'), 2),
+            'review' => [
+                'stars' => round($this->reviews->avg('stars'), 1),
+                'reviews' =>  $this->reviews->count('user_id'),
+            ],
             'created_at' => Carbon::parse($this->created_at)->toDateTimeString(),
             'updated_at' => Carbon::parse($this->updated_at)->toDateTimeString(),
             'preview' => PreviewResource::collection($this->previews),
@@ -38,31 +43,3 @@ class AnimeResource extends JsonResource
         ];
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

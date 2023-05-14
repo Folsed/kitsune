@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Models\User;
+use App\Models\Watchlist;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -50,23 +51,16 @@ class AuthController extends Controller
         // $remember = $credentials['remember'] ?? false;
         // unset($credentials['remember']);
 
-        // if (!Auth::attempt($credentials, $remember)) {
+        $request->authenticate();
+        // if (!$request->authenticate()) {
+        //     return response(['error' => 'Invalid credentials'], 401);
+        // }
+
+        // if (!Auth::attempt($request->only('email', 'password'))) {
         //     throw ValidationException::withMessages([
         //         'password' => ['Перевірте дані для входу'],
         //     ]);
         // }
-
-        // $user = Auth::user();
-        // $token = $user->createToken('main')->plainTextToken;
-
-        // return response([
-        //     'user' => $user,
-        //     'token' => $token,
-
-        // ]);
-
-        $request->authenticate();
-
         $request->session()->regenerate();
 
         /** @var \App\Models\User $user **/
@@ -75,6 +69,7 @@ class AuthController extends Controller
 
         return response([
             'user' => $user->load('roles'),
+            'mylist' => Watchlist::where('user_id', $user->id)->pluck('anime_id'),
             'token' => $token,
         ]);
     }
@@ -93,5 +88,4 @@ class AuthController extends Controller
             'status' => 'success',
         ]);
     }
-
 }

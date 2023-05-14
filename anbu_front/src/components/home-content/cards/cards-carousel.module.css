@@ -48,7 +48,8 @@
 
 .cards-slider {
     display: grid;
-    grid-template-areas: "viewbox";
+    grid-template-areas: 
+    "viewbox";
     position: relative;
     grid-template-columns: minmax(0, auto);
     margin-top: 0.3rem;
@@ -68,13 +69,12 @@
     width: 35px;
     background-color: transparent;
     border: none;
-    transition: all 0.3s;
+    transition: all 0.2s;
 }
 
 .arrow:hover {
     background-color: #1e1f24b4;
     fill: white;
-    transition: all 0.3s;
     cursor: pointer;
 }
 
@@ -101,7 +101,7 @@
     left: 0;
     right: 0;
     background-color: rgba(100, 100, 100, 0.206);
-    transition: opacity 0.3s ease;
+    transition: opacity 0.2s ease;
     -webkit-box-shadow: inset 0px 0px 0px 5px rgba(0, 0, 0, 1);
     -moz-box-shadow: inset 0px 0px 0px 5px rgba(0, 0, 0, 1);
     box-shadow: inset 0px 0px 0px 5px rgba(0, 0, 0, 1);
@@ -115,7 +115,7 @@
 
 .preview {
     width: 154.02px;
-    background-color: #252525c2;
+    background-color: var(--loading-color);
     height: 231px;
 }
 
@@ -134,9 +134,20 @@
 
 .inner-sub-desc {
     padding-top: 0.3rem;
-    color: gray;
+    color: var(--span-color);
 }
 
 .hidden {
     display: none;
 }
+
+.rating-box {
+    display: flex;
+    gap: 3px;
+}
+
+.star {
+    display: flex;
+    align-items: center;
+}
+

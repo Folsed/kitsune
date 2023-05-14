@@ -1,6 +1,6 @@
 import styles from './banner.module.css'
 import { BlueBackground } from '../banner-bgs/BlueBackground'
-import { WatchlistButton } from '../../../../UI/buttons/WatchlistButton'
+import WatchlistButton from '../../../../UI/buttons/WatchlistButton'
 import { OrangeButton } from '../../../../UI/buttons/OrangeButton'
 import { OrangeBackground } from '../banner-bgs/OrangeBackground'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
@@ -17,7 +17,6 @@ const background = {
 
 const ColoredBanner = ({ id, backgroundColor }) => {
     const { isLoading, isError, data: banner } = useBanner(id)
-
 
     return (
         <div>
@@ -75,7 +74,7 @@ const ColoredBanner = ({ id, backgroundColor }) => {
                                 <NavLink to={ROUTES.animePage(banner.anime_id, banner.alias)} >
                                     <OrangeButton title={`Почати перегляд`} watch className={styles.watchBtn} />
                                 </NavLink>
-                                <WatchlistButton />
+                                <WatchlistButton animeId={banner.anime_id}/>
                             </div>
                         </div>
                     </>

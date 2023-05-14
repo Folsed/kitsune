@@ -1,0 +1,145 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 32.23rem;
+    overflow: auto;
+    gap: 10px;
+    overflow-y: overlay;
+    padding: 10px 20px;
+}
+
+.inner-wrapper {
+    display: grid;
+    grid-template-areas: "preview description";
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+    position: relative;
+}
+
+.preview {
+    grid-area: preview;
+    display: flex;
+    background-color: var(--loading-color);
+    width: 200px;
+    height: 112px;
+}
+
+.preview img {
+    display: block;
+    max-height: 100%;
+    width: 100%;
+}
+
+.description {
+    grid-area: description;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+
+}
+
+.added {
+    font-weight: 600;
+}
+
+.title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.anime-name {
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    display: -webkit-box;
+    overflow: hidden;
+    max-width: 20.89rem;
+}
+
+.synopsis {
+    color: #dadada;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    color: #fff;
+    display: -webkit-box;
+    overflow: hidden;
+    text-align: left;
+
+}
+
+.rating {
+    display: flex;
+    color: var(--span-color);
+}
+
+.avg-rating {
+    display: flex;
+    gap: 3px;
+    align-items: center;
+}
+
+.avg-number {
+    font-weight: 600;
+}
+
+.info {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+.list-item {
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    opacity: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+}
+
+.inner-wrapper::after {
+    content: '';
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: -1;
+    opacity: 0;
+    background-color: rgba(58, 58, 72, 0.537);
+    -webkit-box-shadow: 0px 0px 0px 7px rgba(58, 58, 72, 0.537);
+    -moz-box-shadow: 0px 0px 0px 7px rgba(58, 58, 72, 0.537);
+    box-shadow: 0px 0px 0px 7px rgba(58, 58, 72, 0.537);
+    transition: opacity 0.2s ease;
+}
+
+.inner-wrapper:hover::after {
+    opacity: 1;
+}
+
+.delete-button {
+    z-index: 3;
+}
+
+.delete-button button {
+    color: var(--span-color);
+    transition: color .2s;
+}
+
+.delete-button button:hover {
+    color: #dadada;
+}
+
+.delete-button button:active {
+    color: var(--span-color);
+}
+
+.emptyList {
+    display: flex;
+    justify-content: center;
+    color: var(--span-color);
+    font-size: 24px;
+    margin-top: 2rem;
+}

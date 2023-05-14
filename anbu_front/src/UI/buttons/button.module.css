@@ -6,15 +6,15 @@
     font-weight: 600;
     font-size: 18px;
     /* height: 50px; */
-    transition: all .2s;
+    transition: color .2s, border .2s;
     padding: 10px;
-    border: 2px solid #f47521;
-    color: #f47521;
+    border: 2px solid var(--main-color);
+    color: var(--main-color);
 }
 
 .btn svg {
     width: 22px;
-    fill: #f47521;
+    fill: var(--main-color);
 }
 
 .btn:hover {
@@ -34,25 +34,28 @@
     background-color: transparent;
     font-weight: 600;
     font-size: 18px;
-    height: 50px;
-    transition: all .2s;
     padding: 10px;
-    border: 2px solid #f47521;
-    color: #f47521;
+    border: 2px solid var(--main-color);
+    color: var(--main-color);
+    position: relative;
+    transition: color .2s, border .2s, fill .2s;
+    fill: #ffffff;
 }
 
 .watchlist-btn svg {
     width: 22px;
-    fill: #f47521;
 }
 
 .watchlist-btn:hover {
     border-color: #fd9047;
     color: #fd9047;
+    fill: #fd9047;
 }
 
 .watchlist-btn:active {
     border-color: #ff6600;
+    color: #ff6600;
+    fill: #ff6600;
 }
 
 .watch-btn {
@@ -63,7 +66,7 @@
     font-size: 18px;
     height: 100%;
     transition: background-color .2s;
-    border: 2px solid #f47521;
+    border: 2px solid var(--main-color);
     padding: 10px;
     width: 100%;
     justify-content: center;
@@ -81,4 +84,8 @@
 .watch-btn:active {
     background-color: #ff6600;
 
+}
+
+.isLoading {
+    padding: 0 100px;
 }

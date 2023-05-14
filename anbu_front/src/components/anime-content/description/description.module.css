@@ -1,4 +1,4 @@
-.rate {
+/* .rate {
     float: left;
     height: 40px;
 }
@@ -31,7 +31,7 @@
 .rate > input:checked ~ label:hover ~ label,
 .rate > label:hover ~ input:checked ~ label {
     color: #c59b08;
-}
+} */
 
 
 .content-wrapper {
@@ -101,4 +101,64 @@
 
 .act-btn {
     margin-top: 15px;
+}
+
+.rating {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.rating svg{
+    color: #dadada;
+}
+
+.stars-controls {
+    display: flex;
+    align-items: center;
+}
+
+.stars-controls::after {
+    background-color: #4a4e58;
+    content: "";
+    display: block;
+    height: 1.25rem;
+    margin-left: 0.5rem;
+    width: 1px;
+}
+
+.avg-rating {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 15px;
+}
+
+.avg-number {
+    font-weight: 600;
+}
+
+.action-btns {
+    display: flex;
+    gap: 1rem;
+}
+
+.mylist-link {
+    display: flex;
+}
+
+.mylist-button {
+    color: #a0a0a0;
+    font-weight: 600;
+    font-size: 18px;
+    padding: 10px;
+    background-color: transparent;
+    transition: background-color .2s, color .2s;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.mylist-button:hover {
+    background-color: #181818;
+    color: #dadada;
 }

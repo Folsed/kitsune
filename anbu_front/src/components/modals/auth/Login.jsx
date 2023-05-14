@@ -13,12 +13,12 @@ const Login = ({ setAction, setActive }) => {
 
 
     const onSubmit = (e) => {
-        e.preventDefault();
+        e.preventDefault()
 
         const payload = {
             email: email,
             password: password,
-        };
+        }
 
         
         login.mutateAsync(payload)

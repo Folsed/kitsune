@@ -11,9 +11,11 @@ const AuthContext = createContext({
 
 export const AuthProvider = ({ children }) => {
     const parsedUserData = JSON.parse(localStorage.getItem('USER_INFO'))
-    
+    const parsedWatchlist = JSON.parse(localStorage.getItem('mylist'))
+
     const [currentUser, _setCurrentUser] = useState(parsedUserData || '')
     const [userToken, _setUserToken] = useState(localStorage.getItem('TOKEN') || '')
+    const [watchlist, _setWatchlist] = useState(parsedWatchlist || '')
 
 
 
@@ -35,12 +37,23 @@ export const AuthProvider = ({ children }) => {
         _setUserToken(token)
     }
 
+    const setWatchlist = (item) => {
+        if (item) {
+            localStorage.setItem('mylist', JSON.stringify(item));
+        } else {
+            localStorage.removeItem('mylist')
+        }
+        _setWatchlist(item)
+    }
+
     return (
         <AuthContext.Provider value={{
             currentUser,
             setCurrentUser,
             userToken,
-            setUserToken
+            setUserToken,
+            watchlist,
+            setWatchlist,
         }}>
             {children}
         </AuthContext.Provider>

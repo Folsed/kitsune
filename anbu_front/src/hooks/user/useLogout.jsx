@@ -5,7 +5,7 @@ import { userAuthContext } from "../../providers/AuthProvider";
 
 
 export const useLogout = () => {
-    const { setCurrentUser, setUserToken } = userAuthContext()
+    const { setCurrentUser, setUserToken, setWatchlist } = userAuthContext()
 
 
     const logout = useMutation(
@@ -15,6 +15,7 @@ export const useLogout = () => {
                 .then(((res) => {
                     setCurrentUser(null)
                     setUserToken(null)
+                    setWatchlist(null)
                 }))
         }
 

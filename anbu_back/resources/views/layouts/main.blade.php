@@ -23,38 +23,9 @@
 
 <body>
 
-    <div class="wrapper">
 
-        <!-- Header Section -->
-        @include('components.header')
-        <!-- End Header Section -->
-
-
-
-        <!-- Main Section (Content) -->
-        <main>
-            @yield('content')
-        </main>
-        <!-- End Main Section -->
-
-
-
-        <!-- Footer Section -->
-        @include('components.footer')
-        <!-- End Footer Section -->
-
-
-
-        <!-- Extends Section -->
-        @include('auth.auth-box')
-        <!-- End Extends Section -->
-
-    </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/jquery.js') }}"></script>
-    <script src="{{ asset('js/slider.js') }}"></script>
-    <script src="{{ asset('js/visibility.js') }}"></script>
     @vite('resources/js/app.js')
 
 </body>
