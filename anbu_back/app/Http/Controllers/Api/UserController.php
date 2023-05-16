@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManagerStatic as Image;
 
@@ -19,24 +20,38 @@ class UserController extends Controller
 {
     public function user()
     {
-        $imageFiles = Storage::files('images/anime/second_previews');
+        // $imageFiles = Storage::files('images/anime/second_previews');
 
-        foreach ($imageFiles as $file) {
-            $filename = substr(basename($file), 0, 4);
+        // foreach ($imageFiles as $file) {
+        //     $filename = substr(basename($file), 0, 4);
 
-            $previewExists = DB::table('previews')
-                ->where('anime_id', $filename)
-                ->exists();
+        //     $previewExists = DB::table('previews')
+        //         ->where('anime_id', $filename)
+        //         ->exists();
 
-            $preview = DB::table('previews')
-                ->where('anime_id', $filename)
-                ->first();
+        //     $preview = DB::table('previews')
+        //         ->where('anime_id', $filename)
+        //         ->first();
 
-            if (!$previewExists && empty($preview->second_preview_path)) {
-                return DB::table('previews')->where('anime_id', $filename)->update([
-                    'second_preview_path' => $file
-                ]);
-            }
+        //     if (!$previewExists && empty($preview->second_preview_path)) {
+        //         return DB::table('previews')->where('anime_id', $filename)->update([
+        //             'second_preview_path' => $file
+        //         ]);
+        //     }
+        // }
+
+        // Get all the files in the previews directory
+        $files = File::files(storage_path('app/images/anime/previews'));
+
+        // Loop through each file and rename it to a hash name
+        foreach ($files as $file) {
+            $originalPath = $file->getPathname();
+            $extension = $file->getExtension();
+
+
+            $originalFilename = pathinfo($originalPath, PATHINFO_FILENAME).$extension;
+
+            echo 'images/anime/previews/'.$originalFilename . '<br>';
         }
     }
 
