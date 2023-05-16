@@ -5,7 +5,7 @@ import { AnimeService } from "../../services/AnimeData.service";
 export const useAnimes = () => {
     const { data, isLoading, isError } = useQuery(
         ['anime', 'all'],
-        () => AnimeService.getAll(),
+        async () => await AnimeService.getAll(),
         {
             keepPreviousData: true,
             refetchOnWindowFocus: true,

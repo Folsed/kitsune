@@ -11,7 +11,7 @@ export const useLogout = () => {
     const logout = useMutation(
         'logout',
         async () => {
-            axiosClient.post('/logout')
+            await axiosClient.post('/logout')
                 .then(((res) => {
                     setCurrentUser(null)
                     setUserToken(null)

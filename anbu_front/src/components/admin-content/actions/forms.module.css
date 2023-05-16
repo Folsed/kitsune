@@ -52,6 +52,11 @@
     font-size: 8px;
     align-items: center;
     user-select: none;
+
+}
+
+.active-check svg {
+    cursor: pointer;
 }
 
 .action-btns {
@@ -64,10 +69,15 @@
 
 .submit-btn {
     border: 1px solid var(--main-color);
+    width: 4rem;
+    height: 1.75rem;
     font-weight: 300;
     font-size: 14px;
     padding: 4px;
     letter-spacing: 1px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
 }
 
 .span-column {

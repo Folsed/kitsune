@@ -15,6 +15,7 @@ use App\Models\Carousel;
 use App\Models\Comment;
 use App\Models\Genre;
 use App\Models\Promo;
+use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -98,23 +99,57 @@ class AnimeController extends Controller
 
     public function comments($id)
     {
-        return CommentResource::collection(Comment::where('anime_id', $id)->orderBy('created_at', 'desc')->get());
+        $review = CommentResource::collection(
+            Comment::where('comments.anime_id', $id)
+                ->leftJoin('reviews', function ($join) {
+                    $join->on('reviews.user_id', '=', 'comments.user_id')
+                        ->on('reviews.anime_id', '=', 'comments.anime_id');
+                })
+                ->orderBy('comments.created_at', 'desc')
+                ->select('comments.*', 'reviews.stars')
+                ->get()
+        );
+        $total = Comment::where('comments.anime_id', $id)->count();
+
+        return response()->json([
+            'data' => [
+                'reviews' => $review,
+                'total' => $total,
+            ]
+        ]);
     }
 
     public function comment(Request $request)
     {
-        if ($request->comment) {
-            $comment = new Comment();
-            $comment->user_id = $request->user_id;
-            $comment->anime_id = $request->anime_id;
-            $comment->comment = $request->comment;
-            $comment->save();
+        $request->validate([
+            'comment' => ['required'],
+        ]);
 
-            return response(['status' => 'success']);
-        } else {
-            return response(['status' => 'comment is empty']);
+        $userId = $request->input('user_id');
+        $animeId = $request->input('anime_id');
+
+        $comment = new Comment();
+        $comment->user_id = $userId;
+        $comment->anime_id = $animeId;
+        $comment->comment = $request->input('comment');
+        $comment->save();
+
+        $existingReview = Review::with(['user', 'anime'])
+            ->where('user_id', $userId)
+            ->where('anime_id', $animeId)
+            ->exists();
+
+        if (!$existingReview) {
+            $review = new Review();
+            $review->user_id = $userId;
+            $review->anime_id = $animeId;
+            $review->stars = $request->input('stars');
+            $review->save();
         }
+
+        return response(['status' => true]);
     }
+
 
     public function showByGenre(Request $request)
     {

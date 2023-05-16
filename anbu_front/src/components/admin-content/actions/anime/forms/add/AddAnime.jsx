@@ -4,15 +4,17 @@ import AdminFormTextarea from '../../../../../../UI/inputs/AdminFormTextarea'
 import styles from './../../../forms.module.css'
 import ImageUploader from '../../../../../../UI/inputs/ImageUploader'
 import { BlackButton } from '../../../../../../UI/buttons/BlackButton'
-import { ReactComponent as ActiveCheckIcon } from './../../../../../../assets/icons/dot.svg'
 import SelectInput from '../../../../../../UI/inputs/SelectInput'
 import { useGenres } from '../../../../../../hooks/anime/useGenres'
 import { useAnimeCreate } from '../../../../../../hooks/admin/useAnimeCreate'
-import Preloader from '../../../../../../UI/loader/Preloader'
+import { GoPrimitiveDot } from "react-icons/go"
+import Spinner from "../../../../../../UI/loader/Spinner"
+
 
 const AddAnime = () => {
     const { isLoading, isError, data: genresSelect } = useGenres()
     const { animeCreate, errors, status, setStatus } = useAnimeCreate()
+
 
     const [uaTitle, setUaTitle] = useState('')
     const [enTitle, setEnTitle] = useState('')
@@ -62,6 +64,7 @@ const AddAnime = () => {
         }
         animeCreate.mutateAsync(formData);
     }
+
 
     useEffect(() => {
         if (status === 'success') {
@@ -199,13 +202,15 @@ const AddAnime = () => {
                     />
                     <div className={styles.actionBtns}>
                         <div className={styles.activeCheck}>
-                            <ActiveCheckIcon
-                                fill={activeCheck === 1 ? 'var(--main-color)' : '#252525'}
+                            <GoPrimitiveDot
+                                size={18}
+                                color={activeCheck === 1 ? 'var(--main-color)' : '#252525'}
                                 onClick={() => { setActiveCheck(activeCheck === 1 ? 0 : 1) }}
                             />
                             <span>{activeCheck === 1 ? 'Active' : 'Inactive'}</span>
                         </div>
-                        <BlackButton title={`Submit`} className={styles.submitBtn} type='submit' />
+                        <BlackButton title={animeCreate.isLoading ? <Spinner size={16} /> : `Submit`} className={styles.submitBtn} type='submit' />
+                        
                     </div>
                 </div>
                 <div className={styles.imagesBox}>
@@ -232,6 +237,7 @@ const AddAnime = () => {
 
 
             </div>
+            Перевірити чи коректно працює перевизначення помилок у useAnimeCreate
         </form>
     )
 }

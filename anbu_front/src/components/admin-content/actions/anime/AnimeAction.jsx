@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
-import AnimeContext from '../../../../providers/AnimeProvider'
 import AnimeTables from './tables/AnimeTables'
 import AnimeForms from './forms/AnimeForms'
+import AdminContext from '../../../../providers/AdminProvider'
 
 const AnimeAction = () => {
-    const { action } = useContext(AnimeContext)
+    const { action } = useContext(AdminContext)
 
     return (
         <>

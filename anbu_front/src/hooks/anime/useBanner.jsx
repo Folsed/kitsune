@@ -7,7 +7,7 @@ const useBanner = (id) => {
         () => AnimeService.getBanner(id),
         {
             keepPreviousData: true,
-            refetchOnWindowFocus: true,
+            refetchOnWindowFocus: false,
             onError: (error) => {
                 alert(error.message)
             },

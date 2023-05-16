@@ -1,39 +1,3 @@
-/* .rate {
-    float: left;
-    height: 40px;
-}
-.rate:not(:checked) > input {
-    position:absolute;
-    top:-9999px;
-}
-.rate:not(:checked) > label {
-    float:right;
-    width:1em;
-    overflow:hidden;
-    white-space:nowrap;
-    cursor:pointer;
-    font-size:30px;
-    color:#ccc;
-}
-.rate:not(:checked) > label:before {
-    content: '★ ';
-}
-.rate > input:checked ~ label {
-    color: #ffc700;    
-}
-.rate:not(:checked) > label:hover,
-.rate:not(:checked) > label:hover ~ label {
-    color: #deb217;  
-}
-.rate > input:checked + label:hover,
-.rate > input:checked + label:hover ~ label,
-.rate > input:checked ~ label:hover,
-.rate > input:checked ~ label:hover ~ label,
-.rate > label:hover ~ input:checked ~ label {
-    color: #c59b08;
-} */
-
-
 .content-wrapper {
     width: 1067px;
     margin: 0 auto;
@@ -56,6 +20,14 @@
 .next-section {
     grid-area: right-section;
     padding-left: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.heading-preview {
+    width: 312px;
+    height: 176px;
 }
 
 .synopsis {
@@ -88,11 +60,15 @@
 .categ-detail {
     color: white;
     padding: 2px 15px;
-    transition: all .4s;
+    transition: all .2s;
 }
 
 .categ-detail:hover {
     background-color: #89898985;
+}
+
+.categ-detail:active {
+    background-color: #4e4e4e85;
 }
 
 .desc-link {
@@ -160,5 +136,10 @@
 
 .mylist-button:hover {
     background-color: #181818;
+    color: #dadada;
+}
+
+.mylist-button:active {
+    background-color: #141414;
     color: #dadada;
 }

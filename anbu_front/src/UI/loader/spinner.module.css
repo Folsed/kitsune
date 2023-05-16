@@ -1,0 +1,23 @@
+
+@keyframes spinner {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+.spinner {
+    box-sizing: border-box;
+    border-radius: 50%;
+    border: 3px solid #181818;
+    border-top-color: var(--main-color);
+    animation: spinner .6s linear infinite;
+}
+
+.black-border {
+    box-sizing: border-box;
+    border-radius: 50%;
+    border: 3px solid #181818;
+    border-top-color: transparent;
+    animation: spinner .6s linear infinite;
+}

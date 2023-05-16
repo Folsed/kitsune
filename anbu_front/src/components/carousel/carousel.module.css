@@ -134,6 +134,7 @@
 .carousel-content-box {
     height: 421px;
     width: 720px;
+    background-color: var(--loading-color);
 }
 
 .carousel-content-box img {

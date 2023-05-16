@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
-import AnimeContext from '../../../../providers/AnimeProvider'
 import BannerForm from './forms/BannerForm'
+import AdminContext from '../../../../providers/AdminProvider'
 
 
 const BannersAction = () => {
-    const { action } = useContext(AnimeContext)
+    const { action } = useContext(AdminContext)
 
     return (
         <>

@@ -1,11 +1,11 @@
 import { useContext } from 'react'
 import AllAnimes from './all/AllAnimes'
 import styles from '../../table.module.css'
-import AnimeContext from '../../../../../providers/AnimeProvider'
 import AnimeGenres from './genres/AnimeGenres'
+import AdminContext from '../../../../../providers/AdminProvider'
 
 const AnimeTables = () => {
-    const { active, subAction } = useContext(AnimeContext)
+    const { active, subAction } = useContext(AdminContext)
 
     return (
         <div className={styles.actionBody}>

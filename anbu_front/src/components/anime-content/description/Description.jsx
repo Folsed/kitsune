@@ -2,17 +2,24 @@ import styles from './description.module.css'
 import { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
 import YouTube from 'react-youtube'
-import AnimeContext from '../../../providers/AnimeProvider'
 import DescriptionSkeleton from '../../skeletons/anime-page-skeleton/DescriptionSkeleton'
 import { ROUTES } from '../../../router/routes'
 import WatchlistButton from '../../../UI/buttons/WatchlistButton'
 import Stars from '../../../UI/review/Stars'
 import { AiOutlineUnorderedList } from "react-icons/ai";
 import AccountContext from '../../../providers/AccountProvider'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
+import AnimeContext from '../../../providers/AnimeProvider'
+import AuthModalContext from '../../../providers/AuthModalProvider'
+import { userAuthContext } from '../../../providers/AuthProvider'
 
 const Description = () => {
     const animeData = useContext(AnimeContext)
+    const { currentUser } = userAuthContext()
+
     const { setActiveTab } = useContext(AccountContext)
+    const { setActive, setToggleClass } = useContext(AuthModalContext)
+
 
     const data = animeData.data
 
@@ -23,6 +30,12 @@ const Description = () => {
             autoplay: 0,
         },
 
+    }
+
+    const loginHandler = (e) => {
+        e.preventDefault()
+        setActive(true)
+        setToggleClass('auth')
     }
 
     return (
@@ -51,8 +64,12 @@ const Description = () => {
                                 </div>
                                 <div className={styles.actions}>
                                     <div className={styles.actionBtns}>
-                                        <WatchlistButton animeId={data.id} isLoading={animeData.isLoading} />
-                                        <NavLink to={ROUTES.account} onClick={setActiveTab(2)} className={styles.mylistLink}>
+                                        <WatchlistButton animeId={data.id} />
+                                        <NavLink
+                                            to={ROUTES.account}
+                                            onClick={currentUser ? () => setActiveTab(2) : loginHandler}
+                                            className={styles.mylistLink}
+                                        >
                                             <button className={styles.mylistButton}><AiOutlineUnorderedList size={22} />
                                                 Переглянути мій список
                                             </button>
@@ -106,6 +123,10 @@ const Description = () => {
                             </div>
 
                             <div className={styles.nextSection}>
+                                <LazyLoadImage
+                                    className={styles.headingPreview}
+                                    src={`http://localhost:8000/${data.preview[0].second_preview_path}`}
+                                />
                                 <YouTube videoId={data.trailer} opts={opts} />
                             </div>
                         </div>

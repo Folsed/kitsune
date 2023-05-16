@@ -1,6 +1,7 @@
+import { useState } from 'react'
 import styles from './input.module.css'
 
-const AdminFormTextarea = ({ type, id, name, value, className, placeholder, onClick, maxChars, minChars, setValue }) => {
+const Textarea = ({ type, id, name, value, className, placeholder, onClick, maxChars, minChars, setValue }) => {
 
     function maxHandleChange(event) {
         const newValue = event.target.value
@@ -14,8 +15,9 @@ const AdminFormTextarea = ({ type, id, name, value, className, placeholder, onCl
     }
 
     return (
-        <div className={`${styles.inputField} ${className ? className : ''}`}>
+        <div className={styles.textareaField}>
             <textarea
+                className={`${styles.textareaField} ${className ? className : ''}`}
                 type={type}
                 id={id}
                 name={name}
@@ -25,8 +27,8 @@ const AdminFormTextarea = ({ type, id, name, value, className, placeholder, onCl
                 onChange={maxChars ? maxHandleChange : minHandleChange}
                 maxLength={maxChars}
                 minLength={minChars}
+                placeholder={placeholder}
             />
-            <span>{placeholder}</span>
             {maxChars ?
                 <p className={`${styles.charsCounter} ${value.length === maxChars ? styles.block : ''}`}>{value.length}/{maxChars}</p>
                 : minChars ?
@@ -37,4 +39,4 @@ const AdminFormTextarea = ({ type, id, name, value, className, placeholder, onCl
     )
 }
 
-export default AdminFormTextarea
+export default Textarea

@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Carbon\Carbon;
+use Faker\Provider\Lorem;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CommentResource extends JsonResource
@@ -21,6 +22,7 @@ class CommentResource extends JsonResource
                 'user_id' => $this->user->id,
                 'user_name' => $this->user->name,
                 'user_avatar' => $this->user->avatar_softsize,
+                'user_star' => $this->stars,
             ],
             'anime_id' => $this->anime_id,
             'comment' => $this->comment,

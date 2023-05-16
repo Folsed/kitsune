@@ -6,13 +6,14 @@ import { useAnimeDestroy } from '../../../../../../hooks/admin/useAnimeDestroy'
 import TablesSkeleton from '../../../../../skeletons/tables/TablesSkeleton'
 import { useAnimeTableSearch } from '../../../../../../hooks/admin/useAnimeTableSearch'
 import search from '../../../../../../assets/icons/search.svg'
-import { ReactComponent as SpinnerIcon } from '../../../../../../assets/icons/spinner.svg'
-import { ReactComponent as EditIcon } from '../../../../../../assets/icons/edit.svg'
-import { ReactComponent as DeleteIcon } from '../../../../../../assets/icons/delete.svg'
-import { ReactComponent as DotIcon } from '../../../../../../assets/icons/dot.svg'
-import { ReactComponent as VerticalDotsIcon } from '../../../../../../assets/icons/vertical-dots.svg'
-import EditModal from '../../../../../modals/admin/EditModal'
 import DetailsModal from '../../../../../modals/admin/DetailsModal'
+import Spinner from '../../../../../../UI/loader/Spinner'
+import { MdOutlineModeEdit } from 'react-icons/md'
+import { RiDeleteBin6Line } from "react-icons/ri"
+import { GoPrimitiveDot } from "react-icons/go"
+import { BiDotsVertical } from "react-icons/bi"
+
+
 
 const AllAnimes = () => {
     const size = 15
@@ -43,11 +44,11 @@ const AllAnimes = () => {
             <div className={styles.tableSearchWrapper}>
                 <div className={styles.totalPosts}>
                     <p>Total:</p>
-                    <span>{animes ? animes.total : <SpinnerIcon />}</span>
+                    <span>{animes ? animes.total : <Spinner size={16} />}</span>
                 </div>
                 <div className={styles.tableSearch}>
                     <div className={styles.searchIcon}>
-                        {searchLoading ? <SpinnerIcon /> : <img src={search} alt="" />}
+                        {searchLoading ? <Spinner size={16} /> : <img src={search} alt="" />}
                     </div>
                     <input
                         className={styles.searchField}
@@ -84,28 +85,32 @@ const AllAnimes = () => {
                                         <td><span>{item.updated_at}</span></td>
                                         <td className={styles.actions}>
                                             <button
-                                                onClick={() => { setAnimeId(item.id) }}
-                                                title='Редагувати'
+                                                className={styles.actionButton}
+                                                onClick={() => { setActive(true); setToggleClass('details'); setAnimeId(item.id) }}
+                                                title='Деталі'
                                             >
-                                                <EditIcon /></button>
-                                            <button
-                                                onClick={() => handleDestroy(item.id)}
-                                                title='Видалити'
-                                            >
-                                                <DeleteIcon />
+                                                <BiDotsVertical size={18} />
                                             </button>
                                             <button
                                                 className={`${item.active === 1 ? styles.activePost : ''}`}
                                                 title='Змінити статус'
                                             >
-                                                <DotIcon />
+                                                <GoPrimitiveDot size={18} />
                                             </button>
                                             <button
-                                                onClick={() => { setActive(true); setToggleClass('details'); setAnimeId(item.id) }}
-                                                title='Деталі'
+                                                className={styles.actionButton}
+                                                onClick={() => { setAnimeId(item.id) }}
+                                                title='Редагувати'
                                             >
-                                                <VerticalDotsIcon /></button>
-
+                                                <MdOutlineModeEdit size={18} />
+                                            </button>
+                                            <button
+                                                className={styles.actionButton}
+                                                onClick={() => handleDestroy(item.id)}
+                                                title='Видалити'
+                                            >
+                                                <RiDeleteBin6Line size={14} />
+                                            </button>
                                         </td>
                                     </tr>
                                 ))}

@@ -1,9 +1,9 @@
 import { useContext } from 'react'
 import styles from './../../nav.module.css'
-import AnimeContext from '../../../../../providers/AnimeProvider'
+import AdminContext from '../../../../../providers/AdminProvider'
 
 const BannersNav = () => {
-    const {action, setAction} = useContext(AnimeContext)
+    const {action, setAction} = useContext(AdminContext)
 
     return (
         <div className={styles.navWrapper}>

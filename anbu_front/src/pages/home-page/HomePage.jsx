@@ -39,7 +39,8 @@ const Home = () => {
                     subTitle={'Дивіться найкраще аніме на думку користувачів'}
                     shalfColor={'var(--cards-shalf-color-orange)'}
                 />
-                <BannerPromo id={1}/>
+                <BannerPromo id={1} />
+                <BannerPromo id={3} />
                 <CardsTrack
                     query={'popular'}
                     title={'Найпопулярніші'}
@@ -48,6 +49,7 @@ const Home = () => {
                 />
                 <LazyLoadComponent>
                     <ColoredBanner id={2} backgroundColor={'blue'} />
+                    <ColoredBanner id={1} backgroundColor={'orange'} />
                     <CardsTrack
                         genre={'adventure'}
                         title={'Цікаві пригоди'}
@@ -72,7 +74,7 @@ const Home = () => {
                 </LazyLoadComponent>
                 <LazyLoadComponent>
                     <ColoredBanner id={3} backgroundColor={'orange'} />
-                    <BannerPromo id={2}/>
+                    <BannerPromo id={2} />
                     <CardsTrack
                         genre={'shounen'}
                         title={'Кінець сторінки'}

@@ -12,7 +12,7 @@ export const useLogin = (setActive) => {
     const login = useMutation(
         'login',
         async (formData) => {
-            axiosClient.post('/login', formData)
+            await axiosClient.post('/login', formData)
                 .then(({ data }) => {
                     setCurrentUser(data.user)
                     setUserToken(data.token)

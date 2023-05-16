@@ -2,8 +2,10 @@ import { useState } from 'react'
 import { useRegistration } from '../../../hooks/user/useRegistration'
 import { OrangeButton } from '../../../UI/buttons/OrangeButton'
 import styles from './auth.module.css'
+import Spinner from '../../../UI/loader/Spinner'
 
-const Registration = ({setAction, setActive}) => {
+
+const Registration = ({ setAction, setActive }) => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -72,7 +74,11 @@ const Registration = ({setAction, setActive}) => {
                     {/* <div className={styles.links}>
                                 <a href="#">Забули пароль?</a>
                             </div> */}
-                    <OrangeButton className={styles.authBtn} title={`Зареєструватися`} type='submit' />
+                    <OrangeButton
+                        className={styles.authBtn}
+                        title={registration.isLoading ? <Spinner size={20} black/> : 'Зареєструватися'}
+                        type='submit'
+                    />
                     <div className={styles.linkAfter}>
                         {/* <strong>Вже маєте акаунт?</strong> */}
                         <span onClick={() => setAction(0)}>Увійти</span>

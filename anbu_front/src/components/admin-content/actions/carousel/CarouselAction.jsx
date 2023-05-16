@@ -1,12 +1,11 @@
 import React, { useContext } from 'react'
-import AnimeContext from '../../../../providers/AnimeProvider'
-import AnimeForms from '../anime/forms/AnimeForms'
 import AnimeTables from '../anime/tables/AnimeTables'
 import CarouselForm from './forms/CarouselForm'
+import AdminContext from '../../../../providers/AdminProvider'
 
 
 const CarouselAction = () => {
-    const { action } = useContext(AnimeContext)
+    const { action } = useContext(AdminContext)
 
     return (
         <>

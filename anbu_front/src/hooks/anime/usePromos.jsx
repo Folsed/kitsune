@@ -7,7 +7,7 @@ export const usePromos = (id) => {
         () => AnimeService.getPromo(id),
         {
             keepPreviousData: true,
-            refetchOnWindowFocus: true,
+            refetchOnWindowFocus: false,
             onError: (error) => {
                 alert(error.message)
             },

@@ -127,3 +127,17 @@ tbody tr:hover {
     width: 1px;
     border-right: 1px solid #dadada29;
 }
+
+.action-button {
+    position: relative;
+    color: var(--span-color);
+    transition: color .2s;
+}
+
+.action-button:hover {
+    color: white;
+}
+
+.action-button:active {
+    color: var(--span-color);
+}

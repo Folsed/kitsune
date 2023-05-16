@@ -1,8 +1,9 @@
 .input-wrapper {
-    grid-area: input;
     display: grid;
     grid-template-areas: "avatar textarea";
     grid-template-columns: auto minmax(0, 1fr);
+    background-color: #0a0a0a;
+    padding: 1.5rem;
 }
 
 .avatar-wrap {
@@ -26,6 +27,14 @@
 .textarea-wrap {
     grid-area: textarea;
     padding-left: 1.77rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.review-form {
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
 }
 /* 
 .textarea {
@@ -37,7 +46,7 @@
     border: 1px solid #59595b;
     color: #fff;
     display: block;
-    height: 4.75rem;
+    height: 8.75rem;
     padding: 0.375rem 0.5rem 0.625rem;
     resize: none;
     width: 100%;
@@ -61,14 +70,38 @@
 .controls {
     display: flex;
     justify-content: end;
+    gap: 0.65rem;
 }
 
 .comment-btn {
     margin-top: 6px;
     width:fit-content;
-    height: 30px;
+    /* height: 30px; */
+    padding: 5px;
 }
 
 .comment-btn span {
     font-size: 14px;
+}
+
+
+.stars-controls {
+    width: fit-content;
+}
+
+.closed-input {
+    position: relative;
+}
+
+.open-btn {
+    position: absolute;
+    top: 25%;
+    right: 0;
+}
+
+.block-btn {
+    pointer-events: none;
+    background-color: transparent;
+    color: #3e3e3e;
+    border-color: #3e3e3e;
 }

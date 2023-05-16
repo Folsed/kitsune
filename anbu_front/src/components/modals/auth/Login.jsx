@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useLogin } from '../../../hooks/user/useLogin'
 import { OrangeButton } from '../../../UI/buttons/OrangeButton'
 import styles from './auth.module.css'
+import Spinner from '../../../UI/loader/Spinner'
 
 
 const Login = ({ setAction, setActive }) => {
@@ -20,12 +21,12 @@ const Login = ({ setAction, setActive }) => {
             password: password,
         }
 
-        
+
         login.mutateAsync(payload)
-        
+
     }
 
-    
+
     return (
         <>
             <form onSubmit={onSubmit} noValidate>
@@ -60,8 +61,12 @@ const Login = ({ setAction, setActive }) => {
                     <div className={styles.links}>
                         <a href="#">Забули пароль?</a>
                     </div>
-                    <OrangeButton className={styles.authBtn} title={`Увійти`} type='submit'/>
-                    <div className={styles.linkAfter}>
+                    <OrangeButton
+                        className={styles.authBtn}
+                        title={login.isLoading ? <Spinner size={20} black/> : 'Вхід'}
+                        type='submit' />
+                    <div className={styles.linkAfter}
+                    >
                         {/* <strong>Ще немає облікового запису?</strong> */}
                         <span onClick={() => setAction(1)}>Реєстрація</span>
                     </div>

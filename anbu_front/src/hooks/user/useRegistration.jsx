@@ -12,7 +12,7 @@ export const useRegistration = (setActive) => {
     const registration = useMutation(
         'registration',
         async (formData) => {
-            axiosClient.post('/registered', formData)
+            await axiosClient.post('/registered', formData)
                 .then(({ data }) => {
                     setCurrentUser(data.user)
                     setUserToken(data.token)

@@ -9,9 +9,9 @@ const useInfoUpdate = ({ setEditIsActive }) => {
 
 
     const userInfo = useMutation(
-        'user-info',
+        ['user-info', 'update'],
         async (formData) => {
-            axiosClient.post('/user/info/update', formData)
+            await axiosClient.post('/user/info/update', formData)
                 .then(response => {
                     setCurrentUser(response.data.user)
                     setEditIsActive(false)

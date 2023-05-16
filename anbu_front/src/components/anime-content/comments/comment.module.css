@@ -14,3 +14,9 @@
     grid-area: info;
     margin: 20px 0 10px ;
 }
+
+
+.wrapper {
+    grid-area: 2/ span 2;
+    width: 90%;
+}

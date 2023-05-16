@@ -1,20 +1,20 @@
 import { NavLink } from 'react-router-dom'
 import styles from './feedback.module.css'
-import { useAnimeComments } from '../../../../hooks/anime/useAnimeComments'
 import { LazyLoadComponent } from 'react-lazy-load-image-component'
-import { userAuthContext } from '../../../../providers/AuthProvider'
+import Stars from '../../../../UI/review/Stars'
+import { useContext } from 'react'
+import ReviewContext from '../../../../providers/ReviewProvider'
 
 
 const Feedback = ({ animeId }) => {
-    const { currentUser } = userAuthContext()
-    const { isLoading, isError, data: comments } = useAnimeComments(animeId)
+    const { comments, commentsIsLoading: isLoading } = useContext(ReviewContext)
 
     return (
         <div className={styles.feedback}>
             <div className={styles.commentWrapp}>
                 {isLoading ? 'Loading'
                     :
-                    comments.map((item, i) => (
+                    comments.reviews.map((item, i) => (
                         <LazyLoadComponent key={i}>
                             <div className={styles.comment} >
                                 <div className={styles.avatarWrap}>
@@ -34,6 +34,9 @@ const Feedback = ({ animeId }) => {
                                             <h4>{item.user.user_name}</h4>
                                         </NavLink>
                                         <span>{item.created_at}</span>
+                                    </div>
+                                    <div className={styles.stars}>
+                                        <Stars stars={item.user.user_star}/>
                                     </div>
                                     <div className={styles.body}>
                                         <div className={styles.textSection}>

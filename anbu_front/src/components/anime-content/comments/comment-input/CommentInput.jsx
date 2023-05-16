@@ -1,16 +1,21 @@
 import styles from './comment-input.module.css'
-
 import { userAuthContext } from '../../../../providers/AuthProvider'
 import { OrangeButton } from '../../../../UI/buttons/OrangeButton';
-import { useState } from 'react';
-import { useAnimeComments } from '../../../../hooks/anime/useAnimeComments';
+import { BlackButton } from '../../../../UI/buttons/BlackButton';
+import { useContext, useState } from 'react';
 import { useAnimeCommentMutate } from '../../../../hooks/anime/useAnimeCommentMutate';
+import Stars from '../../../../UI/review/Stars';
+import Textarea from '../../../../UI/inputs/Textarea';
+import ReviewContext from '../../../../providers/ReviewProvider';
 
 
 const CommentInput = ({ animeId }) => {
     const { currentUser } = userAuthContext()
+    const { myReview } = useContext(ReviewContext)
     const { comment: leaveComment, errors, setErrors } = useAnimeCommentMutate(animeId)
     const [comment, setComment] = useState('')
+    const [inputActive, setInputActive] = useState(false)
+    const [rate, setRate] = useState()
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -20,13 +25,17 @@ const CommentInput = ({ animeId }) => {
             user_id: currentUser.id,
             anime_id: animeId,
             user_name: currentUser.name,
-        };
-
+            stars: rate,
+        }
 
         leaveComment.mutateAsync(payload)
-        // refetch()
         setComment('')
+        setInputActive(false)
+
     }
+
+    const inputIsBlocked = myReview ? (comment.length < 100 ? styles.blockBtn : '') : (comment.length < 100 || !rate) ? styles.blockBtn : ''
+
 
     return (
         <div className={styles.inputWrapper}>
@@ -42,24 +51,52 @@ const CommentInput = ({ animeId }) => {
                 </div>
             </div>
             <div className={styles.textareaWrap}>
-                <div className={styles.signature}>
-                    <span>Коментар від</span>
-                    <h4>{currentUser.name}</h4>
+                <div className={styles.closedInput}>
+                    <div className={styles.signature}>
+                        <span>Відгук від</span>
+                        <h4>{currentUser.name}</h4>
+                    </div>
+                    {inputActive ? '' :
+                        <div className={styles.openBtn} >
+                            <OrangeButton className={styles.commentBtn} title='Залишити відгук' onClick={() => setInputActive(true)} />
+                        </div>
+                    }
                 </div>
-                <form onSubmit={onSubmit} noValidate>
-                    <div className={styles.textarea}>
-                        <textarea
-                            className={`${styles.editableArea}`}
-                            id="comment"
-                            placeholder='Залишити коментар'
-                            value={comment}
-                            onChange={(e) => { setComment(e.target.value) }}
-                        ></textarea>
+                <form onSubmit={onSubmit} noValidate className={styles.reviewForm}>
+                    <div className={styles.starsControls}>
+                        <Stars
+                            size={24}
+                            isUsable={!myReview ? true : false}
+                            infoEnabled={!myReview ? true : false}
+                            stars={myReview ? myReview : null}
+                            haveUser={myReview ? true : false}
+                            rate={rate}
+                            setRate={setRate}
+                        />
                     </div>
-                    <div className={styles.controls}>
 
-                        <OrangeButton className={styles.commentBtn} type={'submit'} title='Додати' />
-                    </div>
+                    {inputActive ?
+                        <>
+                            <div className={styles.textarea}>
+                                <Textarea
+                                    className={`${styles.editableArea}`}
+                                    placeholder='Залишити коментар'
+                                    value={comment}
+                                    setValue={setComment}
+                                    minChars={100}
+                                ></Textarea>
+                            </div>
+                            <div className={styles.controls} >
+                                <BlackButton className={styles.commentBtn} title='Закрити' onClick={() => setInputActive(false)} />
+                                <OrangeButton
+                                    className={`${styles.commentBtn} ${inputIsBlocked}
+                                    `}
+                                    type={'submit'}
+                                    title='Відправити'
+                                />
+                            </div>
+                        </>
+                        : ''}
                 </form>
             </div>
         </div>

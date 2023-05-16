@@ -64,6 +64,9 @@ Route::controller(UserController::class)->group(function () {
         // Watchlist
         Route::post('api/watchlist/mylist', 'addToWatchlist')->name('api_watchlist-mylist');
         Route::get('api/watchlist/get/{userId}', 'getMyList')->name('api_watchlist-get');
+
+        // Review
+        Route::get('api/review/solo/{animeId}/myReview', 'soloReview')->name('api_review-solo');
     });
 });
 

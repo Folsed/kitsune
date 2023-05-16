@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\WatchlistResource;
 use App\Models\Pronoun;
+use App\Models\Review;
 use App\Models\Watchlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -61,8 +62,6 @@ class UserController extends Controller
             $avatarPath = 'images/avatars/fullsize/';
             $softAvatarPath = 'images/avatars/softsize/';
             $avatarFilename = $request->file('avatar')->hashName();
-            // $soft = $request->file('avatar')->hashName();
-            // $softAvatarFilename = 'soft' . $soft;
             $softAvatarFilename = $request->file('avatar')->hashName();
 
             if ($user->avatar && Storage::exists($user->avatar)) {
@@ -131,6 +130,18 @@ class UserController extends Controller
                     ->orderByDesc('created_at')
                     ->get()
             )
+        ]);
+    }
+
+    public function soloReview($animeId)
+    {
+        /** @var \App\Models\User $user **/
+        $user = Auth::user();
+
+        return response()->json([
+            'stars' => Review::where('user_id', $user->id)
+                ->where('anime_id', $animeId)
+                ->pluck('stars'),
         ]);
     }
 }

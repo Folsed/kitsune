@@ -10,8 +10,8 @@ import { useEffect, useState } from 'react';
 import { usePronouns } from '../../../hooks/user/usePronouns';
 import SelectInput from '../../../UI/inputs/SelectInput';
 import useInfoUpdate from '../../../hooks/user/useInfoUpdate';
-import avatar from './../../../img/avatars/male.webp'
 import AvatarUploader from './AvatarUploader';
+import Spinner from '../../../UI/loader/Spinner'
 
 
 const UserEdit = ({ setEditIsActive }) => {
@@ -56,12 +56,14 @@ const UserEdit = ({ setEditIsActive }) => {
         userInfo.mutateAsync(formData)
     }
 
+    console.log(userInfo.isLoading)
+
     return (
         <form onSubmit={onSubmit} noValidate>
             <div className={styles.avatarWrapper}>
                 <AvatarUploader
                     image={avatar}
-                    setImage={setAvatar} 
+                    setImage={setAvatar}
                     currentAvatar={currentUser.avatar}
                 />
             </div>
@@ -82,11 +84,13 @@ const UserEdit = ({ setEditIsActive }) => {
                 <Textarea
                     placeholder={'Bio'}
                     value={bio}
-                    onChange={(e) => setBio(e.target.value)}
+                    setValue={setBio}
+                    maxChars={255}
                 />
                 <div className={styles.editActionBtns}>
-                    <OrangeButton title={'Зберегти'} />
+                    <OrangeButton title={'Зберегти'} type={'submit'} />
                     <BlackButton title={'Назад'} onClick={() => setEditIsActive(false)} />
+                    {userInfo.isLoading ? <Spinner size={18} /> : ''}
                 </div>
             </div>
         </form>

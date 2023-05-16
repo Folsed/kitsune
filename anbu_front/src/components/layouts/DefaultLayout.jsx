@@ -36,7 +36,6 @@ const DefaultLayout = () => {
                         <Outlet />
                     </main>
 
-
                     <Footer />
                 </AccountContext.Provider>
             </AuthModalContext.Provider>

@@ -6,12 +6,12 @@ import { ROUTES } from '../../router/routes'
 import Navigation from '../../components/admin-content/navigation/Navigation'
 import { useContext, useState } from 'react'
 import AnimeNav from '../../components/admin-content/actions/anime/nav/AnimeNav'
-import AnimeContext from '../../providers/AnimeProvider'
 import AnimeAction from '../../components/admin-content/actions/anime/AnimeAction'
 import CarouselNav from '../../components/admin-content/actions/carousel/nav/CarouselNav'
 import CarouselAction from '../../components/admin-content/actions/carousel/CarouselAction'
 import BannersNav from '../../components/admin-content/actions/banners/nav/BannersNav'
 import BannersAction from '../../components/admin-content/actions/banners/BannersAction'
+import AdminContext from '../../providers/AdminProvider'
 
 
 const AccountPage = () => {
@@ -30,8 +30,10 @@ const AccountPage = () => {
         return <Navigate to={ROUTES.home} replace={true} />
     }
 
+    console.log(active)
+
     return (
-        <AnimeContext.Provider value={{ active, setActive, action, setAction, subAction, setSubAction }} >
+        <AdminContext.Provider value={{ active, setActive, action, setAction, subAction, setSubAction }} >
             <div className='admin-page__wrapper'>
                 <div className="admin-page__grid">
                     <Navigation />
@@ -63,7 +65,7 @@ const AccountPage = () => {
                     </div>
                 </div>
             </div>
-        </AnimeContext.Provider>
+        </AdminContext.Provider>
     )
 }
 

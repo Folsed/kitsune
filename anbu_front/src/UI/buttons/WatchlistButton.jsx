@@ -4,24 +4,19 @@ import { ReactComponent as ActiveWatchlistIcon } from '../../assets/icons/watchl
 import { userAuthContext } from '../../providers/AuthProvider'
 import useWatchlistAdd from '../../hooks/user/useWatchlistAdd'
 import AuthModalContext from '../../providers/AuthModalProvider'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import Spinner from '../loader/Spinner'
 
 
 const WatchlistButton = ({ animeId }) => {
     const { currentUser, watchlist: mylist } = userAuthContext()
-    const { active, setActive, toggleClass, setToggleClass } = useContext(AuthModalContext)
+    const { setActive, setToggleClass } = useContext(AuthModalContext)
     const { watchlist } = useWatchlistAdd()
-    const [wlCheck, setWlCheck] = useState(false)
 
     const onClick = () => {
         const payload = {
             anime_id: animeId,
             user_id: currentUser.id,
-        }
-        if(!wlCheck) {
-            setWlCheck(true)
-        } else {
-            setWlCheck(false)
         }
         watchlist.mutateAsync(payload)
     }
@@ -32,20 +27,21 @@ const WatchlistButton = ({ animeId }) => {
         setToggleClass('auth')
     }
 
+
     return (
         <div className={styles.watchlistBtnWrapper}>
             <button
                 className={`${styles.watchlistBtn}`}
-                onClick={currentUser ? onClick : loginHandler}
+                onClick={currentUser ? (watchlist.isLoading ? null : onClick) : loginHandler}
             >
                 {animeExistsInWatchlist ?
                     <>
-                        <ActiveWatchlistIcon />
+                        {watchlist.isLoading ? <Spinner size={22} /> : <ActiveWatchlistIcon />}
                         <span>У списку бажаного</span>
                     </>
                     :
                     <>
-                        <WatchlistIcon />
+                        {watchlist.isLoading ? <Spinner size={22}/> : <WatchlistIcon />}
                         <span>Додати до бажаного</span>
                     </>
                 }
