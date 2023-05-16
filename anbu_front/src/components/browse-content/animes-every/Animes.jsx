@@ -24,7 +24,6 @@ const Animes = () => {
                                         <div className={styles.preview}>
                                             {item.preview.map(preview => (
                                                 <LazyLoadImage
-                                                    loading='lazy'
                                                     key={preview.id}
                                                     src={`http://127.0.0.1:8000/${preview.preview_path}`}
                                                     alt=""
