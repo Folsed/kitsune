@@ -62,7 +62,7 @@ class AnimeFormsController extends Controller
 
         // Preview, Sub-preview, Logo
         $previewPath = 'images/anime/previews/';
-        $subPreviewPath = 'images/anime/sub-previews/';
+        $subPreviewPath = 'images/anime/sub_previews/';
         $logoPath = 'images/anime/logos/';
 
         if ($request->hasFile('preview') && $request->hasFile('sub_preview') && $request->hasFile('logo')) {
