@@ -30,7 +30,7 @@ class PreviewsSeeder extends Seeder
         // }
 
         // Get all the files in the previews directory
-        $files = File::files(storage_path('app/images/anime/sub_preview'));
+        $files = File::files(storage_path('app/images/anime/logos'));
 
         // Loop through each file and rename it to a hash name
         foreach ($files as $file) {
@@ -47,8 +47,8 @@ class PreviewsSeeder extends Seeder
 
             // Update the database with the new path
             DB::table('previews')
-                ->where('second_preview_path', 'images/anime/sub_preview_path/'.$originalFilename)
-                ->update(['second_preview_path' => 'images/anime/sub_preview_path/' . $hashName]);
+                ->where('logo_path', 'images/anime/logos/'.$originalFilename)
+                ->update(['logo_path' => 'images/anime/logos/' . $hashName]);
         }
     }
 }
