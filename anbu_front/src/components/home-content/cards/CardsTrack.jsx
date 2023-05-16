@@ -42,18 +42,20 @@ const CardsTrack = ({ query, title, subTitle, shalfColor, genre }) => {
                                         <NavLink to={ROUTES.animePage(item.id, item.alias)}>
                                             <div className={styles.innerContentContainer}>
                                                 <div className={styles.preview}>
-                                                    <LazyLoadImage
-                                                        src={`http://127.0.0.1:8000/${item.preview_path}`}
-                                                        effect='blur'
-                                                        alt=""
-                                                        title={item.ua_title}
-                                                    />
+                                                    <picture>
+                                                        <LazyLoadImage
+                                                            src={`http://127.0.0.1:8000/${item.preview_path}`}
+                                                            effect='blur'
+                                                            alt=""
+                                                            title={item.ua_title}
+                                                        />
+                                                    </picture>
                                                 </div>
                                                 <div className={styles.description}>
                                                     <h4>{item.ua_title}</h4>
                                                     <div className={styles.innerSubDesc}>
                                                         <div className={styles.ratingBox}>
-                                                            <div className={styles.star}><RiStarFill/></div> {item.stars} | {item.genres[0].name}
+                                                            <div className={styles.star}><RiStarFill /></div> {item.stars} | {item.genres[0].name}
                                                         </div>
                                                     </div>
                                                 </div>

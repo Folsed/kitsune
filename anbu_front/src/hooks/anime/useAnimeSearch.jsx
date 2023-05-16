@@ -14,7 +14,7 @@ export const useAnimeSearch = (title) => {
         () => AnimeService.searchAnime(searchParams),
         {
             keepPreviousData: false,
-            refetchOnWindowFocus: true,
+            refetchOnWindowFocus: false,
             onError: (error) => {
                 alert(error.message)
             },

@@ -68,15 +68,15 @@ class AnimeFormsController extends Controller
         if ($request->hasFile('preview') && $request->hasFile('sub_preview') && $request->hasFile('logo')) {
             // Preview
             $previewExtension = $request->file('preview')->extension();
-            $previewFilename = $anime->id . '-' . $anime->alias . '.' . $previewExtension;
+            $previewFilename = $request->file('preview')->hashName();
 
             // Sub-Preview
             $subPreviewExtension = $request->file('sub_preview')->extension();
-            $subPreviewFilename = $anime->id . '-' . $anime->alias . '.' . $subPreviewExtension;
+            $subPreviewFilename = $request->file('sub_preview')->hashName();
 
             // Logo
             $logoExtension = $request->file('logo')->extension();
-            $logoFilename = $anime->id . '-' . $anime->alias . '.' . $logoExtension;
+            $logoFilename = $request->file('logo')->hashName();
 
             // Put in Storage
             $request->preview->storeAs($previewPath, $previewFilename);

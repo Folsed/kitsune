@@ -18,6 +18,7 @@ use App\Models\Promo;
 use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class AnimeController extends Controller
 {
@@ -31,22 +32,56 @@ class AnimeController extends Controller
 
     public function index(Request $request)
     {
+        // $query = $this->anime->where('active', 1);
+
+        // if ($request->size) {
+        //     $query = $query->orderBy('created_at', 'desc')->paginate($request->size);
+
+        //     return response()->json([
+        //         'data' => AnimeResource::collection($query),
+        //         'total' => $query->total(),
+        //     ]);
+        // } else {
+        //     $query = $query->orderBy('created_at', 'desc')->get();
+
+        //     return response()->json([
+        //         'data' => AnimeResource::collection($query),
+        //         'total' => $this->anime->count(),
+        //     ]);
+        // }
+
+        $cacheKey = 'animes_' . md5(json_encode($request->all()));
+
+        $cachedResult = Cache::store('file')->get($cacheKey);
+
+        if ($cachedResult) {
+            return $cachedResult;
+        }
+
         $query = $this->anime->where('active', 1);
 
         if ($request->size) {
             $query = $query->orderBy('created_at', 'desc')->paginate($request->size);
 
-            return response()->json([
+            $result = response()->json([
                 'data' => AnimeResource::collection($query),
                 'total' => $query->total(),
             ]);
+
+            Cache::store('file')->put($cacheKey, $result, 60); // Cache for 60 minutes
+
+            return $result;
         } else {
             $query = $query->orderBy('created_at', 'desc')->get();
 
-            return response()->json([
+            $result = response()->json([
                 'data' => AnimeResource::collection($query),
                 'total' => $this->anime->count(),
             ]);
+
+            Cache::store('file')->put($cacheKey, $result, 60); // Cache for 60 minutes
+
+            return $result;
         }
     }
 
@@ -210,51 +245,77 @@ class AnimeController extends Controller
             'query' => ['required'],
         ]);
 
-        $query = $validatedData['query'];
+        $category = $validatedData['query'];
+
+        $cacheKey = 'categories_' . md5(json_encode($request->all()));
+
+        $cachedResult = Cache::store('file')->get($cacheKey);
+
+        if (Cache::has($cacheKey)) {
+            return $cachedResult;
+        }
 
         // Recent
-        if ($query === 'recently') {
-            return response()->json([
+        if ($category === 'recently') {
+            $query = AnimeCutResource::collection(
+                $this->anime->select(['animes.id', 'animes.ua_title', 'animes.alias', 'preview_path', 'animes.created_at'])
+                    ->join('previews', 'animes.id', '=', 'previews.anime_id')
+                    ->orderByDesc('created_at', 'desc')->limit(12)->get()
+            );
+
+            $result = response()->json([
                 'data' => [
-                    'animes' => AnimeCutResource::collection(
-                        $this->anime->select(['animes.id', 'animes.ua_title', 'animes.alias', 'preview_path', 'animes.created_at'])
-                            ->join('previews', 'animes.id', '=', 'previews.anime_id')
-                            ->orderByDesc('created_at', 'desc')->limit(12)->get()
-                    ),
+                    'animes' => $query,
                 ],
             ]);
+
+            Cache::store('file')->put($cacheKey, $result, 60);
+
+            return $result;
         }
         // Best
-        if ($query === 'best') {
-            return response()->json([
+        if ($category === 'best') {
+            $query =  AnimeCutResource::collection(
+                $this->anime->selectRaw('animes.id, animes.alias, animes.ua_title, avg(stars) as avg_stars, preview_path')
+                    ->join('reviews', 'animes.id', '=', 'reviews.anime_id')
+                    ->join('previews', 'animes.id', '=', 'previews.anime_id')
+                    ->groupBy('animes.id')
+                    ->orderByDesc('avg_stars')
+                    ->limit(12)
+                    ->get()
+            );
+
+            $result = response()->json([
                 'data' => [
-                    'animes' => AnimeCutResource::collection(
-                        $this->anime->selectRaw('animes.id, animes.alias, animes.ua_title, avg(stars) as avg_stars, preview_path')
-                            ->join('reviews', 'animes.id', '=', 'reviews.anime_id')
-                            ->join('previews', 'animes.id', '=', 'previews.anime_id')
-                            ->groupBy('animes.id')
-                            ->orderByDesc('avg_stars')
-                            ->limit(12)
-                            ->get()
-                    ),
+                    'animes' => $query,
                 ],
             ]);
+
+            Cache::store('file')->put($cacheKey, $result, 60);
+
+            return $result;
         }
         // Popular
-        if ($query === 'popular') {
-            return response()->json([
+        if ($category === 'popular') {
+            $query = AnimeCutResource::collection(
+                $this->anime->selectRaw('animes.id, animes.alias, animes.ua_title, count(user_id) as count_review, preview_path')
+                    ->join('reviews', 'animes.id', '=', 'reviews.anime_id')
+                    ->join('previews', 'animes.id', '=', 'previews.anime_id')
+                    ->groupBy('animes.id')
+                    ->orderByDesc('count_review')
+                    ->limit(12)
+                    ->get()
+            );
+
+            $result = response()->json([
                 'data' => [
-                    'animes' =>  AnimeCutResource::collection(
-                        $this->anime->selectRaw('animes.id, animes.alias, animes.ua_title, count(user_id) as count_review, preview_path')
-                            ->join('reviews', 'animes.id', '=', 'reviews.anime_id')
-                            ->join('previews', 'animes.id', '=', 'previews.anime_id')
-                            ->groupBy('animes.id')
-                            ->orderByDesc('count_review')
-                            ->limit(12)
-                            ->get()
-                    ),
+                    'animes' =>  $query,
                 ],
             ]);
+
+            Cache::store('file')->put($cacheKey, $result, 60);
+
+            return $result;
         }
     }
 }

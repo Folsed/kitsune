@@ -8,7 +8,7 @@ export const useAnimesPagination = (size, page) => {
         () => AnimeService.getWithPagination(size, page),
         {
             keepPreviousData: true,
-            refetchOnWindowFocus: true,
+            refetchOnWindowFocus: false,
             onError: (error) => {
                 alert(error.message)
             },
