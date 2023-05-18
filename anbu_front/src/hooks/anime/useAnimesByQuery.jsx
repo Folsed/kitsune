@@ -11,7 +11,7 @@ export const useAnimesByQuery = (query) => {
         () => AnimeService.getByQuery(queryParams),
         {
             keepPreviousData: true,
-            refetchOnWindowFocus: false,
+            refetchOnWindowFocus: true,
             onError: (error) => {
                 alert(error.message)
             },

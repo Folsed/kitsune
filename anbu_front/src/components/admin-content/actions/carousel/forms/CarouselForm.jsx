@@ -4,7 +4,7 @@ import { BlackButton } from '../../../../../UI/buttons/BlackButton'
 import ImageUploader from '../../../../../UI/inputs/ImageUploader'
 import SelectInput from '../../../../../UI/inputs/SelectInput'
 import { useAnimes } from '../../../../../hooks/anime/useAnimes'
-import { useCarouselMutate } from '../../../../../hooks/anime/useCarouselMutate'
+import { useCarouselMutate } from '../../../../../hooks/admin/useCarouselMutate'
 
 
 const CarouselForm = () => {
@@ -20,7 +20,7 @@ const CarouselForm = () => {
 
         const formData = new FormData()
         formData.append('slide', slide)
-        formData.append('anime', anime.value)
+        formData.append('anime_id', anime.value ? anime.value : '')
 
         carousel.mutateAsync(formData);
     }
@@ -34,14 +34,14 @@ const CarouselForm = () => {
             setSelect(selectItems)
         }
 
-        if (status === 'success') {
+        if (status) {
             setAnime([])
             setSlide(null)
             setStatus('')
         }
     }, [isLoading, status])
 
-
+    console.log(anime.value)
 
     return (
         <form onSubmit={onSubmit} noValidate>

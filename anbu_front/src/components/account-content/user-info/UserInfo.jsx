@@ -1,6 +1,4 @@
 import styles from './user-info.module.css'
-
-import avatar from './../../../img/avatar.jpg'
 import { userAuthContext } from '../../../providers/AuthProvider'
 import { BlackButton } from '../../../UI/buttons/BlackButton'
 import { format } from 'date-fns';
@@ -9,6 +7,7 @@ import { useState } from 'react';
 import UserEdit from './UserEdit';
 
 const UserInfo = () => {
+    const ROOT_URL = import.meta.env.VITE_ROOT_URL
     const { currentUser } = userAuthContext()
     const [editIsActive, setEditIsActive] = useState(false)
 
@@ -23,7 +22,7 @@ const UserInfo = () => {
                         <div className={styles.avatar}>
                             {currentUser.avatar_softsize ?
                                 <img
-                                    src={`http://127.0.0.1:8000/${currentUser.avatar}`}
+                                    src={`${ROOT_URL}${currentUser.avatar}`}
                                     alt=""
                                 />
                                 : ''

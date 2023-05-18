@@ -1,13 +1,14 @@
 import axios from "axios";
 
 const axiosClient = axios.create({
-    baseURL: import.meta.env.VITE_API_BASE_URL
+    baseURL: import.meta.env.VITE_API_BASE_URL,
 })
 
 
 
 axiosClient.interceptors.request.use((config) => {
     config.headers.Authorization = `Bearer ${localStorage.getItem('TOKEN')}`
+    config.headers['Cache-Control'] = 'public, max-age=3600';
     return config
 })
 

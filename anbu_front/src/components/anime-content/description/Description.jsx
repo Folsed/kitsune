@@ -1,5 +1,5 @@
 import styles from './description.module.css'
-import { useContext } from 'react'
+import React, { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
 import YouTube from 'react-youtube'
 import DescriptionSkeleton from '../../skeletons/anime-page-skeleton/DescriptionSkeleton'
@@ -14,6 +14,7 @@ import AuthModalContext from '../../../providers/AuthModalProvider'
 import { userAuthContext } from '../../../providers/AuthProvider'
 
 const Description = () => {
+    const ROOT_URL = import.meta.env.VITE_ROOT_URL
     const animeData = useContext(AnimeContext)
     const { currentUser } = userAuthContext()
 
@@ -38,6 +39,8 @@ const Description = () => {
         setToggleClass('auth')
     }
 
+    console.log(data)
+
     return (
         <div>
             <div className={styles.body}>
@@ -48,8 +51,8 @@ const Description = () => {
                                 <div className={styles.heading}>
                                     <h1>{data.ua_title}</h1>
                                 </div>
-                                <div className={styles.voice}>
-                                    <span>{data.translated}</span>
+                                <div className={styles.secondHeading}>
+                                    <span>{data.en_title}</span>
                                 </div>
                                 <div className={styles.starRating}>
                                     <div className={styles.rating}>
@@ -78,7 +81,12 @@ const Description = () => {
                                 </div>
                                 <div className={styles.synopsis}>
                                     <p className={styles.synBlockText}>
-                                        {data.synopsis}
+                                        {data.synopsis.split('\n').map((paragraph, index) => (
+                                            <React.Fragment key={index}>
+                                                {paragraph}
+                                                <br />
+                                            </React.Fragment>
+                                        ))}
                                     </p>
                                 </div>
                                 <div className={styles.genres}>
@@ -125,7 +133,7 @@ const Description = () => {
                             <div className={styles.nextSection}>
                                 <LazyLoadImage
                                     className={styles.headingPreview}
-                                    src={`http://localhost:8000/${data.preview[0].second_preview_path}`}
+                                    src={`${ROOT_URL}${data.preview[0].second_preview_path}`}
                                 />
                                 <YouTube videoId={data.trailer} opts={opts} />
                             </div>

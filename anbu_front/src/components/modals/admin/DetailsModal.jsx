@@ -1,5 +1,5 @@
 import { useQuery } from 'react-query';
-import { useAnime } from '../../../hooks/admin/useAnime';
+import { useAnimeWithPagination } from '../../../hooks/admin/useAnimeWithPagination';
 import styles from './modal.module.css'
 
 const DetailsModal = ({ setActive, active, setToggleClass, toggleClass, data }) => {

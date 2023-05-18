@@ -8,7 +8,7 @@ export const useAnimesByGenre = (genre) => {
         () => AnimeService.getByGenre(genre),
         {
             keepPreviousData: true,
-            refetchOnWindowFocus: false,
+            refetchOnWindowFocus: true,
             onError: (error) => {
                 alert(error.message)
             },

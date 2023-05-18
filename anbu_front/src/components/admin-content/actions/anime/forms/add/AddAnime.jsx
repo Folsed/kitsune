@@ -30,6 +30,7 @@ const AddAnime = () => {
     const [synopsis, setSynopsis] = useState('')
     const [activeCheck, setActiveCheck] = useState(1)
     const [previewImage, setPreviewImage] = useState(null)
+    const [secondPreviewImage, setSecondPreviewImage] = useState(null)
     const [subPreviewImage, setSubPreviewImage] = useState(null)
     const [logoImage, setLogoImage] = useState(null)
 
@@ -38,6 +39,7 @@ const AddAnime = () => {
 
         const formData = new FormData()
         formData.append('preview', previewImage)
+        formData.append('second_preview', secondPreviewImage)
         formData.append('sub_preview', subPreviewImage)
         formData.append('logo', logoImage)
         genres.forEach(genre => formData.append('genres[]', genre.value))
@@ -82,6 +84,7 @@ const AddAnime = () => {
             setSynopsis('')
             setActiveCheck(1)
             setPreviewImage(null)
+            setSecondPreviewImage(null)
             setSubPreviewImage(null)
             setLogoImage(null)
             setStatus('')
@@ -198,7 +201,7 @@ const AddAnime = () => {
                         id='synopsis'
                         placeholder='Synopsis'
                         value={synopsis}
-                        onChange={(e) => setSynopsis(e.target.value)}
+                        setValue={setSynopsis}
                     />
                     <div className={styles.actionBtns}>
                         <div className={styles.activeCheck}>
@@ -210,7 +213,7 @@ const AddAnime = () => {
                             <span>{activeCheck === 1 ? 'Active' : 'Inactive'}</span>
                         </div>
                         <BlackButton title={animeCreate.isLoading ? <Spinner size={16} /> : `Submit`} className={styles.submitBtn} type='submit' />
-                        
+
                     </div>
                 </div>
                 <div className={styles.imagesBox}>
@@ -219,6 +222,13 @@ const AddAnime = () => {
                         placeholder={'Upload Preview'}
                         image={previewImage}
                         setImage={setPreviewImage}
+
+                    />
+                    <ImageUploader
+                        className={`${styles.secondPreviewImage} ${errors && errors.second_preview ? styles.errorFile : ''}`}
+                        placeholder={'Upload Second Preview'}
+                        image={secondPreviewImage}
+                        setImage={setSecondPreviewImage}
 
                     />
                     <ImageUploader

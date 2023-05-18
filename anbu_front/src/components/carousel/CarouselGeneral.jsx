@@ -2,11 +2,11 @@ import CarouselLogic from "./CarouselLogic"
 import CarouselSlide from "./CarouselSlide"
 import { useCarousel } from "../../hooks/anime/useCarousel"
 import CarouselSkeleton from "../skeletons/welcome-carousel-skeleton/CarouselSkeleton"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const CarouselGeneral = () => {
+    const ROOT_URL = import.meta.env.VITE_ROOT_URL
     const { isLoading, isError, data: slides } = useCarousel()
-
 
     return (
         <div>
@@ -15,11 +15,10 @@ const CarouselGeneral = () => {
                     {slides.carousel.map((item) => (
                         <CarouselSlide key={item.id} animeId={item.anime_id} alias={item.alias}>
                             <picture>
-                                <img 
-                                    loading="lazy"
-                                    src={`http://127.0.0.1:8000/${item.content_path}`}
+                                <img
+                                    src={`${ROOT_URL}${item.content_path}`}
                                     alt=""
-                                    title={item.title}                                    
+                                    title={item.title}
                                 />
                             </picture>
                         </CarouselSlide>

@@ -1,0 +1,115 @@
+.container {
+    width: 100%;
+
+}
+
+.wrapper {
+    width: 1067px;
+    margin: 0 auto;
+}
+
+.cards-slider {
+    display: grid;
+    grid-template-areas: 
+    "viewbox";
+    position: relative;
+    grid-template-columns: minmax(0, auto);
+    margin-top: 0.3rem;
+}
+
+.arrow-wrapper {
+    display: grid;
+    grid-area: viewbox;
+    height: 225px;
+    align-items: center;
+}
+
+.arrow {
+    text-align: center;
+    fill: rgb(121, 121, 121);
+    height: 35px;
+    width: 35px;
+    background-color: transparent;
+    border: none;
+    transition: all 0.2s;
+}
+
+.arrow:hover {
+    background-color: #1e1f24b4;
+    fill: white;
+    cursor: pointer;
+}
+
+.arrow-wrapper .arrowRight {
+    justify-self: end;
+    transform: translateX(30px);
+}
+
+.arrow-wrapper .arrowLeft {
+    transform: scaleX(-1) translateX(30px);
+}
+
+.extra {
+    padding: 0.75rem;
+    position: relative;
+}
+
+.inner-content-container:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    opacity: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(100, 100, 100, 0.206);
+    transition: opacity 0.2s ease;
+    -webkit-box-shadow: inset 0px 0px 0px 5px rgba(0, 0, 0, 1);
+    -moz-box-shadow: inset 0px 0px 0px 5px rgba(0, 0, 0, 1);
+    box-shadow: inset 0px 0px 0px 5px rgba(0, 0, 0, 1);
+    z-index: -1;
+}
+
+.inner-content-container:hover::after {
+    opacity: 1;
+}
+
+
+.preview {
+    width: 154.02px;
+    background-color: var(--loading-color);
+    height: 231px;
+}
+
+.preview span, .preview img {
+    width: 100%;
+    height: 100%;
+}
+
+.content-container.is-hidden {
+    visibility: hidden;
+}
+
+.description {
+    padding-top: 0.253rem;
+}
+
+.inner-sub-desc {
+    padding-top: 0.3rem;
+    color: var(--span-color);
+}
+
+.hidden {
+    display: none;
+}
+
+.rating-box {
+    display: flex;
+    gap: 3px;
+}
+
+.star {
+    display: flex;
+    align-items: center;
+}
+

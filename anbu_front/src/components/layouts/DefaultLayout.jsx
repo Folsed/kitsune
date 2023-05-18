@@ -27,18 +27,14 @@ const DefaultLayout = () => {
 
     return (
         <div>
-            <AuthModalContext.Provider value={{ active, setActive, toggleClass, setToggleClass }}>
-                <AccountContext.Provider value={{ activeTab, setActiveTab }}>
-                    <Header />
-                    <ScrollRestoration />
+            <Header />
+            <ScrollRestoration />
 
-                    <main className="main">
-                        <Outlet />
-                    </main>
+            <main className="main">
+                <Outlet />
+            </main>
 
-                    <Footer />
-                </AccountContext.Provider>
-            </AuthModalContext.Provider>
+            <Footer />
         </div>
     )
 }

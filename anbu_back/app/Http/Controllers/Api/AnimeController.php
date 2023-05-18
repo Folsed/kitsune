@@ -17,7 +17,7 @@ use App\Models\Genre;
 use App\Models\Promo;
 use App\Models\Review;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Cache;
 
 class AnimeController extends Controller
@@ -32,55 +32,20 @@ class AnimeController extends Controller
 
     public function index(Request $request)
     {
-        // $query = $this->anime->where('active', 1);
-
-        // if ($request->size) {
-        //     $query = $query->orderBy('created_at', 'desc')->paginate($request->size);
-
-        //     return response()->json([
-        //         'data' => AnimeResource::collection($query),
-        //         'total' => $query->total(),
-        //     ]);
-        // } else {
-        //     $query = $query->orderBy('created_at', 'desc')->get();
-
-        //     return response()->json([
-        //         'data' => AnimeResource::collection($query),
-        //         'total' => $this->anime->count(),
-        //     ]);
-        // }
-
-        $cacheKey = 'animes_' . md5(json_encode($request->all()));
-
-        $cachedResult = Cache::store('file')->get($cacheKey);
-
-        if ($cachedResult) {
-            return $cachedResult;
-        }
-
         $query = $this->anime->where('active', 1);
-
         if ($request->size) {
             $query = $query->orderBy('created_at', 'desc')->paginate($request->size);
-
             $result = response()->json([
-                'data' => AnimeResource::collection($query),
+                'data' => AnimeCutResource::collection($query),
                 'total' => $query->total(),
             ]);
-
-            Cache::store('file')->put($cacheKey, $result, 60); // Cache for 60 minutes
-
             return $result;
         } else {
             $query = $query->orderBy('created_at', 'desc')->get();
-
             $result = response()->json([
-                'data' => AnimeResource::collection($query),
+                'data' => AnimeCutResource::collection($query),
                 'total' => $this->anime->count(),
             ]);
-
-            Cache::store('file')->put($cacheKey, $result, 60); // Cache for 60 minutes
-
             return $result;
         }
     }
@@ -209,33 +174,7 @@ class AnimeController extends Controller
             'data' => [
                 'carousel' => CarouselResource::collection(Carousel::orderBy('created_at', 'desc')->limit(6)->get()),
             ],
-            'status' => 'success',
-        ]);
-    }
-
-    public function carouselMutate(Request $request)
-    {
-        if ($request->hasFile('slide')) {
-            $alias = $this->anime->where('id', $request->anime)->value('alias');
-
-            $slidePath = 'images/anime/carousel/slides/';
-
-            // slide
-            $slideExtension = $request->file('slide')->extension();
-            $slideFilename = $request->anime . '-' . $alias . '.' . $slideExtension;
-
-            // Put in Storage
-            $request->slide->storeAs($slidePath, $slideFilename);
-
-            // Put in Database
-            $carousel = new Carousel();
-            $carousel->anime_id = $request->input('anime');
-            $carousel->content_path = (string)$slidePath . $slideFilename;
-            $carousel->save();
-        }
-
-        return response()->json([
-            'status' => 'success',
+            'status' => true,
         ]);
     }
 
@@ -244,16 +183,7 @@ class AnimeController extends Controller
         $validatedData = $request->validate([
             'query' => ['required'],
         ]);
-
         $category = $validatedData['query'];
-
-        $cacheKey = 'categories_' . md5(json_encode($request->all()));
-
-        $cachedResult = Cache::store('file')->get($cacheKey);
-
-        if (Cache::has($cacheKey)) {
-            return $cachedResult;
-        }
 
         // Recent
         if ($category === 'recently') {
@@ -262,16 +192,11 @@ class AnimeController extends Controller
                     ->join('previews', 'animes.id', '=', 'previews.anime_id')
                     ->orderByDesc('created_at', 'desc')->limit(12)->get()
             );
-
-            $result = response()->json([
+            return response()->json([
                 'data' => [
                     'animes' => $query,
                 ],
             ]);
-
-            Cache::store('file')->put($cacheKey, $result, 60);
-
-            return $result;
         }
         // Best
         if ($category === 'best') {
@@ -284,16 +209,11 @@ class AnimeController extends Controller
                     ->limit(12)
                     ->get()
             );
-
-            $result = response()->json([
+            return response()->json([
                 'data' => [
                     'animes' => $query,
                 ],
             ]);
-
-            Cache::store('file')->put($cacheKey, $result, 60);
-
-            return $result;
         }
         // Popular
         if ($category === 'popular') {
@@ -306,16 +226,11 @@ class AnimeController extends Controller
                     ->limit(12)
                     ->get()
             );
-
-            $result = response()->json([
+            return response()->json([
                 'data' => [
                     'animes' =>  $query,
                 ],
             ]);
-
-            Cache::store('file')->put($cacheKey, $result, 60);
-
-            return $result;
         }
     }
 }

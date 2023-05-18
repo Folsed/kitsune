@@ -6,6 +6,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { ROUTES } from '../../../../router/routes'
 
 const BannerPromo = ({ id }) => {
+    const ROOT_URL = import.meta.env.VITE_ROOT_URL
     const { isLoading, isError, data: promo } = usePromos(id)
 
     return (
@@ -17,7 +18,7 @@ const BannerPromo = ({ id }) => {
                             <NavLink to={ROUTES.animePage(promo.anime_id, promo.alias)}>
                                 <picture>
                                     <LazyLoadImage
-                                        src={`http://127.0.0.1:8000/${promo.promo_path}`}
+                                        src={`${ROOT_URL}${promo.promo_path}`}
                                         alt=""
                                         title={promo.ua_title}
                                     />

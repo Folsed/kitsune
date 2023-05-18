@@ -7,6 +7,7 @@ import LiveSearchSkeleton from '../skeletons/live-search-skeleton/LiveSearchSkel
 import { useCallback } from 'react'
 import useDebounce from '../../helpers/useDebounce'
 import { useAnimeSearch } from '../../hooks/anime/useAnimeSearch';
+import { AiOutlineSearch } from 'react-icons/ai';
 
 
 const LiveSearch = () => {
@@ -31,7 +32,7 @@ const LiveSearch = () => {
         <div className={styles.searchContainer}>
             <div className={`${styles.searchField} ${isLoading ? styles.focused : focus === true && animes ? styles.focused : ''}`}>
                 <div className={styles.searchIcon}>
-                    <img src={search} alt="" />
+                    <AiOutlineSearch color='gray' size={16}/>
                 </div>
                 <input
                     className={`${styles.inputField}`}

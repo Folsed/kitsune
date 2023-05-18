@@ -26,12 +26,17 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->group(function () {
     Route::controller(AnimeFormsController::class)->group(function () {
         // Anime
+        Route::get('api/admin/get/anime', 'index')->name('api_anime-all');
         Route::post('api/create/anime', 'create')->name('api_anime-create');
         Route::post('api/destroy/anime', 'destroy')->name('api_anime-delete');
+        Route::post('api/deactivate/anime', 'deactivate')->name('api_anime-deactivate');
 
         // Banners
         Route::post('api/create/banner', 'bannerCreate')->name('api_banner-create');
         Route::post('api/create/banner/promo', 'promoCreate')->name('promo-create');
+
+        // Carousel
+        Route::post('api/carousel/anime/mutate', 'carouselMutate')->name('api_carousel-mutate');
     });
 
 
@@ -83,7 +88,6 @@ Route::controller(AnimeController::class)->group(function () {
     // Browse
     Route::get('api/anime/genre/{genre}', 'showByGenre')->name('api_anime-by-genre');
     // Carousel
-    Route::post('api/carousel/anime/mutate', 'carouselMutate')->name('api_carousel-mutate');
     Route::get('api/carousel/anime', 'carousel')->name('api_carousel');
     // Queries
     Route::get('api/query/anime', 'queries')->name('api_anime-by-query');

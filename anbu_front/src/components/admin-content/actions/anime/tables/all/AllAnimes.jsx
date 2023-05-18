@@ -12,19 +12,22 @@ import { MdOutlineModeEdit } from 'react-icons/md'
 import { RiDeleteBin6Line } from "react-icons/ri"
 import { GoPrimitiveDot } from "react-icons/go"
 import { BiDotsVertical } from "react-icons/bi"
+import { useAnimeDeactivate } from '../../../../../../hooks/admin/useAnimeDeactivate'
+import { useAnimeWithPagination } from '../../../../../../hooks/admin/useAnimeWithPagination'
 
 
 
 const AllAnimes = () => {
     const size = 15
     const [page, setPage] = useState(1)
-    const { isLoading, isError, data: animes, refetch } = useAnimesPagination(size, page)
+    const { isLoading, isError, data: animes, refetch } = useAnimeWithPagination(size, page)
     const { animeDestroy } = useAnimeDestroy(refetch)
     const [query, setQuery] = useState('')
     const { isLoading: searchLoading, isError: searchErrors, data: searchData, status } = useAnimeTableSearch({ title: query })
     const [animeId, setAnimeId] = useState(null)
     const [active, setActive] = useState(false)
     const [toggleClass, setToggleClass] = useState('')
+    const { animeDeactivate } = useAnimeDeactivate(refetch)
 
     if (active) {
         document.body.classList.add('scroll-blocked')
@@ -37,6 +40,13 @@ const AllAnimes = () => {
             id: id,
         }
         animeDestroy.mutateAsync(payload)
+    }
+
+    const handleDeactivate = (id) => {
+        const payload = {
+            id: id,
+        }
+        animeDeactivate.mutateAsync(payload)
     }
 
     return (
@@ -92,10 +102,11 @@ const AllAnimes = () => {
                                                 <BiDotsVertical size={18} />
                                             </button>
                                             <button
-                                                className={`${item.active === 1 ? styles.activePost : ''}`}
+                                                className={`${item.active ? styles.activePost : ''}`}
+                                                onClick={() => handleDeactivate(item.id)}
                                                 title='Змінити статус'
                                             >
-                                                <GoPrimitiveDot size={18} />
+                                                <GoPrimitiveDot size={18} color='#333333' />
                                             </button>
                                             <button
                                                 className={styles.actionButton}

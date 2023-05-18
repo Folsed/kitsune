@@ -30,8 +30,6 @@ const AccountPage = () => {
         return <Navigate to={ROUTES.home} replace={true} />
     }
 
-    console.log(active)
-
     return (
         <AdminContext.Provider value={{ active, setActive, action, setAction, subAction, setSubAction }} >
             <div className='admin-page__wrapper'>

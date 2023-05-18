@@ -15,6 +15,7 @@ import { useEffect } from 'react';
 
 
 const Watchlist = () => {
+    const ROOT_URL = import.meta.env.VITE_ROOT_URL
     const { currentUser } = userAuthContext()
     const { data, isLoading, refetch } = useWatchlistGet(currentUser.id)
     const { watchlist } = useWatchlistAdd(refetch)
@@ -58,7 +59,7 @@ const Watchlist = () => {
                                 {item.second_preview_path ?
                                     <>
                                         <picture>
-                                            <LazyLoadImage src={`http://localhost:8000/${item.second_preview_path}`} alt="" />
+                                            <LazyLoadImage src={`${ROOT_URL}${item.second_preview_path}`} alt="" />
                                         </picture>
                                     </>
                                     : ''}

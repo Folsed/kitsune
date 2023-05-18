@@ -16,6 +16,7 @@ const background = {
 }
 
 const ColoredBanner = ({ id, backgroundColor }) => {
+    const ROOT_URL = import.meta.env.VITE_ROOT_URL
     const { isLoading, isError, data: banner } = useBanner(id)
 
     return (
@@ -37,7 +38,7 @@ const ColoredBanner = ({ id, backgroundColor }) => {
                                 <div className={styles.leftInfoPromo}>
                                     <picture>
                                         <LazyLoadImage
-                                            src={`http://127.0.0.1:8000/${banner.png_preview}`}
+                                            src={`${ROOT_URL}${banner.png_preview}`}
                                             alt=""
                                             title={banner.ua_title}
                                         />
@@ -49,7 +50,7 @@ const ColoredBanner = ({ id, backgroundColor }) => {
                                     <NavLink className={styles.leftInfoLinkPreview} to={ROUTES.animePage(banner.anime_id, banner.alias)}>
                                         <picture>
                                             <LazyLoadImage
-                                                src={`http://127.0.0.1:8000/${banner.preview}`}
+                                                src={`${ROOT_URL}${banner.preview}`}
                                                 alt=""
                                                 title={banner.ua_title}
                                             />

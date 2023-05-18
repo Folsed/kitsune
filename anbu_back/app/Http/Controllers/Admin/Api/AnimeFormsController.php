@@ -3,21 +3,27 @@
 namespace App\Http\Controllers\Admin\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\AnimeResource;
 use App\Models\Anime;
 use App\Models\Banner;
+use App\Models\Carousel;
 use App\Models\Genre;
 use App\Models\Preview;
 use App\Models\Promo;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class AnimeFormsController extends Controller
 {
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function index(Request $request)
+    {
+            $query = Anime::orderBy('created_at', 'desc')->paginate($request->size);
+            $result = response()->json([
+                'data' => AnimeResource::collection($query),
+                'total' => $query->total(),
+            ]);
+            return $result;
+    }
+
     public function create(Request $request)
     {
         $this->validate($request, [
@@ -34,11 +40,10 @@ class AnimeFormsController extends Controller
             'trailer' => 'required',
             'genres' => 'required',
             'preview' => 'required|image|mimes:webp,png,svg,jpeg,avif',
+            'second_preview' => 'required|image|mimes:webp,png,svg,jpeg,avif',
             'sub_preview' => 'required|image|mimes:webp,png,svg,jpeg,avif',
             'logo' => 'required|image|mimes:webp,png,svg,jpeg,avif',
         ]);
-
-
 
         $anime = new Anime();
         $anime->ua_title = $request->input('ua_title');
@@ -62,31 +67,29 @@ class AnimeFormsController extends Controller
 
         // Preview, Sub-preview, Logo
         $previewPath = 'images/anime/previews/';
+        $secondPreviewPath = 'images/anime/second_previews/';
         $subPreviewPath = 'images/anime/sub_previews/';
         $logoPath = 'images/anime/logos/';
 
         if ($request->hasFile('preview') && $request->hasFile('sub_preview') && $request->hasFile('logo')) {
             // Preview
-            $previewExtension = $request->file('preview')->extension();
             $previewFilename = $request->file('preview')->hashName();
-
+            // Preview
+            $secondPreviewFilename = $request->file('second_preview')->hashName();
             // Sub-Preview
-            $subPreviewExtension = $request->file('sub_preview')->extension();
             $subPreviewFilename = $request->file('sub_preview')->hashName();
-
             // Logo
-            $logoExtension = $request->file('logo')->extension();
             $logoFilename = $request->file('logo')->hashName();
-
             // Put in Storage
             $request->preview->storeAs($previewPath, $previewFilename);
+            $request->second_preview->storeAs($secondPreviewPath, $secondPreviewFilename);
             $request->sub_preview->storeAs($subPreviewPath, $subPreviewFilename);
             $request->logo->storeAs($logoPath, $logoFilename);
-
             // Put in Database
             $preview = new Preview();
             $preview->anime_id = $anime->id;
             $preview->preview_path = (string)$previewPath . $previewFilename;
+            $preview->second_preview_path = (string)$secondPreviewPath . $secondPreviewFilename;
             $preview->sub_preview_path = (string)$subPreviewPath . $subPreviewFilename;
             $preview->logo_path = (string)$logoPath . $logoFilename;
             $preview->save();
@@ -100,9 +103,39 @@ class AnimeFormsController extends Controller
     public function destroy(Request $request)
     {
         Anime::destroy($request->id);
+        return response()->json(['status' => true]);
+    }
 
-        return response([
-            'status' => 'success',
+    public function deactivate(Request $request)
+    {
+        $anime = Anime::findOrFail($request->id);
+        $anime->active = $anime->active ? false :  true;
+        $anime->save();
+        return response()->json(['status' => true]);
+    }
+
+    public function carouselMutate(Request $request)
+    {
+        $this->validate($request, [
+            'anime_id' => 'required',
+            'slide' => 'required|image|mimes:png',
+        ]);
+
+        if ($request->hasFile('slide')) {
+            $carousel = new Carousel();
+            $slidePath = 'images/anime/carousel/slides/';
+            // slide
+            $slideFilename = $request->file('slide')->hashName();
+            // Put in Storage
+            $request->slide->storeAs($slidePath, $slideFilename);
+            // Put in Database
+            $carousel->anime_id = $request->input('anime');
+            $carousel->content_path = (string)$slidePath . $slideFilename;
+            $carousel->save();
+        }
+
+        return response()->json([
+            'status' => true,
         ]);
     }
 
@@ -113,21 +146,14 @@ class AnimeFormsController extends Controller
             'png_preview' => 'required|image|mimes:png',
         ]);
 
-
         $banner = new Banner();
         $banner->anime_id = $request->input('anime_id');
 
-        $anime = Anime::where('id', $request->anime_id)->get(['id', 'alias']);
-
         $pngPreviewPath = 'images/anime/png_previews/';
-        if($request->hasFile('png_preview')) {
-            $pngPreviewExtension = $request->file('png_preview')->extension();
-            $pngPreviewFilename = $anime[0]['id'] . '-' . $anime[0]['alias'] . '.' . $pngPreviewExtension;
-
+        if ($request->hasFile('png_preview')) {
+            $pngPreviewFilename = $request->file('png_preview')->hasnHame();
             $request->png_preview->storeAs($pngPreviewPath, $pngPreviewFilename);
-
             $banner->png_preview = (string)$pngPreviewPath . $pngPreviewFilename;
-
             $banner->save();
         }
 
@@ -142,17 +168,12 @@ class AnimeFormsController extends Controller
             'anime_id' => 'required',
             'promo' => 'required|image|mimes:webp,png,svg,jpeg,avif',
         ]);
-
-
         $promo = new Promo();
         $promo->anime_id = $request->input('anime_id');
 
-        $anime = Anime::where('id', $request->anime_id)->get(['id', 'alias']);
-
         $promoPath = 'images/anime/promo/';
-        if($request->hasFile('promo')) {
-            $promoExtension = $request->file('promo')->extension();
-            $promoFilename = $anime[0]['id'] . '-' . $anime[0]['alias'] . '.' . $promoExtension;
+        if ($request->hasFile('promo')) {
+            $promoFilename = $request->file('promo')->hashName();
 
             $request->promo->storeAs($promoPath, $promoFilename);
 
@@ -166,3 +187,5 @@ class AnimeFormsController extends Controller
         ]);
     }
 }
+
+

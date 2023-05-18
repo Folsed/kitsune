@@ -13,7 +13,7 @@ export const useAnime = (id) => {
                 alert(error.message)
             },
             select: ({ data }) => data,
-            enabled: !!id
+            // enabled: !!id
 
         }
     )

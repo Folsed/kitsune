@@ -11,8 +11,11 @@ import { userAuthContext } from '../../providers/AuthProvider';
 import UserActionsModal from '../modals/UserActionsModal';
 import LiveSearch from '../live-serach/LiveSearch';
 import AuthModalContext from '../../providers/AuthModalProvider';
+import { AiOutlineUser } from 'react-icons/ai';
+import { RiArrowDropDownFill } from 'react-icons/ri';
 
 const Header = () => {
+    const ROOT_URL = import.meta.env.VITE_ROOT_URL
     const { active, setActive, toggleClass, setToggleClass } = useContext(AuthModalContext)
 
     const { currentUser, userToken } = userAuthContext()
@@ -50,20 +53,13 @@ const Header = () => {
                 <div className={styles.headerContent}>
                     <div className={styles.leftMenu}>
                         <Link className={styles.logo} to={'/'} onClick={() => destroyStates()}><Logo /></Link>
-
-                        <div
-                            className={styles.dropdownMenuBox}
-                        >
+                        <div className={styles.dropdownMenuBox}>
                             <div
                                 className={`${styles.menuItem} ${toggleClass === 'anime' ? styles.activeTab : ''}`}
                                 onClick={() => handleClick('anime')}
                             >
                                 <span>Аніме</span>
-                                <div className="header-svg menu-icon">
-                                    <svg className="header-svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="4 4 14 14" data-t="dropdown-svg" aria-labelledby="dropdown-svg" aria-hidden="true" role="img">
-                                        <path d="M7 10h10l-5 5z"></path>
-                                    </svg>
-                                </div>
+                                <RiArrowDropDownFill size={22}/>
                             </div>
                             <BrowseModal active={active} setActive={setActive} toggleClass={toggleClass} setToggleClass={setToggleClass} />
                         </div>
@@ -86,41 +82,28 @@ const Header = () => {
                                         <div className={styles.avatarWrapper}>
                                             {currentUser.avatar_softsize ?
                                                 <img
-                                                    src={`http://127.0.0.1:8000/${currentUser.avatar_softsize}`}
+                                                    src={`${ROOT_URL}${currentUser.avatar_softsize}`}
                                                     alt=""
                                                 />
                                                 : ''
                                             }
                                         </div>
                                     </div>
-                                    <div className="header-svg menu-icon">
-                                        <svg className="header-svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="4 4 14 14" data-t="dropdown-svg" aria-labelledby="dropdown-svg" aria-hidden="true" role="img">
-                                            <path d="M7 10h10l-5 5z"></path>
-                                        </svg>
-                                    </div>
-
+                                    <RiArrowDropDownFill size={22}/>
                                 </div>
                                 <UserActionsModal />
                             </div>
-
                             :
-
                             <div className={styles.dropdownMenuBox}>
                                 <div
                                     className={`${styles.menuItem} ${toggleClass === 'auth' ? styles.activeTab : ''}`}
                                     onClick={() => handleClick('auth')}
                                 >
-                                    <span>Авторизація</span>
-                                    <div className="header-svg menu-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" id="account"><path d="M15.71,12.71a6,6,0,1,0-7.42,0,10,10,0,0,0-6.22,8.18,1,1,0,0,0,2,.22,8,8,0,0,1,15.9,0,1,1,0,0,0,1,.89h.11a1,1,0,0,0,.88-1.1A10,10,0,0,0,15.71,12.71ZM12,12a4,4,0,1,1,4-4A4,4,0,0,1,12,12Z">
-                                        </path>
-                                        </svg>
-                                    </div>
+                                    <AiOutlineUser size={22} />
                                 </div>
                                 <AuthModal toggleClass={toggleClass} setToggleClass={setToggleClass} setActive={setActive} />
                             </div>
                         }
-
                     </div>
                 </div>
                 <div
@@ -131,7 +114,7 @@ const Header = () => {
             </div>
 
         </header>
-    );
+    )
 }
 
 export default Header;

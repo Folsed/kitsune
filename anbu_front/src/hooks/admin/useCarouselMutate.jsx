@@ -8,18 +8,18 @@ export const useCarouselMutate = () => {
     const carousel = useMutation(
         ['carousel', 'mutate'],
         async (formData) => {
-            axiosClient.post('/carousel/anime/mutate', formData)
+            await axiosClient.post('/carousel/anime/mutate', formData)
                 .then(response => {
-                    if(response.data.status === 'success') {
+                    if(response.data.status) {
                         setStatus(response.data.status)
                     }
                 })
-                // .catch((error) => {
-                //     if (error.response) {
-                //         const finalErrors = error.response.data.errors
-                //         setErrors(finalErrors)
-                //     }
-                // })
+                .catch((error) => {
+                    if (error.response) {
+                        const finalErrors = error.response.data.errors
+                        setErrors(finalErrors)
+                    }
+                })
         },
 
     )

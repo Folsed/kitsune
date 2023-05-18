@@ -2,11 +2,11 @@ import { useMutation } from "react-query";
 import axiosClient from "../../axios-client";
 
 
-export const useAnimeDestroy = (refetch) => {
-    const animeDestroy = useMutation(
-        ['destroy', 'anime'],
+export const useAnimeDeactivate = (refetch) => {
+    const animeDeactivate = useMutation(
+        ['deactivate', 'anime'],
         async (payload) => {
-            axiosClient.post(`/destroy/anime`, payload)
+            await axiosClient.post(`/deactivate/anime`, payload)
                 .then((response) => {
                     if (response.data.status) {
                         refetch()
@@ -14,5 +14,5 @@ export const useAnimeDestroy = (refetch) => {
                 })
         }
     )
-    return { animeDestroy }
+    return { animeDeactivate }
 }

@@ -13,14 +13,12 @@ const DefaultLayout = () => {
 
     return (
         <div>
-            <AuthModalContext.Provider value={{ active, setActive, toggleClass, setToggleClass }}>
-                <Header />
-                <ScrollRestoration />
-                <main className="main">
-                    <Outlet />
-                </main>
-                <span style={{ color: '#dadada29', marginTop: '5rem', }}>Administrative panel</span>
-            </AuthModalContext.Provider>
+            <Header />
+            <ScrollRestoration />
+            <main className="main">
+                <Outlet />
+            </main>
+            <span style={{ color: '#dadada29', marginTop: '5rem', }}>Administrative panel</span>
         </div>
     )
 }

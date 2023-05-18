@@ -7,10 +7,7 @@ import HeaderSkeleton from '../../skeletons/anime-page-skeleton/HeaderSkeleton'
 
 const Header = () => {
     const animeData = useContext(AnimeContext)
-
-    // if (animeData.isLoading) {
-    //     return <p>Loading</p>
-    // }
+    const ROOT_URL = import.meta.env.VITE_ROOT_URL
 
     const data = animeData.data
 
@@ -24,10 +21,10 @@ const Header = () => {
                                 <picture>
                                     <img
                                         key=""
-                                        src={`http://127.0.0.1:8000/${data.preview[0].sub_preview_path}`}
+                                        src={`${ROOT_URL}${data.preview[0].sub_preview_path}`}
                                         alt=""
                                         title=""
-                                        // loading="lazy"
+                                    // loading="lazy"
                                     />
                                 </picture>
                             </div>
@@ -39,7 +36,7 @@ const Header = () => {
                                         <picture>
                                             <img
                                                 className={styles.logo}
-                                                src={`http://127.0.0.1:8000/${data.preview[0].logo_path}`}
+                                                src={`${ROOT_URL}${data.preview[0].logo_path}`}
                                                 loading="lazy"
                                                 alt=""
                                             />

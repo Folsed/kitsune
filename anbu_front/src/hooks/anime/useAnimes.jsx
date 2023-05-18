@@ -1,18 +1,19 @@
 import { useQuery } from "react-query";
 import { AnimeService } from "../../services/AnimeData.service";
+import axiosClient from "../../axios-client";
 
 
 export const useAnimes = () => {
     const { data, isLoading, isError } = useQuery(
         ['anime', 'all'],
-        async () => await AnimeService.getAll(),
+        async () => await axiosClient.get('/anime'),
         {
             keepPreviousData: true,
-            refetchOnWindowFocus: false,
+            refetchOnWindowFocus: true,
             onError: (error) => {
                 alert(error.message)
             },
-            select: ({ data }) => data
+            select: ({ data }) => data.data
 
         }
     )
