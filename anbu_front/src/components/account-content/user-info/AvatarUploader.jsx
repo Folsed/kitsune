@@ -2,6 +2,7 @@ import styles from './user-info.module.css'
 import { useEffect, useRef, useState } from 'react'
 
 const AvatarUploader = ({ name, image, setImage, currentAvatar }) => {
+    const ROOT_URL = import.meta.env.VITE_ROOT_URL
     const imageInputRef = useRef()
     const [preview, setPreview] = useState(null)
 
@@ -79,7 +80,7 @@ const AvatarUploader = ({ name, image, setImage, currentAvatar }) => {
                     :
                     currentAvatar &&
                     <img
-                        src={`http://127.0.0.1:8000/${currentAvatar}`}
+                        src={`${ROOT_URL}${currentAvatar}`}
                     />
                 }
             </div>

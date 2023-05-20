@@ -15,6 +15,7 @@ import { ImExit } from 'react-icons/im'
 
 
 const UserActionsModal = () => {
+    const ROOT_URL = import.meta.env.VITE_ROOT_URL
     const { currentUser, userToken } = userAuthContext()
     const { setActive, toggleClass } = useContext(AuthModalContext)
     const { setActiveTab } = useContext(AccountContext)
@@ -44,7 +45,7 @@ const UserActionsModal = () => {
                                 <div className={styles.avatarWrapper}>
                                     {currentUser.avatar_softsize ?
                                         <img
-                                            src={`http://127.0.0.1:8000/${currentUser.avatar_softsize}`}
+                                            src={`${ROOT_URL}${currentUser.avatar_softsize}`}
                                             alt=""
                                         />
                                         : ''
