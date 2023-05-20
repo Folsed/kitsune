@@ -10,6 +10,7 @@ use App\Http\Resources\CarouselResource;
 use App\Http\Resources\CommentResource;
 use App\Http\Resources\PromoResource;
 use App\Models\Anime;
+use App\Models\AnimeSeries;
 use App\Models\Banner;
 use App\Models\Carousel;
 use App\Models\Comment;
@@ -232,5 +233,12 @@ class AnimeController extends Controller
                 ],
             ]);
         }
+    }
+
+    public function getSeries($animeId)
+    {
+        return response()->json([
+            'series' => AnimeSeries::where('anime_id', $animeId)->get(),
+        ]);
     }
 }

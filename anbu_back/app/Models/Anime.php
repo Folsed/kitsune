@@ -74,4 +74,9 @@ class Anime extends Model
     {
         return $this->hasMany(Watchlist::class);
     }
+
+    public function series()
+    {
+        return $this->hasMany(AnimeSeries::class);
+    }
 }

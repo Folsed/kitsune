@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\WatchlistResource;
+use App\Models\AnimeSeries;
 use App\Models\Pronoun;
 use App\Models\Review;
 use App\Models\Watchlist;
@@ -159,4 +160,6 @@ class UserController extends Controller
                 ->pluck('stars'),
         ]);
     }
+
+
 }

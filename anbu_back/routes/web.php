@@ -8,6 +8,8 @@ use App\Http\Controllers\TestController;
 use App\Models\Watchlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,26 +26,27 @@ use Illuminate\Support\Facades\Auth;
 /*
 Content Routes
 */
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::get('source/videos/{root}/{filename}', function ($root, $filename) {
+    $path = storage_path('app/videos/' . $root . '/' . $filename);
+    return response()->download($path);
 });
-Route::get('/',  function () {
-    return Watchlist::where('user_id', 1)->get('anime_id');
-})->name('home');
 
-// Route::controller(AnimeController::class)->group(function () {
-//     Route::get('anime/{id}/{alias?}', 'show')->name('anime');
-//     Route::post('anime/{id}/{alias?}', 'createComment')->middleware('auth')->name('anime-comment');
+Route::get('source/images/{root}/{category}/{filename}', function ($root, $category, $filename) {
+    $path = storage_path('app/images/' . $root . '/' . $category . '/' . $filename);
+    return response()->download($path);
+});
+
+// Route::get('source/images/anime/previews/{filename}', function (Request $request, $filename) {
+//     $path = storage_path('app/images/anime/previews/' . $filename);
+
+//     $response = Response::file($path);
+//     $response->setCache([
+//         'public' => true,
+//         'max_age' => 31536000, // Cache for 1 year (adjust according to your requirements)
+//     ]);
+
+//     return $response;
 // });
-
-// Route::get('news', [NewsController::class, 'index'])->name('news');
-
-
-
-
-// //Test Route
-// Route::get('test', [TestController::class, 'index'])->name('test');
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/admin.php';

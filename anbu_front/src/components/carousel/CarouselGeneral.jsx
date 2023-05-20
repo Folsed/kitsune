@@ -16,6 +16,7 @@ const CarouselGeneral = () => {
                         <CarouselSlide key={item.id} animeId={item.anime_id} alias={item.alias}>
                             <picture>
                                 <img
+                                    loading="lazy"
                                     src={`${ROOT_URL}${item.content_path}`}
                                     alt=""
                                     title={item.title}

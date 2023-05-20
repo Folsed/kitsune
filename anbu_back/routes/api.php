@@ -26,76 +26,81 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->group(function () {
     Route::controller(AnimeFormsController::class)->group(function () {
         // Anime
-        Route::get('api/admin/get/anime', 'index')->name('api_anime-all');
-        Route::post('api/create/anime', 'create')->name('api_anime-create');
-        Route::post('api/destroy/anime', 'destroy')->name('api_anime-delete');
-        Route::post('api/deactivate/anime', 'deactivate')->name('api_anime-deactivate');
+        Route::get('api/admin/get/anime', 'index')->name('api.anime.all');
+        Route::post('api/create/anime', 'create')->name('api.anime.create');
+        Route::post('api/destroy/anime', 'destroy')->name('api.anime.delete');
+        Route::post('api/deactivate/anime', 'deactivate')->name('api.anime.deactivate');
+        Route::post('api/series/anime/upload', 'createAnimeSeries')->name('api.anime.series.upload');
 
         // Banners
-        Route::post('api/create/banner', 'bannerCreate')->name('api_banner-create');
-        Route::post('api/create/banner/promo', 'promoCreate')->name('promo-create');
+        Route::post('api/create/banner', 'bannerCreate')->name('api.banner.create');
+        Route::post('api/create/banner/promo', 'promoCreate')->name('promo.create');
 
         // Carousel
-        Route::post('api/carousel/anime/mutate', 'carouselMutate')->name('api_carousel-mutate');
+        Route::post('api/carousel/anime/mutate', 'carouselMutate')->name('api.carousel.mutate');
     });
 
 
-    Route::get('api/table/search/anime', [AnimeTablesController::class, 'tableSearch'])->name('api_anime-delete');
+    Route::get('api/table/search/anime', [AnimeTablesController::class, 'tableSearch'])->name('api.anime.delete');
 });
 
 
 // Auth API
 
 Route::controller(AuthController::class)->group(function () {
-    Route::post('api/registered', 'registered')->name('api_registered');
-    Route::post('api/login', 'login')->name('api_login');
+    Route::post('api/registered', 'registered')->name('api.registered');
+    Route::post('api/login', 'login')->name('api.login');
 
 
     Route::middleware('auth:sanctum')->group(function () {
-        Route::post('api/logout', 'logout')->name('api_logout');
+        Route::post('api/logout', 'logout')->name('api.logout');
     });
 });
 
 
 // User API
-Route::get('api/user', [UserController::class, 'user'])->name('api_user');
+Route::get('api/user', [UserController::class, 'user'])->name('api.user');
 
 Route::controller(UserController::class)->group(function () {
     Route::middleware('auth:sanctum')->group(function () {
-        Route::get('api/user/pronouns', 'getPronouns')->name('api_pronouns');
+        Route::get('api/user/pronouns', 'getPronouns')->name('api.pronouns');
 
-        Route::put('api/user/info/update', 'updateInfo')->name('api_update-info');
+        Route::put('api/user/info/update', 'updateInfo')->name('api.update.info');
 
         // Watchlist
-        Route::post('api/watchlist/mylist', 'addToWatchlist')->name('api_watchlist-mylist');
-        Route::get('api/watchlist/get/{userId}', 'getMyList')->name('api_watchlist-get');
+        Route::post('api/watchlist/mylist', 'addToWatchlist')->name('api.watchlist.mylist');
+        Route::get('api/watchlist/get/{userId}', 'getMyList')->name('api.watchlist.get');
 
         // Review
-        Route::get('api/review/solo/{animeId}/myReview', 'soloReview')->name('api_review-solo');
+        Route::get('api/review/solo/{animeId}/myReview', 'soloReview')->name('api.review.solo');
     });
 });
 
 // Anime API
 Route::controller(AnimeController::class)->group(function () {
-    Route::get('api/anime', 'index')->name('api_anime-all');
-    Route::get('api/anime/{id}', 'show')->name('api_anime-byId');
+    Route::get('api/anime', 'index')->name('api.anime.all');
+    Route::get('api/anime/{id}', 'show')->name('api.anime.byId');
+    Route::get('api/series/anime/get/{animeId}', 'getSeries')->name('api.anime.get');
+
 
     // Comment
-    Route::get('api/comments/anime/{id}', 'comments')->name('api_anime-comments');
-    Route::post('api/comment/leave', 'comment')->name('api_anime-comment');
+    Route::get('api/comments/anime/{id}', 'comments')->name('api.anime.comments');
+    Route::post('api/comment/leave', 'comment')->name('api.anime.comment');
     // Search
-    Route::get('api/search/anime', 'search')->name('api_anime-search');
+    Route::get('api/search/anime', 'search')->name('api.anime.search');
     // Browse
-    Route::get('api/anime/genre/{genre}', 'showByGenre')->name('api_anime-by-genre');
+    Route::get('api/anime/genre/{genre}', 'showByGenre')->name('api.anime.by.genre');
     // Carousel
-    Route::get('api/carousel/anime', 'carousel')->name('api_carousel');
+    Route::get('api/carousel/anime', 'carousel')->name('api.carousel');
     // Queries
-    Route::get('api/query/anime', 'queries')->name('api_anime-by-query');
+    Route::get('api/query/anime', 'queries')->name('api.anime.by.query');
     // Banners
-    Route::get('api/banner/anime/{id}', 'getBanner')->name('api_banner');
-    Route::get('api/banner/promo/anime/{id}', 'getPromo')->name('api_promo');
+    Route::get('api/banner/anime/{id}', 'getBanner')->name('api.banner');
+    Route::get('api/banner/promo/anime/{id}', 'getPromo')->name('api.promo');
 });
 
 Route::get('api/anime/genres/list', function () {
     return GenreResourse::collection(Genre::all());
-})->name('api_show-genres');
+})->name('api.show.genres');
+
+

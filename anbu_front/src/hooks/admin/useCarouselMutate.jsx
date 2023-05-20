@@ -5,6 +5,8 @@ import axiosClient from "../../axios-client";
 
 export const useCarouselMutate = () => {
     const [status, setStatus] = useState('')
+    const [errors, setErrors] = useState('')
+
     const carousel = useMutation(
         ['carousel', 'mutate'],
         async (formData) => {
@@ -23,5 +25,5 @@ export const useCarouselMutate = () => {
         },
 
     )
-    return { carousel, status, setStatus }
+    return { carousel, status, setStatus, errors }
 }

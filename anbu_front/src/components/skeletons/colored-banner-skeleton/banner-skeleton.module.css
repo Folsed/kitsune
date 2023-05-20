@@ -1,23 +1,31 @@
-
 .right-info {
     display: flex;
     grid-area: right-info;
     position: relative;
-    /* height: 270px; */
     flex-direction: column;
-    padding: 1.5rem 40px 20px 10px;
-    gap: 20px;
+    padding: 1.5rem 40px 16px 10px;
+    gap: 18px;
 }
+
 .left-info {
     display: flex;
     grid-area: left-info;
     position: relative;
+    flex: 1 1 59%;
+    height: 300px;
+    padding-right: 0.6rem;
+
 }
 
 .preview {
     flex: 1 1 41%;
-    height: 290px;
+    padding-right: 1rem;
+    width: 180px;
+    height: 270px;
+    margin-top: 0.6rem;
+
 }
+
 .promo {
     flex: 1 1 59%;
     padding: 2rem 3rem;
@@ -33,11 +41,10 @@
 .preview-asc {
     width: 180px;
     height: 270px;
-
-    position: relative;
 }
 
 .title {
+    margin-top: 3px;
     width: 40%;
     height: 20px;
 }

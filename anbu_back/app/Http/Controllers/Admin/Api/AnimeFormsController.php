@@ -5,23 +5,26 @@ namespace App\Http\Controllers\Admin\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\AnimeResource;
 use App\Models\Anime;
+use App\Models\AnimeSeries;
 use App\Models\Banner;
 use App\Models\Carousel;
 use App\Models\Genre;
 use App\Models\Preview;
 use App\Models\Promo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
 
 class AnimeFormsController extends Controller
 {
     public function index(Request $request)
     {
-            $query = Anime::orderBy('created_at', 'desc')->paginate($request->size);
-            $result = response()->json([
-                'data' => AnimeResource::collection($query),
-                'total' => $query->total(),
-            ]);
-            return $result;
+        $query = Anime::orderBy('created_at', 'desc')->paginate($request->size);
+        $result = response()->json([
+            'data' => AnimeResource::collection($query),
+            'total' => $query->total(),
+        ]);
+        return $result;
     }
 
     public function create(Request $request)
@@ -118,18 +121,18 @@ class AnimeFormsController extends Controller
     {
         $this->validate($request, [
             'anime_id' => 'required',
-            'slide' => 'required|image|mimes:png',
+            'slide' => 'required|image',
         ]);
 
         if ($request->hasFile('slide')) {
             $carousel = new Carousel();
-            $slidePath = 'images/anime/carousel/slides/';
+            $slidePath = 'images/anime/carousel/';
             // slide
             $slideFilename = $request->file('slide')->hashName();
             // Put in Storage
             $request->slide->storeAs($slidePath, $slideFilename);
             // Put in Database
-            $carousel->anime_id = $request->input('anime');
+            $carousel->anime_id = $request->input('anime_id');
             $carousel->content_path = (string)$slidePath . $slideFilename;
             $carousel->save();
         }
@@ -186,6 +189,28 @@ class AnimeFormsController extends Controller
             'status' => 'success',
         ]);
     }
+
+    public function createAnimeSeries(Request $request)
+    {
+        $request->validate([
+            'anime_id' => 'required',
+            // 'series' => 'required',
+        ]);
+        $series = new AnimeSeries();
+        $series->anime_id = $request->input('anime_id');
+        $series->series_number = null;
+
+        // if ($request->hasFile('series')) {
+        //     $video = $request->file('series');
+        //     $fileName = $request->file('series')->hashName();
+        //     $video->storeAs('videos/series', $fileName);
+
+        //     $series->video = 'videos/series/' . $fileName;
+        //     $series->save();
+        // }
+        $fileName = Str::random(40) . '.mp4';
+        $series->video = 'videos/series/' . $fileName;
+        $series->save();
+        return response()->json(['status' => true]);
+    }
 }
-
-

@@ -1,5 +1,4 @@
 import styles from './user-info.module.css'
-import { ReactComponent as ImageUploaderIcon } from '../../../assets/icons/uploader.svg'
 import { useEffect, useRef, useState } from 'react'
 
 const AvatarUploader = ({ name, image, setImage, currentAvatar }) => {

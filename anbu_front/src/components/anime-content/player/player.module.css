@@ -52,6 +52,10 @@
     background: #303030;
 }
 
+.tab-item:active {
+    background: #252525;
+}
+
 .active {
     background: #3c3c3c;
 }
