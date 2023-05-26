@@ -6,20 +6,19 @@ import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 const AnimeCard = ({ data }) => {
     const ROOT_URL = import.meta.env.VITE_ROOT_URL
-    
+
     return (
         <div className={`${styles.contentContainer}`}>
             <div className={styles.extra}>
                 <NavLink to={ROUTES.animePage(data.id, data.alias)}>
                     <div className={styles.innerContentContainer}>
                         <div className={styles.preview}>
-                            <LazyLoadImage
-                                src={`${ROOT_URL}${data.preview_path}`}
-                                
-                                effect='blur'
-                                alt=""
-                                title={data.ua_title}
-                            />
+                                <LazyLoadImage
+                                    src={`${ROOT_URL}${data.preview_path}`}
+                                    effect='blur'
+                                    alt=""
+                                    title={data.ua_title}
+                                />
                         </div>
                         <div className={styles.description}>
                             <h4>{data.ua_title}</h4>

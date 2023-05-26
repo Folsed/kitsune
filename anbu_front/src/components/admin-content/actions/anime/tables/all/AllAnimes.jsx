@@ -13,7 +13,7 @@ import { RiDeleteBin6Line } from "react-icons/ri"
 import { GoPrimitiveDot } from "react-icons/go"
 import { BiDotsVertical } from "react-icons/bi"
 import { useAnimeDeactivate } from '../../../../../../hooks/admin/useAnimeDeactivate'
-import { useAnimeWithPagination } from '../../../../../../hooks/admin/useAnimeWithPagination'
+import useAnimeWithPagination from '../../../../../../hooks/admin/useAnimeWithPagination'
 
 
 

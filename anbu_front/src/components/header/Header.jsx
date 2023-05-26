@@ -1,7 +1,4 @@
 import styles from './header.module.css'
-
-import avatar from './../../img/avatar.jpg'
-
 import { Link } from 'react-router-dom';
 import { Logo } from '../../assets/logo/Logo';
 import { useContext, useEffect, useState } from 'react';

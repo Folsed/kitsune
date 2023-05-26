@@ -13,14 +13,13 @@ import { ReactComponent as AdminIcon } from '../../assets/icons/admin.svg'
 import { ImExit } from 'react-icons/im'
 
 
-
 const UserActionsModal = () => {
     const ROOT_URL = import.meta.env.VITE_ROOT_URL
-    const { currentUser, userToken } = userAuthContext()
+    const { currentUser, userToken, watchlist } = userAuthContext()
     const { setActive, toggleClass } = useContext(AuthModalContext)
     const { setActiveTab } = useContext(AccountContext)
-
     const { logout } = useLogout(setActive)
+    
 
     const onLogout = (ev) => {
         ev.preventDefault()
@@ -73,7 +72,7 @@ const UserActionsModal = () => {
                         <li className={styles.actionBox}>
                             <NavLink to={ROUTES.account} onClick={() => handleClick(2)}>
                                 <RiBookmarkLine size={22} />
-                                <span>Заплановано (10)</span>
+                                <span>Заплановано ({watchlist.length})</span>
                             </NavLink>
                         </li>
                         {currentUser.roles[0].name === 'Administrator' ?

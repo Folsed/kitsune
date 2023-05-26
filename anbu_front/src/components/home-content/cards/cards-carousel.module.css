@@ -151,3 +151,26 @@
     align-items: center;
 }
 
+.wl-heading {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.wl-heading span {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    color: var(--span-color);
+    transition: color .2s;
+}
+
+.wl-heading span:hover {
+    color: #dadada;
+}
+
+.wl-cards-box {
+    display: grid;  
+    grid-template-columns: repeat(4, 1fr);
+}

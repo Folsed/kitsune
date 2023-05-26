@@ -3,6 +3,7 @@ import CarouselSlide from "./CarouselSlide"
 import { useCarousel } from "../../hooks/anime/useCarousel"
 import CarouselSkeleton from "../skeletons/welcome-carousel-skeleton/CarouselSkeleton"
 import { useEffect, useState } from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const CarouselGeneral = () => {
     const ROOT_URL = import.meta.env.VITE_ROOT_URL

@@ -61,19 +61,18 @@ Route::controller(AuthController::class)->group(function () {
 // User API
 Route::get('api/user', [UserController::class, 'user'])->name('api.user');
 
-Route::controller(UserController::class)->group(function () {
-    Route::middleware('auth:sanctum')->group(function () {
-        Route::get('api/user/pronouns', 'getPronouns')->name('api.pronouns');
 
-        Route::put('api/user/info/update', 'updateInfo')->name('api.update.info');
+Route::middleware('auth:sanctum')->controller(UserController::class)->group(function () {
+    Route::get('api/user/pronouns', 'getPronouns')->name('api.pronouns');
 
-        // Watchlist
-        Route::post('api/watchlist/mylist', 'addToWatchlist')->name('api.watchlist.mylist');
-        Route::get('api/watchlist/get/{userId}', 'getMyList')->name('api.watchlist.get');
+    Route::put('api/user/info/update', 'updateInfo')->name('api.update.info');
 
-        // Review
-        Route::get('api/review/solo/{animeId}/myReview', 'soloReview')->name('api.review.solo');
-    });
+    // Watchlist
+    Route::post('api/watchlist/mylist', 'addToWatchlist')->name('api.watchlist.mylist');
+    Route::get('api/watchlist/get/{userId}', 'getMyList')->name('api.watchlist.get');
+
+    // Review
+    Route::get('api/review/solo/{animeId}/myReview', 'soloReview')->name('api.review.solo');
 });
 
 // Anime API
@@ -102,5 +101,3 @@ Route::controller(AnimeController::class)->group(function () {
 Route::get('api/anime/genres/list', function () {
     return GenreResourse::collection(Genre::all());
 })->name('api.show.genres');
-
-

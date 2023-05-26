@@ -48,9 +48,9 @@ select:-webkit-autofill:focus {
 
 
 ::selection {
-    background-color: var(--main-color);
-    color: black;
-    -webkit-text-fill-color: black;
+    color: var(--main-color);
+    background-color: rgb(30, 30, 30);
+    -webkit-text-fill-color: var(--main-color);
 }
 
 /* ::-webkit-scrollbar {

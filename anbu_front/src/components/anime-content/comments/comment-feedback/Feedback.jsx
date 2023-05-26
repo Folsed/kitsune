@@ -7,6 +7,7 @@ import ReviewContext from '../../../../providers/ReviewProvider'
 
 
 const Feedback = ({ animeId }) => {
+    const ROOT_URL = import.meta.env.VITE_ROOT_URL
     const { comments, commentsIsLoading: isLoading } = useContext(ReviewContext)
 
     return (
@@ -21,7 +22,7 @@ const Feedback = ({ animeId }) => {
                                     <div className={styles.avatar}>
                                         {item.user.user_avatar ?
                                             <img
-                                                src={`http://127.0.0.1:8000/${item.user.user_avatar}`}
+                                                src={`${ROOT_URL}${item.user.user_avatar}`}
                                                 alt=""
                                             />
                                             : ''

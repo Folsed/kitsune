@@ -10,6 +10,7 @@ import ReviewContext from '../../../../providers/ReviewProvider';
 
 
 const CommentInput = ({ animeId }) => {
+    const ROOT_URL = import.meta.env.VITE_ROOT_URL
     const { currentUser } = userAuthContext()
     const { myReview } = useContext(ReviewContext)
     const { comment: leaveComment, errors, setErrors } = useAnimeCommentMutate(animeId)
@@ -43,7 +44,7 @@ const CommentInput = ({ animeId }) => {
                 <div className={styles.avatar}>
                     {currentUser.avatar_softsize ?
                         <img
-                            src={`http://127.0.0.1:8000/${currentUser.avatar_softsize}`}
+                            src={`${ROOT_URL}${currentUser.avatar_softsize}`}
                             alt=""
                         />
                         : ''

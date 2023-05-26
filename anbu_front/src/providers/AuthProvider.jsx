@@ -1,4 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { SHA256, AES, enc } from 'crypto-js'
+
 
 const AuthContext = createContext({
     currentUser: {},
@@ -11,11 +13,12 @@ const AuthContext = createContext({
 
 export const AuthProvider = ({ children }) => {
     const parsedUserData = JSON.parse(localStorage.getItem('USER_INFO'))
-    const parsedWatchlist = JSON.parse(localStorage.getItem('mylist'))
+    const parsedWatchlist = localStorage.getItem('mylist')
+    const decryptedWatchlist = AES.decrypt(parsedWatchlist, 'watchlist').toString(enc.Utf8)
 
     const [currentUser, _setCurrentUser] = useState(parsedUserData || '')
     const [userToken, _setUserToken] = useState(localStorage.getItem('TOKEN') || '')
-    const [watchlist, _setWatchlist] = useState(parsedWatchlist || '')
+    const [watchlist, _setWatchlist] = useState(JSON.parse(decryptedWatchlist) || '')
 
 
 
@@ -38,8 +41,9 @@ export const AuthProvider = ({ children }) => {
     }
 
     const setWatchlist = (item) => {
+        const encryptedWl = AES.encrypt(JSON.stringify(item), 'watchlist').toString()
         if (item) {
-            localStorage.setItem('mylist', JSON.stringify(item));
+            localStorage.setItem('mylist', encryptedWl);
         } else {
             localStorage.removeItem('mylist')
         }

@@ -2,11 +2,9 @@ import React from 'react'
 import './news.style.css'
 
 
-import promo from './../../../../img/promo.png'
 import new1 from './../../../../img/news1.jpg'
 import new2 from './../../../../img/news2.jpg'
 import new3 from './../../../../img/news3.jpg'
-import play from './../../../../img/icons/play-icon.png'
 import girl from './../../../../img/girl.png'
 import cat from './../../../../img/cat.png'
 import { NewsBackgroung } from '../banner-bgs/NewsBackgroung'

@@ -77,7 +77,7 @@ class AnimeController extends Controller
     public function search(Request $request)
     {
         $validatedData = $request->validate([
-            'title' => ['required'],
+            'title' => ['required', 'string'],
         ]);
 
         $title = $validatedData['title'];
@@ -123,7 +123,7 @@ class AnimeController extends Controller
     public function comment(Request $request)
     {
         $request->validate([
-            'comment' => ['required'],
+            'comment' => ['required', 'string'],
         ]);
 
         $userId = $request->input('user_id');
@@ -182,7 +182,7 @@ class AnimeController extends Controller
     public function queries(Request $request)
     {
         $validatedData = $request->validate([
-            'query' => ['required'],
+            'query' => ['required', 'string'],
         ]);
         $category = $validatedData['query'];
 

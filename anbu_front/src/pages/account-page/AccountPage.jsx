@@ -10,8 +10,8 @@ import AccountContext from '../../providers/AccountProvider'
 import Content from '../../components/account-content/content/Content'
 
 const AccountPage = () => {
-    const { currentUser, userToken } = userAuthContext()
-
+    const { currentUser, userToken, watchlist } = userAuthContext()
+    
 
     if (!userToken) {
         return <Navigate to={ROUTES.home} replace={true} />

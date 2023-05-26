@@ -11,33 +11,31 @@ const CardsTrack = ({ query, title, subTitle, shalfColor, genre }) => {
 
 
     return (
-        <>
-            <div>
-                {isLoading ? <CardsBoxSkeleton /> :
-                    <div className="dfsa">
-                        <div className={styles.headingWrapper}>
-                            <div className={styles.feedHeading}>
-                                <h2 className={styles.feedHeadingTitle}>{title ? title : ''}</h2>
-                                <p className={styles.feedHeadingText}>{subTitle ? subTitle : ''}</p>
-                                <div
-                                    className={styles.feedHeadingShalf}
-                                    style={{
-                                        background: shalfColor
-                                    }}
-                                >
-                                </div>
+        <div>
+            {isLoading ? <CardsBoxSkeleton /> :
+                <div className="dfsa">
+                    <div className={styles.headingWrapper}>
+                        <div className={styles.feedHeading}>
+                            <h2 className={styles.feedHeadingTitle}>{title ? title : ''}</h2>
+                            <p className={styles.feedHeadingText}>{subTitle ? subTitle : ''}</p>
+                            <div
+                                className={styles.feedHeadingShalf}
+                                style={{
+                                    background: shalfColor
+                                }}
+                            >
                             </div>
                         </div>
-                        <CardsCarousel>
-                            {(genre ? carouselData.animes : carouselData).map((item) => (
-                                <AnimeCard key={item.id} data={item} />
-                            ))}
-                        </CardsCarousel>
                     </div>
+                    <CardsCarousel>
+                        {(genre ? carouselData.animes : carouselData).map((item) => (
+                            <AnimeCard key={item.id} data={item} />
+                        ))}
+                    </CardsCarousel>
+                </div>
 
-                }
-            </div>
-        </>
+            }
+        </div>
     )
 }
 

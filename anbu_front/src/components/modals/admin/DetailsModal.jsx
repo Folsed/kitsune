@@ -1,8 +1,7 @@
-import { useQuery } from 'react-query';
-import { useAnimeWithPagination } from '../../../hooks/admin/useAnimeWithPagination';
 import styles from './modal.module.css'
 
 const DetailsModal = ({ setActive, active, setToggleClass, toggleClass, data }) => {
+    const ROOT_URL = import.meta.env.VITE_ROOT_URL
 
     return (
         <div className={styles.modalDisplay}>
@@ -13,7 +12,7 @@ const DetailsModal = ({ setActive, active, setToggleClass, toggleClass, data }) 
                             <picture>
                                 <img
                                     key=""
-                                    src={`http://127.0.0.1:8000/${data.preview[0].sub_preview_path}`}
+                                    src={`${ROOT_URL}${data.preview[0].sub_preview_path}`}
                                     alt=""
                                     title=""
                                 />
@@ -21,7 +20,7 @@ const DetailsModal = ({ setActive, active, setToggleClass, toggleClass, data }) 
                         </div>
                         <div className={styles.logo}>
                             <img
-                                src={`http://127.0.0.1:8000/${data.preview[0].logo_path}`}
+                                src={`${ROOT_URL}${data.preview[0].logo_path}`}
                                 loading="lazy"
                                 alt=""
                             />

@@ -21,7 +21,6 @@ Cards shalf colors:
 
 
 const Home = () => {
-    disableKeyboardScroll()
     return (
         <div className="home-content-wrapper home">
             <CarouselGeneral />
@@ -33,13 +32,14 @@ const Home = () => {
                     subTitle={'Нещодавно додані аніме на сайті'}
                     shalfColor={'var(--cards-shalf-color-white-black)'}
                 />
+                <BannerPromo id={1} />
                 <CardsTrack
                     query={'best'}
                     title={'Найкраще'}
                     subTitle={'Дивіться найкраще аніме на думку користувачів'}
                     shalfColor={'var(--cards-shalf-color-orange)'}
                 />
-                <BannerPromo id={1} />
+                
                 <BannerPromo id={3} />
                 <CardsTrack
                     query={'popular'}
@@ -49,13 +49,14 @@ const Home = () => {
                 />
                 <LazyLoadComponent>
                     <ColoredBanner id={2} backgroundColor={'blue'} />
-                    <ColoredBanner id={1} backgroundColor={'orange'} />
+
                     <CardsTrack
                         genre={'adventure'}
                         title={'Цікаві пригоди'}
                         subTitle={'Всі люблять пригоди, чи не так?'}
                         shalfColor={'var(--cards-shalf-color-white-black)'}
                     />
+                    <ColoredBanner id={1} backgroundColor={'orange'} />
                     <CardsTrack
                         genre={'fantasy'}
                         title={'Фантазійне фентезі'}

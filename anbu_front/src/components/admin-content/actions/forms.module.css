@@ -90,13 +90,7 @@
     grid-column-end: -1;
 }
 
-.error input, .error textarea{
-    border-bottom: 1px solid red;
-}
 
-.error-file {
-    border: 1px solid red;
-}
 
 .png-preview-image img {
     max-width: 200px;
@@ -112,4 +106,12 @@
 .form-name {
     font-weight: 400;
     color: #dadadab3;
+}
+
+.error input, .error textarea{
+    border-bottom: 1px solid red !important;
+}
+
+.error-file {
+    border: 1px solid red !important;
 }
