@@ -56,8 +56,6 @@ const UserEdit = ({ setEditIsActive }) => {
         userInfo.mutateAsync(formData)
     }
 
-    console.log(userInfo.isLoading)
-
     return (
         <form onSubmit={onSubmit} noValidate>
             <div className={styles.avatarWrapper}>

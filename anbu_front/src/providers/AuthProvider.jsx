@@ -12,21 +12,34 @@ const AuthContext = createContext({
 
 
 export const AuthProvider = ({ children }) => {
-    const parsedUserData = JSON.parse(localStorage.getItem('USER_INFO'))
-    const parsedWatchlist = localStorage.getItem('mylist')
-    const decryptedWatchlist = AES.decrypt(parsedWatchlist, 'watchlist').toString(enc.Utf8)
+    const [currentUser, _setCurrentUser] = useState('')
+    const [userToken, _setUserToken] = useState('')
+    const [watchlist, _setWatchlist] = useState('')
 
-    const [currentUser, _setCurrentUser] = useState(parsedUserData || '')
-    const [userToken, _setUserToken] = useState(localStorage.getItem('TOKEN') || '')
-    const [watchlist, _setWatchlist] = useState(JSON.parse(decryptedWatchlist) || '')
+    useEffect(() => {
+        const parsedUserData = localStorage.getItem('user_traits')
+        const decryptedUserData = parsedUserData
+            ? AES.decrypt(parsedUserData, 'user').toString(enc.Utf8)
+            : ''
+
+        const parsedWatchlist = localStorage.getItem('mylist')
+        const decryptedWatchlist = parsedWatchlist
+            ? AES.decrypt(parsedWatchlist, 'watchlist').toString(enc.Utf8)
+            : ''
+
+        _setCurrentUser(decryptedUserData ? JSON.parse(decryptedUserData) : '')
+        _setUserToken(localStorage.getItem('TOKEN') || '')
+        _setWatchlist(decryptedWatchlist ? JSON.parse(decryptedWatchlist) : '')
+    }, [])
 
 
 
     const setCurrentUser = (data) => {
-        if (data) {
-            localStorage.setItem('USER_INFO', JSON.stringify(data))
+        const encryptedUser = AES.encrypt(JSON.stringify(data), 'user').toString()
+        if (encryptedUser) {
+            localStorage.setItem('user_traits',encryptedUser)
         } else {
-            localStorage.removeItem('USER_INFO')
+            localStorage.removeItem('user_traits')
         }
         _setCurrentUser(data)
     }
@@ -42,7 +55,7 @@ export const AuthProvider = ({ children }) => {
 
     const setWatchlist = (item) => {
         const encryptedWl = AES.encrypt(JSON.stringify(item), 'watchlist').toString()
-        if (item) {
+        if (encryptedWl) {
             localStorage.setItem('mylist', encryptedWl);
         } else {
             localStorage.removeItem('mylist')

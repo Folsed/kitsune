@@ -5,12 +5,10 @@ import { userAuthContext } from '../../providers/AuthProvider'
 import { ROUTES } from '../../router/routes'
 import UserInfo from '../../components/account-content/user-info/UserInfo'
 import AccountNavbar from '../../components/account-content/navbar/AccountNavbar'
-import { useState } from 'react'
-import AccountContext from '../../providers/AccountProvider'
 import Content from '../../components/account-content/content/Content'
 
 const AccountPage = () => {
-    const { currentUser, userToken, watchlist } = userAuthContext()
+    const { userToken } = userAuthContext()
     
 
     if (!userToken) {
