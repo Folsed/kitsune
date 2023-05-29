@@ -14,6 +14,7 @@ import { GoPrimitiveDot } from "react-icons/go"
 import { BiDotsVertical } from "react-icons/bi"
 import { useAnimeDeactivate } from '../../../../../../hooks/admin/useAnimeDeactivate'
 import useAnimeWithPagination from '../../../../../../hooks/admin/useAnimeWithPagination'
+import ConfirmModal from '../../../../../modals/confirm-modal/ConfirmModal'
 
 
 
@@ -28,6 +29,7 @@ const AllAnimes = () => {
     const [active, setActive] = useState(false)
     const [toggleClass, setToggleClass] = useState('')
     const { animeDeactivate } = useAnimeDeactivate(refetch)
+    const [deleteConfirm, setDeleteConfirm] = useState(false)
 
     if (active) {
         document.body.classList.add('scroll-blocked')
@@ -117,7 +119,7 @@ const AllAnimes = () => {
                                             </button>
                                             <button
                                                 className={styles.actionButton}
-                                                onClick={() => handleDestroy(item.id)}
+                                                onClick={() => setDeleteConfirm(true)}
                                                 title='Видалити'
                                             >
                                                 <RiDeleteBin6Line size={14} />
@@ -133,6 +135,13 @@ const AllAnimes = () => {
                             setToggleClass={setToggleClass}
                             toggleClass={toggleClass}
                             data={(query && searchData ? searchData.data.animes : animes.data).find(anime => anime.id === animeId)}
+                        />
+                        <ConfirmModal
+                            active={deleteConfirm}
+                            setActive={setDeleteConfirm}
+                            title={'Видалити аніме'}
+                            info={'Ви дійсно хочете видалити це аніме?'}
+                            onConfirm={handleDestroy}
                         />
                     </>
                 }

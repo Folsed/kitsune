@@ -1,18 +1,14 @@
 import styles from './user-info.module.css'
 import { userAuthContext } from '../../../providers/AuthProvider'
 import { BlackButton } from '../../../UI/buttons/BlackButton'
-import { format } from 'date-fns';
-import { uk } from 'date-fns/locale';
-import { useState } from 'react';
-import UserEdit from './UserEdit';
+import { useState } from 'react'
+import UserEdit from './UserEdit'
+import { formattedDate } from '../../../helpers/formattedDate'
 
 const UserInfo = () => {
     const ROOT_URL = import.meta.env.VITE_ROOT_URL
     const { currentUser } = userAuthContext()
     const [editIsActive, setEditIsActive] = useState(false)
-
-    const formattedDate = format(new Date(currentUser.created_at), 'd MMMM yyyy', { locale: uk });
-    const capitalizedMonth = formattedDate.replace(/(^|\s)(\p{Ll})/gu, change => change.toUpperCase());
 
     return (
         <div className={styles.wrapper}>
@@ -50,7 +46,7 @@ const UserInfo = () => {
                             </div>
 
                             <div className={styles.dates}>
-                                <h4>Реєстрація: <span>{capitalizedMonth}</span></h4>
+                                <h4>Реєстрація: <span>{formattedDate(currentUser.created_at)}</span></h4>
                             </div>
                         </div>
                     </div>

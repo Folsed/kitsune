@@ -5,7 +5,7 @@ import AnimeContext from '../../providers/AnimeProvider'
 import Header from '../../components/anime-content/header/Header'
 import Description from '../../components/anime-content/description/Description'
 import Player from '../../components/anime-content/player/Player'
-import Comments from '../../components/anime-content/comments/Comments'
+import Reviews from '../../components/anime-content/reviews/Reviews'
 import { useAnime } from '../../hooks/anime/useAnime'
 
 const Anime = () => {
@@ -26,7 +26,7 @@ const Anime = () => {
                 <Header />
                 <Description/>
                 <Player/>
-                <Comments animeId={animeId}/>
+                <Reviews animeId={animeId}/>
             </div>
         </AnimeContext.Provider>
     )

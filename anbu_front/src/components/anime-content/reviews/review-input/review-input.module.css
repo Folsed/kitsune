@@ -105,3 +105,76 @@
     color: #3e3e3e;
     border-color: #3e3e3e;
 }
+
+.my-signature {
+    display: inline-flex;
+    gap: 1rem;
+}
+
+.my-signature span {
+    color: var(--span-color);
+}
+
+.my-review-gap {
+    gap: 1rem;
+}
+
+.text {
+    max-height: 6rem;
+    overflow: hidden;
+    --fade-size: 2.875rem;
+    -webkit-mask-image: linear-gradient(to bottom,#000 calc(100% - var(--fade-size)),#0000);
+    mask-image: linear-gradient(to bottom,#000 calc(100% - var(--fade-size)),#0000);
+}
+
+.text-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.show-btn {
+    color: var(--span-color);
+    font-size: 14px;
+    font-weight: 600;
+    width: fit-content;
+    transition: color .2s;
+}
+
+.show-btn:hover {
+    color: #dadada;
+}
+
+.show-btn:active {
+    color: #747474;
+}
+
+.more-active {
+    overflow: visible;
+    max-height: none;
+    --fade-size: 0rem;
+}
+
+.review-footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.actions {
+    display: flex;
+    gap: .56rem;
+}
+
+.actions button{
+    color: var(--span-color);
+    transition: color .2s;
+}
+
+.actions button:hover{
+    color: #dadada;
+}
+
+.actions button:active {
+    color: #747474;
+}

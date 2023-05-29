@@ -1,0 +1,109 @@
+.feedback {
+    grid-area: comment;
+    margin-bottom: 20px;
+}
+
+.comment-wrapp {
+    display: grid;
+    gap: 40px;
+}
+
+.comment {
+    display: grid;
+    grid-template-areas: "avatar content";
+    grid-template-columns: auto minmax(0, 1fr);
+}
+
+.avatar-wrap {
+    grid-area: avatar;
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+    background-color: rgb(28, 28, 28);
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.avatar img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.content {
+    grid-area: content;
+    padding-left: 1.77rem;
+    display: grid;
+    gap: 10px;
+}
+
+.signature {
+    display: inline-flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.signature span {
+    font-size: 10px;
+    color: gray;
+}
+
+.text-section {
+    max-height: 6rem;
+    overflow: hidden;
+    --fade-size: 2.875rem;
+    -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - var(--fade-size)), #0000);
+    mask-image: linear-gradient(to bottom, #000 calc(100% - var(--fade-size)), #0000);
+}
+
+.show-btn {
+    color: var(--span-color);
+    font-size: 14px;
+    font-weight: 600;
+    width: fit-content;
+    transition: color .2s;
+}
+
+.show-btn:hover {
+    color: #dadada;
+}
+
+.show-btn:active {
+    color: #747474;
+}
+
+.more-active {
+    overflow: visible;
+    max-height: none;
+    --fade-size: 0rem;
+}
+
+.action {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.action span {
+    color: var(--span-color);
+}
+
+.votes {
+    display: flex;
+}
+
+.votes button {
+    color: var(--span-color);
+    margin-left: 2px;
+    transition: color .2s;
+}
+
+.votes button:hover {
+    color: #dadada;
+}
+
+.votes span {
+    user-select: none;
+}

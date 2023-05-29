@@ -1,21 +1,22 @@
 import styles from './comment.module.css'
 
-import { useContext } from 'react'
+import { useContext, useMemo, useRef } from 'react'
 import AnimeContext from '../../../providers/AnimeProvider'
-import CommentInput from './comment-input/CommentInput'
-import Feedback from './comment-feedback/Feedback'
+import ReviewInput from './review-input/ReviewInput'
+import ReviewFeedback from './review-feedback/ReviewFeedback'
 import { userAuthContext } from '../../../providers/AuthProvider'
 import Warning from '../../../UI/warning/Warning'
 import { LazyLoadComponent } from 'react-lazy-load-image-component'
 import ReviewContext from '../../../providers/ReviewProvider'
 import useMyReview from '../../../hooks/user/useMyReview'
-import { useAnimeComments } from '../../../hooks/anime/useAnimeComments'
+import { useAnimeReviews } from '../../../hooks/anime/useAnimeReviews'
 
 const Comments = ({ animeId }) => {
     const animeData = useContext(AnimeContext)
+    const reviewRef = useRef(null)
     const { currentUser, userToken } = userAuthContext()
     const { data: myReview } = useMyReview(animeId)
-    const { isLoading: commentsIsLoading, isError, data: comments } = useAnimeComments(animeId)
+    const { isLoading: commentsIsLoading, isError, data: reviews } = useAnimeReviews(animeId)
 
 
     if (animeData.isLoading) {
@@ -23,21 +24,21 @@ const Comments = ({ animeId }) => {
     }
 
     return (
-        <ReviewContext.Provider value={{ myReview, comments, commentsIsLoading }}>
+        <ReviewContext.Provider value={{ myReview, reviews, commentsIsLoading }}>
             <div className={styles.commentsSection}>
 
-                <div className={styles.sectionTitle}>
+                <div className={styles.sectionTitle} ref={reviewRef}>
                     <h2>Що скажеш про аніме "{animeData.data.ua_title}" ?</h2>
                 </div>
-                
+
 
                 <div className={styles.wrapper}>
-                    {userToken ? <CommentInput animeId={animeId} /> : <Warning />}
+                    {userToken ? <ReviewInput animeId={animeId} reviewRef={reviewRef} /> : <Warning />}
                 </div>
 
 
                 <LazyLoadComponent>
-                    <Feedback animeId={animeId} />
+                    <ReviewFeedback />
                 </LazyLoadComponent>
             </div>
         </ReviewContext.Provider>

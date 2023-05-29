@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ReviewResource;
 use App\Http\Resources\WatchlistResource;
+use App\Models\Anime;
 use App\Models\AnimeSeries;
 use App\Models\Pronoun;
 use App\Models\Review;
+use App\Models\User;
 use App\Models\Watchlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -50,9 +53,9 @@ class UserController extends Controller
             $extension = $file->getExtension();
 
 
-            $originalFilename = pathinfo($originalPath, PATHINFO_FILENAME).$extension;
+            $originalFilename = pathinfo($originalPath, PATHINFO_FILENAME) . $extension;
 
-            echo 'images/anime/previews/'.$originalFilename . '<br>';
+            echo 'images/anime/previews/' . $originalFilename . '<br>';
         }
     }
 
@@ -155,11 +158,24 @@ class UserController extends Controller
         $user = Auth::user();
 
         return response()->json([
-            'stars' => Review::where('user_id', $user->id)
+            'review' => Review::where('user_id', $user->id)
+                ->join('users', 'reviews.user_id', '=', 'users.id')
                 ->where('anime_id', $animeId)
-                ->pluck('stars'),
+                ->select(['reviews.*', 'users.name AS user_name'])
+                ->get()
         ]);
     }
 
-
+    public function myReviews($id)
+    {
+        return response()->json([
+            'reviews' => Review::where('user_id', $id)
+                ->join('animes', 'reviews.anime_id', '=', 'animes.id')
+                ->join('users', 'reviews.user_id', '=', 'users.id')
+                ->select(['reviews.*', 'animes.alias', 'animes.ua_title', 'users.name AS user_name'])
+                ->orderByDesc('created_at')
+                ->get(),
+            'total' => Review::where('user_id', $id)->count(),
+        ]);
+    }
 }

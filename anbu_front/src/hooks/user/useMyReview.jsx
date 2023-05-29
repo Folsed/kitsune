@@ -12,7 +12,7 @@ const useMyReview = (animeId) => {
             keepPreviousData: true,
             refetchOnWindowFocus: false,
             enabled: !!userToken,
-            select: ({ data }) => data.stars[0]
+            select: ({ data }) => data.review
         },
 
 
@@ -21,4 +21,3 @@ const useMyReview = (animeId) => {
 }
 
 export default useMyReview
-

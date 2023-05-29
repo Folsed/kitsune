@@ -1,21 +1,20 @@
 import { useState } from "react";
 import { useMutation } from "react-query";
 import axiosClient from "../../axios-client";
-import { userAuthContext } from "../../providers/AuthProvider";
-import { useAnimeComments } from "./useAnimeComments";
 import useMyReview from "../user/useMyReview";
+import { useAnimeReviews } from "./useAnimeReviews";
 
 
 export const useAnimeCommentMutate = (animeId) => {
     const [errors, setErrors] = useState()
-    const { refetch } = useAnimeComments(animeId)
+    const { refetch } = useAnimeReviews(animeId)
     const { refetch: refetchReview} = useMyReview(animeId)
 
 
     const comment = useMutation(
         'comment',
         async (formData) => {
-            axiosClient.post('/comment/leave', formData)
+            axiosClient.post('/review/leave_review', formData)
                 .then(response => {
                     if(response.data.status) {
                         refetch()

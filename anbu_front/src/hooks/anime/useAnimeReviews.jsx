@@ -2,10 +2,10 @@ import { useQuery } from "react-query";
 import { AnimeService } from "../../services/AnimeData.service";
 
 
-export const useAnimeComments = (id) => {
+export const useAnimeReviews = (id) => {
     const { data, isLoading, isError, refetch } = useQuery(
         ['comments', id],
-        () => AnimeService.getComments(id),
+        () => AnimeService.getReviews(id),
         {
             keepPreviousData: true,
             refetchOnWindowFocus: false,

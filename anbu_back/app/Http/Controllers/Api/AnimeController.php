@@ -9,6 +9,7 @@ use App\Http\Resources\BannerResource;
 use App\Http\Resources\CarouselResource;
 use App\Http\Resources\CommentResource;
 use App\Http\Resources\PromoResource;
+use App\Http\Resources\ReviewResource;
 use App\Models\Anime;
 use App\Models\AnimeSeries;
 use App\Models\Banner;
@@ -98,20 +99,14 @@ class AnimeController extends Controller
         ]);
     }
 
-    public function comments($id)
+    public function reviews($id)
     {
-        $review = CommentResource::collection(
-            Comment::where('comments.anime_id', $id)
-                ->leftJoin('reviews', function ($join) {
-                    $join->on('reviews.user_id', '=', 'comments.user_id')
-                        ->on('reviews.anime_id', '=', 'comments.anime_id');
-                })
-                ->orderBy('comments.created_at', 'desc')
-                ->select('comments.*', 'reviews.stars')
+        $review = ReviewResource::collection(
+            Review::where('anime_id', $id)
+                ->orderBy('created_at', 'desc')
                 ->get()
         );
-        $total = Comment::where('comments.anime_id', $id)->count();
-
+        $total = Review::where('anime_id', $id)->count();
         return response()->json([
             'data' => [
                 'reviews' => $review,
@@ -124,29 +119,15 @@ class AnimeController extends Controller
     {
         $request->validate([
             'comment' => ['required', 'string'],
+            'stars' => ['required', 'numeric'],
         ]);
 
-        $userId = $request->input('user_id');
-        $animeId = $request->input('anime_id');
-
-        $comment = new Comment();
-        $comment->user_id = $userId;
-        $comment->anime_id = $animeId;
-        $comment->comment = $request->input('comment');
-        $comment->save();
-
-        $existingReview = Review::with(['user', 'anime'])
-            ->where('user_id', $userId)
-            ->where('anime_id', $animeId)
-            ->exists();
-
-        if (!$existingReview) {
-            $review = new Review();
-            $review->user_id = $userId;
-            $review->anime_id = $animeId;
-            $review->stars = $request->input('stars');
-            $review->save();
-        }
+        $review = new Review();
+        $review->user_id = $request->input('user_id');
+        $review->anime_id = $request->input('anime_id');
+        $review->stars = $request->input('stars');
+        $review->text = $request->input('comment');
+        $review->save();
 
         return response(['status' => true]);
     }

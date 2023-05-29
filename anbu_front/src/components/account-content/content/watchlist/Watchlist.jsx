@@ -3,15 +3,14 @@ import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { RiStarFill } from 'react-icons/ri'
 import { NavLink } from 'react-router-dom'
 import { RiDeleteBin6Line, RiEmotionSadLine } from "react-icons/ri";
-import { format } from 'date-fns';
-import { uk } from 'date-fns/locale';
 import { userAuthContext } from '../../../../providers/AuthProvider'
 import useWatchlistGet from '../../../../hooks/user/useWatchlistGet'
 import { ROUTES } from '../../../../router/routes'
 import WatchlistSkeleton from '../../../skeletons/mylist-skeleton/WatchlistSkeleton'
 import useWatchlistAdd from '../../../../hooks/user/useWatchlistAdd'
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useState } from 'react'
+import { useEffect } from 'react'
+import { formattedDate } from '../../../../helpers/formattedDate'
 
 
 const Watchlist = () => {
@@ -20,12 +19,6 @@ const Watchlist = () => {
     const { data, isLoading, refetch } = useWatchlistGet(currentUser.id)
     const { watchlist } = useWatchlistAdd(refetch)
     const [myList, setMyList] = useState([])
-
-    const formatDate = (date) => {
-        const formattedDate = format(new Date(date), 'd MMMM yyyy', { locale: uk })
-        const capitalizedMonth = formattedDate.replace(/(^|\s)(\p{Ll})/gu, change => change.toUpperCase())
-        return capitalizedMonth
-    }
 
     useEffect(() => {
         if (data) {
@@ -85,7 +78,7 @@ const Watchlist = () => {
                                 <div className={styles.info}>
                                     <div className={styles.addedAt}>
                                         <span>Додано:</span>
-                                        <span className={styles.added}> {formatDate(item.created_at)}</span>
+                                        <span className={styles.added}> {formattedDate(item.created_at)}</span>
                                     </div>
                                     <div className={styles.deleteButton}>
                                         <button onClick={() => { onDelete(item.id) }}><RiDeleteBin6Line size={20} /></button>

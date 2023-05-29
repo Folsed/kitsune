@@ -73,6 +73,7 @@ Route::middleware('auth:sanctum')->controller(UserController::class)->group(func
 
     // Review
     Route::get('api/review/solo/{animeId}/myReview', 'soloReview')->name('api.review.solo');
+    Route::get('api/review/all/{userId}/myReviews', 'myReviews')->name('api.reviews.all');
 });
 
 // Anime API
@@ -82,9 +83,9 @@ Route::controller(AnimeController::class)->group(function () {
     Route::get('api/series/anime/get/{animeId}', 'getSeries')->name('api.anime.get');
 
 
-    // Comment
-    Route::get('api/comments/anime/{id}', 'comments')->name('api.anime.comments');
-    Route::post('api/comment/leave', 'comment')->name('api.anime.comment');
+    // Reviews
+    Route::get('api/reviews/anime/{id}/get_reviews', 'reviews')->name('api.anime.comments');
+    Route::post('api/review/leave_review', 'comment')->name('api.anime.comment');
     // Search
     Route::get('api/search/anime', 'search')->name('api.anime.search');
     // Browse

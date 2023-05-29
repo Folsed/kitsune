@@ -1,0 +1,11 @@
+
+.not-found {
+    position: absolute;
+    left: 15%;
+}
+
+.error-button {
+    position: absolute;
+    top: 50%;
+    left: 36%;
+}

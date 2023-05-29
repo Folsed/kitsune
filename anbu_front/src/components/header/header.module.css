@@ -185,7 +185,7 @@
     height: 100%;
     width: 100%;
     position: fixed;
-    background-color: #121212ed;
+    background-color: #0e0e0e8d;
     z-index: -1;
     overflow: hidden;
     transform: scale(0);

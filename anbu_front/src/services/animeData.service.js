@@ -33,8 +33,8 @@ export const AnimeService = {
         return data.data
     },
 
-    async getComments(id) {
-        const data = await axios.get(`${API_URL}/comments/anime/${id}`)
+    async getReviews(id) {
+        const data = await axios.get(`${API_URL}/reviews/anime/${id}/get_reviews`)
 
         return data.data
     },

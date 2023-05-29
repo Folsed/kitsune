@@ -10,6 +10,7 @@
     padding: 10px;
     border: 2px solid var(--main-color);
     color: var(--main-color);
+    justify-content: center;
 }
 
 .btn svg {
@@ -67,7 +68,6 @@
     transition: background-color .2s;
     border: 2px solid var(--main-color);
     padding: 10px;
-    width: 100%;
     justify-content: center;
 }
 
