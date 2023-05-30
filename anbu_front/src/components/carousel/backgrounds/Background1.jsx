@@ -2,7 +2,7 @@ import './backgrounds.css'
 
 export const Background1 = ({ currentIndex }) => {
     return (
-        <div className={`carousel-background__1 ${currentIndex === 0 || currentIndex === 4 ? 'active__background' : ''}`}>
+        <div className={`carousel-background__1 animation ${currentIndex === 0 || currentIndex === 4 ? 'active__background' : ''}`}>
             {/* Bg1 */}
             <svg className="single-promo-background1-p1" viewBox="0 0 340 322" aria-hidden="true" role="img">
                 <linearGradient id="bg1" gradientUnits="userSpaceOnUse" x1="65.42" x2="315.72" y1="7.12" y2="233.33">

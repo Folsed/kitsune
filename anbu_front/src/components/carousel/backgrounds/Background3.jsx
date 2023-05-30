@@ -2,7 +2,7 @@ import './backgrounds.css'
 
 export const Background3 = ({ currentIndex }) => {
     return (
-        <div className={`carousel-background__3 ${currentIndex === 2 ? 'active__background' : ''}`}>
+        <div className={`carousel-background__bubbles animation ${currentIndex === 2 ? 'active__background' : ''}`}>
             {/* Bg3 */}
             <svg className="single-promo-background3-p1" viewBox="0 0 2709 1680" aria-hidden="true" role="img">
                 <defs>
