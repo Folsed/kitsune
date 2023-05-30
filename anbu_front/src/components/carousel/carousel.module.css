@@ -201,7 +201,7 @@
     height: 100%;
     width: 0;
     animation: progress 10s linear forwards;
-    animation-play-state: running;
+    /* animation-play-state: running; */
 }
 
 .carousel-tab-text {

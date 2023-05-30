@@ -1,17 +1,24 @@
 import styles from './review-input.module.css'
 import Stars from '../../../../UI/review/Stars'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { MdOutlineModeEdit } from 'react-icons/md'
 import { RiDeleteBin6Line } from "react-icons/ri"
 import { isComponentVisible } from '../../../../helpers/isComponentVisible'
 import ConfirmModal from '../../../modals/confirm-modal/ConfirmModal'
 import { formattedDate } from '../../../../helpers/formattedDate'
+import { useLocation } from 'react-router-dom'
 
 
 const ReviewExists = ({ myReview, reviewRef }) => {
     const [showMore, setShowMore] = useState(false)
     const [deleteConfirm, setDeleteConfirm] = useState(false)
+    const location = useLocation()
 
+    useEffect(() => {
+        if (location.hash === '#my_review') {
+            reviewRef.current.scrollIntoView();
+        }
+    }, [location.hash])
 
     const handleShowMore = () => {
         if (showMore && !isComponentVisible(reviewRef.current)) {

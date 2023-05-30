@@ -8,19 +8,19 @@ import { ROUTES } from "../../router/routes";
 const CarouselSlide = ({ children, width, currentIndex, index, animeId, alias }) => {
     const [isHidden, setIsHidden] = useState(false)
 
-    useEffect(() => {
-        if (currentIndex !== index) {
-            const timeoutId = setTimeout(() => {
-                setIsHidden(true)
-            }, 1000)
-            return () => clearTimeout(timeoutId);
-        } else {
-            setIsHidden(false)
-        }
-    }, [currentIndex, index])
+    // useEffect(() => {
+    //     if (currentIndex !== index) {
+    //         const timeoutId = setTimeout(() => {
+    //             setIsHidden(true)
+    //         }, 1000)
+    //         return () => clearTimeout(timeoutId);
+    //     } else {
+    //         setIsHidden(false)
+    //     }
+    // }, [currentIndex, index])
 
     return (
-        <div className={`${styles.carouselContentContainer} ${isHidden ? styles.hiddenCarouselSlide : ''}`}>
+        <div className={`${styles.carouselContentContainer}`}>
             <div className={styles.carouselContentWrapper}>
                 <NavLink to={ROUTES.animePage(animeId, alias)}>
                     <div className={styles.carouselContentBox}>{children}</div>

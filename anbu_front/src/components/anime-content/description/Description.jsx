@@ -12,6 +12,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component'
 import AnimeContext from '../../../providers/AnimeProvider'
 import AuthModalContext from '../../../providers/AuthModalProvider'
 import { userAuthContext } from '../../../providers/AuthProvider'
+import { OrangeButton } from '../../../UI/buttons/OrangeButton'
 
 const Description = () => {
     const ROOT_URL = import.meta.env.VITE_ROOT_URL
@@ -38,8 +39,6 @@ const Description = () => {
         setActive(true)
         setToggleClass('auth')
     }
-
-    console.log(data)
 
     return (
         <div>
@@ -135,7 +134,8 @@ const Description = () => {
                                     className={styles.headingPreview}
                                     src={`${ROOT_URL}${data.preview[0].second_preview_path}`}
                                 />
-                                <YouTube videoId={data.trailer} opts={opts} />
+                                {/* <YouTube videoId={data.trailer} opts={opts} /> */}
+                                <OrangeButton title={'Переглянути трейлер'} className={styles.trailerButton}/>
                             </div>
                         </div>
                     }

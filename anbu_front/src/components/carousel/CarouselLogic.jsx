@@ -14,16 +14,13 @@ const CarouselLogic = ({ children, title, slides }) => {
     const [currentIndex, setCurrentIndex] = useState(0)
     const [isPaused, setIsPaused] = useState(false);
     const innerCarouselTrackRef = useRef(null);
+    const [count, setCount] = useState(0);
 
     const updateIndex = (newIndex) => {
         if (newIndex < 0) {
             newIndex = Children.count(children) - 1;
         } else if (newIndex >= Children.count(children)) {
             newIndex = 0;
-        }
-
-        if (newIndex === currentIndex) {
-            return;
         }
 
         const direction = newIndex > currentIndex ? 1 : -1;
@@ -37,7 +34,7 @@ const CarouselLogic = ({ children, title, slides }) => {
 
         tabIndices.forEach((index, i) => {
             setTimeout(() => {
-                const tab = document.getElementById(`.carousel_tab_code-FFf1Y:nth-child(${index + 1})`);
+                const tab = document.getElementById(`.carousel_tab:nth-child(${index + 1})`);
                 if (tab) {
                     tab.classList.add(styles.activeTab);
                 }
@@ -54,6 +51,14 @@ const CarouselLogic = ({ children, title, slides }) => {
         }
     };
 
+    const handleVisibilityChange = () => {
+        if (document.hidden) {
+            setIsPaused(true);
+        } else {
+            setIsPaused(false);
+        }
+    };
+
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -62,12 +67,13 @@ const CarouselLogic = ({ children, title, slides }) => {
             }
         }, 10000);
 
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+
         return () => {
-            if (interval) {
-                clearInterval(interval);
-            }
+            clearInterval(interval);
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
         };
-    });
+    }, [currentIndex, isPaused]);
 
 
     return (
@@ -115,7 +121,7 @@ const CarouselLogic = ({ children, title, slides }) => {
                     {slides.map((item, index) => {
                         return (
                             <button
-                                id='carousel_tab_code-FFf1Y'
+                                id='carousel_tab'
                                 className={`${styles.carouselTab} ${index === currentIndex ? styles.activeTab : ''}`}
                                 onClick={() => {
                                     updateIndex(index);

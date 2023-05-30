@@ -2,7 +2,6 @@ import styles from './player.module.css'
 import React, { useEffect, useState } from 'react'
 import ReactPlayer from 'react-player/file'
 import { PlayerBackground } from './PlayerBackground'
-import video from 'C:/Study/IT/Git/anbu/anbu_back/storage/app/videos/series/28vyq86TBWqfDRkM1OkLK5CAqMkVGYqcbuzkOtgP.mp4'
 import { useAnimeSeries } from '../../../hooks/anime/useAnimeSeries'
 
 

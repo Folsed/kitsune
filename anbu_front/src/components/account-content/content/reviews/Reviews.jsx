@@ -1,5 +1,5 @@
 import styles from './reviews.module.css'
-import { RiDeleteBin6Line, RiEmotionSadLine } from "react-icons/ri";
+import { RiEmotionSadLine } from "react-icons/ri";
 import { userAuthContext } from '../../../../providers/AuthProvider'
 import { NavLink } from 'react-router-dom';
 import { useMyReviews } from '../../../../hooks/user/useMyReviews';
@@ -22,8 +22,6 @@ const Reviews = () => {
             return newState;
         })
     }
-
-
 
     return (
         <div className={styles.wrapper}>
@@ -94,9 +92,11 @@ const Reviews = () => {
                                             {showMore[i] ? 'Менше' : 'Показати більше'}
                                         </button>
                                         : ''}
-                                    <button className={styles.navBtn}>
-                                        До відгуку<MdKeyboardArrowRight size={16} />
-                                    </button>
+                                    <NavLink to={`${ROUTES.animePage(item.anime_id, item.alias)}#my_review`}>
+                                        <button className={styles.navBtn}>
+                                            До відгуку<MdKeyboardArrowRight size={16} />
+                                        </button>
+                                    </NavLink>
                                 </div>
                             </div>
                         </div>
