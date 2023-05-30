@@ -1,24 +1,9 @@
-import { useEffect, useState } from "react";
-
 import styles from './carousel.module.css'
 import { NavLink } from "react-router-dom";
 import { ROUTES } from "../../router/routes";
 
 
-const CarouselSlide = ({ children, width, currentIndex, index, animeId, alias }) => {
-    const [isHidden, setIsHidden] = useState(false)
-
-    // useEffect(() => {
-    //     if (currentIndex !== index) {
-    //         const timeoutId = setTimeout(() => {
-    //             setIsHidden(true)
-    //         }, 1000)
-    //         return () => clearTimeout(timeoutId);
-    //     } else {
-    //         setIsHidden(false)
-    //     }
-    // }, [currentIndex, index])
-
+const CarouselSlide = ({ children, animeId, alias }) => {
     return (
         <div className={`${styles.carouselContentContainer}`}>
             <div className={styles.carouselContentWrapper}>

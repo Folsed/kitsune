@@ -12,7 +12,7 @@ const CarouselLogic = ({ children, slides }) => {
     const [isPaused, setIsPaused] = useState(false)
     const innerCarouselTrackRef = useRef(null)
     const [count, setCount] = useState(0)
-    const currentIndexRef = useRef(currentIndex)
+    
 
     const animationPaused = isPaused ? 'paused' : 'running'
 
@@ -61,28 +61,28 @@ const CarouselLogic = ({ children, slides }) => {
                 setCount((prevCount) => prevCount + 1 / 100)
             }
         }, 10)
-
         document.addEventListener('visibilitychange', handleVisibilityChange)
-
         return () => {
             clearInterval(interval)
             document.removeEventListener('visibilitychange', handleVisibilityChange)
-
         }
     }, [currentIndex, isPaused])
 
     useEffect(() => {
-        if (count >= 7.9) {
+        setCount(0)
+    }, [currentIndex])
+
+
+    useEffect(() => {
+        if (count >= 7.8) {
             updateIndex(currentIndex + 1)
             setCount(0)
         }
     }, [count, currentIndex])
 
-    console.log(count)
-
 
     return (
-        <div className={styles.welcomeCarousel} onMouseEnter={() => setIsPaused(true)} onMouseLeave={() => setIsPaused(false)}>
+        <div className={styles.welcomeCarousel} >
             <div className={styles.carouselBackgroundContainer}>
                 <div className={styles.backgroundWrapper}>
                     <Background >
@@ -105,6 +105,8 @@ const CarouselLogic = ({ children, slides }) => {
                     <div
                         className={styles.innerCarouselTrack}
                         ref={innerCarouselTrackRef}
+                        onMouseEnter={() => setIsPaused(true)}
+                        onMouseLeave={() => setIsPaused(false)}
                     >
                         {Children.map(children, (child, index) => {
                             return React.cloneElement(child, { currentIndex: currentIndex, index: index })
@@ -131,6 +133,8 @@ const CarouselLogic = ({ children, slides }) => {
                                 onClick={() => {
                                     updateIndex(index)
                                 }}
+                                onMouseEnter={() => setIsPaused(true)}
+                                onMouseLeave={() => setIsPaused(false)}
                                 key={item.id}
                             >
                                 <div
