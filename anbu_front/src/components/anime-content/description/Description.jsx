@@ -1,7 +1,6 @@
 import styles from './description.module.css'
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import YouTube from 'react-youtube'
 import DescriptionSkeleton from '../../skeletons/anime-page-skeleton/DescriptionSkeleton'
 import { ROUTES } from '../../../router/routes'
 import WatchlistButton from '../../../UI/buttons/WatchlistButton'
@@ -13,31 +12,28 @@ import AnimeContext from '../../../providers/AnimeProvider'
 import AuthModalContext from '../../../providers/AuthModalProvider'
 import { userAuthContext } from '../../../providers/AuthProvider'
 import { OrangeButton } from '../../../UI/buttons/OrangeButton'
+import TrailerModal from './TrailerModal'
 
 const Description = () => {
     const ROOT_URL = import.meta.env.VITE_ROOT_URL
     const animeData = useContext(AnimeContext)
     const { currentUser } = userAuthContext()
-
     const { setActiveTab } = useContext(AccountContext)
     const { setActive, setToggleClass } = useContext(AuthModalContext)
-
+    const [trailerActive, setTrailerActive] = useState(false)
 
     const data = animeData.data
-
-    const opts = {
-        height: '230',
-        width: '100%',
-        playerVars: {
-            autoplay: 0,
-        },
-
-    }
 
     const loginHandler = (e) => {
         e.preventDefault()
         setActive(true)
         setToggleClass('auth')
+    }
+
+    if (trailerActive) {
+        document.body.classList.add('scroll-blocked')
+    } else {
+        document.body.classList.remove('scroll-blocked')
     }
 
     return (
@@ -134,8 +130,14 @@ const Description = () => {
                                     className={styles.headingPreview}
                                     src={`${ROOT_URL}${data.preview[0].second_preview_path}`}
                                 />
-                                {/* <YouTube videoId={data.trailer} opts={opts} /> */}
-                                <OrangeButton title={'Переглянути трейлер'} className={styles.trailerButton}/>
+                                <OrangeButton
+                                    title={'Переглянути трейлер'}
+                                    className={styles.trailerButton}
+                                    onClick={() => setTrailerActive(true)}
+                                />
+                                {trailerActive ?
+                                    <TrailerModal setActive={setTrailerActive} link={data.trailer} />
+                                    : ''}
                             </div>
                         </div>
                     }

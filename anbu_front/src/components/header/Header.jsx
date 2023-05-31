@@ -8,7 +8,7 @@ import { userAuthContext } from '../../providers/AuthProvider';
 import UserActionsModal from '../modals/UserActionsModal';
 import LiveSearch from '../live-serach/LiveSearch';
 import AuthModalContext from '../../providers/AuthModalProvider';
-import { AiOutlineUser } from 'react-icons/ai';
+import { AiOutlineUser, AiOutlineSearch } from 'react-icons/ai';
 import { RiArrowDropDownFill } from 'react-icons/ri';
 
 const Header = () => {
@@ -64,7 +64,8 @@ const Header = () => {
                         <Link className={styles.menuItem}><span>Новини</span></Link>
                     </div>
                     <div className={styles.centerMenu}>
-                        <LiveSearch />
+                        {/* <LiveSearch /> */}
+                        <AiOutlineSearch size={44}  className={`${styles.menuItem} ${styles.search}`}/>
                     </div>
                     <div className={styles.rightMenu}>
 
