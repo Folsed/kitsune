@@ -15,7 +15,7 @@
     opacity: 0;
     transition: height .2s ease;
     transform: translateY(50px);
-    transition: transform .2s,opacity .6s,visibility .6s ;
+    transition: transform .2s,opacity .2s,visibility .2s ;
 }
 
 .active-auth-box {
@@ -145,7 +145,7 @@
 }
 
 .links a {
-    transition: color .3s;
+    transition: color .2s;
 }
 
 .links a:hover {

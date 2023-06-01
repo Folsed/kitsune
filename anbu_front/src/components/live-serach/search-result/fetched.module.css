@@ -1,0 +1,10 @@
+.wrapper {
+    width: 1067px;
+    margin: 0 auto;
+}
+
+.inner-wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    row-gap: 2rem;
+}

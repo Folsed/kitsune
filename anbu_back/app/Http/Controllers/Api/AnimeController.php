@@ -78,18 +78,35 @@ class AnimeController extends Controller
     public function search(Request $request)
     {
         $validatedData = $request->validate([
-            'title' => ['required', 'string'],
+            'query' => ['required', 'string'],
         ]);
 
-        $title = $validatedData['title'];
+        $title = $validatedData['query'];
 
-        $animes = Anime::where('active', true)
-            ->where(function ($query) use ($title) {
-                $query
-                    ->where('en_title', 'like', "%{$title}%")
-                    ->orWhere('ua_title', 'like', "%{$title}%");
-            })
-            ->get(['id', 'ua_title', 'en_title', 'aired', 'alias']);
+        $animes = AnimeCutResource::collection(
+            Anime::where('active', true)
+                ->where(function ($query) use ($title) {
+                    $query
+                        ->where(function ($subQuery) use ($title) {
+                            $subQuery
+                                ->where('en_title', 'like', "%{$title}%")
+                                ->orWhere('ua_title', 'like', "%{$title}%");
+                        })
+                        ->orWhere(function ($subQuery) use ($title) {
+                            $subQuery
+                                ->whereRaw("levenshtein(en_title, '{$title}') <= 5")
+                                ->orWhereRaw("levenshtein(ua_title, '{$title}') <=5");
+                        })
+                        ->orderByRaw("CASE WHEN en_title LIKE '{$title}%' THEN 1
+                                WHEN ua_title LIKE '{$title}%' THEN 2
+                                WHEN en_title LIKE '%{$title}' THEN 3
+                                WHEN ua_title LIKE '%{$title}' THEN 4
+                                WHEN en_title LIKE '%{$title}%' THEN 5
+                                WHEN ua_title LIKE '%{$title}%' THEN 6
+                                ELSE 7 END, CHAR_LENGTH(en_title), CHAR_LENGTH(ua_title)");
+                })
+                ->get()
+        );
 
         return response()->json([
             'data' => [
@@ -98,6 +115,7 @@ class AnimeController extends Controller
             'status' => 'success',
         ]);
     }
+
 
     public function reviews($id)
     {
@@ -166,19 +184,17 @@ class AnimeController extends Controller
             'query' => ['required', 'string'],
         ]);
         $category = $validatedData['query'];
-
+        $query = [];
         // Recent
         if ($category === 'recently') {
             $query = AnimeCutResource::collection(
-                $this->anime->select(['animes.id', 'animes.ua_title', 'animes.alias', 'preview_path', 'animes.created_at'])
+                $this->anime->selectRaw('animes.id, animes.ua_title, animes.alias, preview_path, animes.created_at')
                     ->join('previews', 'animes.id', '=', 'previews.anime_id')
-                    ->orderByDesc('created_at', 'desc')->limit(12)->get()
+                    ->groupBy('animes.id')
+                    ->orderByDesc('created_at')
+                    ->limit(12)
+                    ->get()
             );
-            return response()->json([
-                'data' => [
-                    'animes' => $query,
-                ],
-            ]);
         }
         // Best
         if ($category === 'best') {
@@ -191,11 +207,6 @@ class AnimeController extends Controller
                     ->limit(12)
                     ->get()
             );
-            return response()->json([
-                'data' => [
-                    'animes' => $query,
-                ],
-            ]);
         }
         // Popular
         if ($category === 'popular') {
@@ -208,12 +219,12 @@ class AnimeController extends Controller
                     ->limit(12)
                     ->get()
             );
-            return response()->json([
-                'data' => [
-                    'animes' =>  $query,
-                ],
-            ]);
         }
+        return response()->json([
+            'data' => [
+                'animes' => $query,
+            ],
+        ]);
     }
 
     public function getSeries($animeId)

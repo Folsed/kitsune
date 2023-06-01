@@ -8,6 +8,7 @@ import BrowsePage from "./pages/browse-page/BrowsePage";
 import { NotFound } from "./pages/not-found/NotFound";
 import { ROUTES } from "./router/routes";
 import PageLoader from "./UI/loader/PageLoader";
+import SearchPage from "./pages/search-page/SearchPage";
 
 const LazyAccount = React.lazy(() => import("./pages/account-page/AccountPage"))
 // const LazyBrowse = React.lazy(() => import("./pages/browse-page/BrowsePage"))
@@ -47,7 +48,7 @@ const router = createBrowserRouter([
             },
             {
                 path: ROUTES.animeSearch,
-                element: 'search'
+                element: <SearchPage/>
             },
             // Errors
             {

@@ -4,7 +4,7 @@ import { ROUTES } from '../../router/routes'
 import { NavLink } from 'react-router-dom'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 
-const WatchlistCard = ({ data }) => {
+const AnimeBigCard = ({ data }) => {
     const ROOT_URL = import.meta.env.VITE_ROOT_URL
 
     return (
@@ -23,8 +23,16 @@ const WatchlistCard = ({ data }) => {
                         <div className={styles.wlDescription}>
                             <h4>{data.ua_title}</h4>
                             <div className={styles.innerSubDesc}>
-                                <div className={styles.ratingBox}>
-                                    <div className={styles.star}><RiStarFill /></div> {data.review.stars}
+                                <div className={styles.upDesc}>
+                                    {data.genres.slice(0, 2).map((item, i) => (
+                                        <span key={i}>{item.name}</span>
+                                    ))}
+                                </div>
+                                <div className={styles.downDesc}>
+                                    <div className={styles.star}><RiStarFill />{data.stars}</div> 
+                                    <div className={styles.translate}>
+                                        <span>{data.translated}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -36,4 +44,4 @@ const WatchlistCard = ({ data }) => {
 }
 
 
-export default WatchlistCard
+export default AnimeBigCard

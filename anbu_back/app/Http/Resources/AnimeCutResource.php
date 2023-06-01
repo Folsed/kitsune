@@ -20,6 +20,8 @@ class AnimeCutResource extends JsonResource
             'en_title' => $this->en_title,
             'alias' => $this->alias,
             'preview_path' => $this->previews->value('preview_path'),
+            'translated' => $this->translated,
+            'second_preview_path' => $this->previews->value('second_preview_path'),
             'stars' => round($this->reviews->avg('stars'), 1),
             'genres' => $this->genres,
         ];

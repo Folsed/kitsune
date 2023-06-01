@@ -1,16 +1,14 @@
 import { useQuery } from "react-query";
-import axiosClient from "../../axios-client";
-import axios from "axios";
 import { AnimeService } from "../../services/AnimeData.service";
 
-export const useAnimeSearch = (title) => {
+export const useAnimeSearch = (query) => {
 
     const searchParams = new URLSearchParams({
-        title,
+        query,
     })
 
     const { data, isLoading, isError, status} = useQuery(
-        ['anime', title],
+        ['anime', query],
         () => AnimeService.searchAnime(searchParams),
         {
             keepPreviousData: false,
@@ -19,7 +17,7 @@ export const useAnimeSearch = (title) => {
                 alert(error.message)
             },
             select: ({ data }) => data.animes,
-            enabled: !!title,
+            enabled: !!query,
 
         }
     )
