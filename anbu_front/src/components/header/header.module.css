@@ -16,10 +16,8 @@
     margin: 0 auto;
     height: 100%;
     padding: 0 20px;
-    display: grid;
-    grid-template-areas:
-        "left center right";
-    grid-template-columns: .6fr 1.2fr .6fr;
+    display: flex;
+    justify-content: space-between;
 }
 
 .left-menu {
@@ -121,30 +119,11 @@
 }
 
 
-
-
-.center-menu {
-    display: flex;
-    height: 100%;
-    align-items: center;
-    justify-content: center;
-}
-
-
-
-
-
-
 .right-menu {
     display: flex;
     height: 100%;
     margin-right: 30px;
     justify-content: end;
-    /* align-items: center; */
-}
-
-.right-menu>* {
-    margin-left: 20px;
 }
 
 
@@ -172,9 +151,6 @@
 .active-tab {
     background-color: #000000;
 }
-
-
-
 
 
 .blackout {

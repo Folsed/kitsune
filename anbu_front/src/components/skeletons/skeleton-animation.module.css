@@ -1,14 +1,14 @@
 .loading {
-    background: linear-gradient(130deg,#0000 33.333%,#23252b0d,#494c5633 47%,#494c5633 53%,#23252b1a,#0000 60.666%);
+    background: linear-gradient(130deg, #0000 33.333%, #23252b0d, #494c5633 47%, #494c5633 53%, #23252b1a, #0000 60.666%);
     background-size: 300% 100%;
     background-position-x: 130%;
-    animation: loading 2s cubic-bezier(.13,1,.12,1) infinite;
-    background-color: rgb(18, 18, 18);
+    animation: loading 2s cubic-bezier(.13, 1, .12, 1) infinite;
+    background-color: rgba(18, 18, 18)
 }
 
 @keyframes loading {
     to {
-        background-position-x: -30%;
+        background-position-x: -35%;
     }
-    
+
 }

@@ -2,11 +2,11 @@ import styles from './live-search.module.css'
 import search from './../../assets/icons/search.svg'
 import { useEffect, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
-import { ROUTES } from '../../router/routes';
-import LiveSearchSkeleton from '../skeletons/live-search-skeleton/LiveSearchSkeleton'
+import { ROUTES } from '../../../router/routes';
+import LiveSearchSkeleton from '../../skeletons/live-search-skeleton/LiveSearchSkeleton'
 import { useCallback } from 'react'
-import useDebounce from '../../helpers/useDebounce'
-import { useAnimeSearch } from '../../hooks/anime/useAnimeSearch';
+import useDebounce from '../../../helpers/useDebounce'
+import { useAnimeSearch } from '../../../hooks/anime/useAnimeSearch';
 import { AiOutlineSearch } from 'react-icons/ai';
 
 
@@ -28,6 +28,9 @@ const LiveSearch = () => {
     }, [])
 
 
+    
+
+
     return (
         <div className={styles.searchContainer}>
             <div className={`${styles.searchField} ${isLoading ? styles.focused : focus === true && animes ? styles.focused : ''}`}>
@@ -40,7 +43,7 @@ const LiveSearch = () => {
                     placeholder="Пошук аніме"
                     value={query}
                     onChange={handleInput}
-                    onBlur={() => { setFocus(false) }}
+                    // onBlur={() => { setFocus(false) }}
                     onFocus={() => { setFocus(true) }}
                     maxLength={200}
                 />

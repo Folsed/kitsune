@@ -1,5 +1,4 @@
 import './home-page.css'
-import disableKeyboardScroll from '../../helpers/disabledKeyboardScroll'
 
 // Components 
 import { ViewAll } from '../../components/view-all/ViewAll'

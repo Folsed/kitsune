@@ -6,23 +6,18 @@ import BrowseModal from '../modals/BrowseModal';
 import AuthModal from '../modals/auth/AuthModal';
 import { userAuthContext } from '../../providers/AuthProvider';
 import UserActionsModal from '../modals/UserActionsModal';
-import LiveSearch from '../live-serach/LiveSearch';
 import AuthModalContext from '../../providers/AuthModalProvider';
-import { AiOutlineUser, AiOutlineSearch } from 'react-icons/ai';
+import { AiOutlineUser } from 'react-icons/ai';
 import { RiArrowDropDownFill } from 'react-icons/ri';
+import LiveSearch from '../live-serach/live_v2/LiveSearch';
 
 const Header = () => {
     const ROOT_URL = import.meta.env.VITE_ROOT_URL
     const { active, setActive, toggleClass, setToggleClass } = useContext(AuthModalContext)
-
     const { currentUser, userToken } = userAuthContext()
 
     const handleClick = (state) => {
-        if (state === toggleClass) {
-            setActive(false)
-        } else {
-            setActive(true)
-        }
+        state === toggleClass ? setActive(false) : setActive(true)
         setToggleClass(state)
     }
 
@@ -32,16 +27,13 @@ const Header = () => {
     }
 
     useEffect(() => {
-        if (!active) {
+        if (active) {
+            document.body.classList.add('scroll-blocked')
+        } else {
+            document.body.classList.remove('scroll-blocked')
             setToggleClass('')
         }
     }, [active]);
-
-    if (active) {
-        document.body.classList.add('scroll-blocked')
-    } else {
-        document.body.classList.remove('scroll-blocked')
-    }
 
 
     return (
@@ -56,19 +48,15 @@ const Header = () => {
                                 onClick={() => handleClick('anime')}
                             >
                                 <span>Аніме</span>
-                                <RiArrowDropDownFill size={22}/>
+                                <RiArrowDropDownFill size={22} />
                             </div>
                             <BrowseModal active={active} setActive={setActive} toggleClass={toggleClass} setToggleClass={setToggleClass} />
                         </div>
 
                         <Link className={styles.menuItem}><span>Новини</span></Link>
                     </div>
-                    <div className={styles.centerMenu}>
-                        {/* <LiveSearch /> */}
-                        <AiOutlineSearch size={44}  className={`${styles.menuItem} ${styles.search}`}/>
-                    </div>
                     <div className={styles.rightMenu}>
-
+                        <LiveSearch />
                         {userToken ?
                             <div className={styles.dropdownMenuBox}>
                                 <div
@@ -87,7 +75,7 @@ const Header = () => {
                                             }
                                         </div>
                                     </div>
-                                    <RiArrowDropDownFill size={22}/>
+                                    <RiArrowDropDownFill size={22} />
                                 </div>
                                 <UserActionsModal />
                             </div>

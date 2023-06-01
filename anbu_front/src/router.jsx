@@ -46,8 +46,8 @@ const router = createBrowserRouter([
 
             },
             {
-                path: ROUTES.searchedAnimes(),
-                element: 'searched animes'
+                path: ROUTES.animeSearch,
+                element: 'search'
             },
             // Errors
             {
