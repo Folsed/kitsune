@@ -72,7 +72,7 @@ const UserActionsModal = () => {
                         <li className={styles.actionBox}>
                             <NavLink to={ROUTES.account} onClick={() => handleClick(2)}>
                                 <RiBookmarkLine size={22} />
-                                <span>Заплановано ({watchlist.length})</span>
+                                <span>Заплановано ({watchlist?.length || 0})</span>
                             </NavLink>
                         </li>
                         {currentUser.roles[0].name === 'Administrator' ?

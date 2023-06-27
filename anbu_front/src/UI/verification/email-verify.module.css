@@ -1,0 +1,71 @@
+.wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background-color: rgb(167, 239, 167);
+    z-index: 3;
+    animation: animation 0.4s;
+}
+
+@keyframes animation {
+    0% {
+        top: -50px;
+    }
+
+    100% {
+        top: 0;
+    }
+}
+
+.container {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.message {
+    color: black;
+    font-size: 16px;
+    display: flex;
+    gap: .25rem;
+}
+
+.message button {
+    font-size: 16px;
+    color: black;
+    /* text-decoration: underline; */
+    transition: color .2s;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    padding: 1px 3px;
+}
+
+.message button:hover {
+    color: var(--main-color);
+}
+
+.message button:active {
+    color: black;
+}
+
+.close {
+    position: absolute;
+    right: 50px;
+}
+
+.close button {
+    display: flex;
+    color: black;
+    transition: color .2s;
+}
+
+.close button:hover {
+    color: var(--main-color);
+}
+
+.close button:active {
+    color: black;
+}

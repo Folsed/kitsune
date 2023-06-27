@@ -7,6 +7,17 @@
     padding-top: 2rem;
 }
 
+/* .navbar::after {
+    content: "";
+    width: 80%;
+    height: 1px;
+    background-color: white;
+    position: absolute;
+    left: 10%;
+    z-index: -1;
+    opacity: .3;
+} */
+
 .item {
     display: flex;
     height: 30px;

@@ -30,7 +30,17 @@ html {
     height: 100%;
     margin: 0;
     box-sizing: border-box;
-    /* overflow-y: overlay; */
+}
+
+body {
+    font-family: Roboto, sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    margin: 0px;
+    height: 100%;
+    overflow-y: overlay;
+    background: rgb(0, 0, 0);
+    color: #dadada;
 }
 
 input:-webkit-autofill,
@@ -53,9 +63,6 @@ select:-webkit-autofill:focus {
     -webkit-text-fill-color: var(--main-color);
 }
 
-/* ::-webkit-scrollbar {
-    display: none;
-} */
 
 ::-webkit-scrollbar {
     width: 3px;
@@ -80,7 +87,6 @@ select:-webkit-autofill:focus {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    /* scroll-behavior: smooth; */
 }
 
 a {
@@ -106,18 +112,6 @@ p {
     margin: 0;
 }
 
-
-body {
-    font-family: Roboto, sans-serif;
-    font-weight: 400;
-    font-size: 14px;
-    margin: 0px;
-    height: 100%;
-    overflow-y: overlay;
-    background: rgb(0, 0, 0);
-    color: #dadada;
-}
-
 .scroll-blocked {
     bottom: 0;
     left: 0;
@@ -134,7 +128,6 @@ div {
 }
 
 img {
-    /* user-drag: none; */
     user-select: none;
     -moz-user-select: none;
     -webkit-user-drag: none;

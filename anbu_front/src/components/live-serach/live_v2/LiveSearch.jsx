@@ -16,7 +16,7 @@ const LiveSearch = () => {
     const inputRef = useRef()
 
     useEffect(() => {
-        navigate(ROUTES.home)
+        location.pathname === '/search' && navigate(ROUTES.home)
     }, [])
 
     useEffect(() => {

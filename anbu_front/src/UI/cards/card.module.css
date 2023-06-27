@@ -54,6 +54,14 @@
     position: relative;
 }
 
+.card-link {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
 .inner-content-container:after,
 .wl-inner-content-container:after {
     content: '';
@@ -71,8 +79,8 @@
     z-index: -1;
 }
 
-.inner-content-container:hover::after,
-.wl-inner-content-container:hover::after {
+.card-link:hover+.inner-content-container::after,
+.card-link:hover+.wl-inner-content-container::after {
     opacity: 1;
 }
 
@@ -165,3 +173,4 @@
     padding: 0 2px;
     color: #dadada;
 }
+

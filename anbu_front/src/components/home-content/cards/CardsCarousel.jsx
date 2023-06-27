@@ -9,8 +9,6 @@ import { useState } from 'react';
 const slidesToShow = 6
 
 const CardsCarousel = ({ children }) => {
-    const [isHovering, setIsHovering] = useState(false);
-
     const settings = {
         dots: true,
         infinite: false,
@@ -29,11 +27,7 @@ const CardsCarousel = ({ children }) => {
     }
 
     return (
-        <div
-            className={styles.wrapper}
-            onMouseEnter={() => setIsHovering(true)}
-            onMouseLeave={() => setIsHovering(false)}
-        >
+        <div className={styles.wrapper}>
             <Slider {...settings} className={styles.cardsSlider} >
                 {children}
             </Slider>

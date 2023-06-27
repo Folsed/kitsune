@@ -6,16 +6,12 @@ import Footer from '../footer/Footer'
 import Header from '../header/Header'
 import AuthModalContext from '../../providers/AuthModalProvider'
 import AccountContext from '../../providers/AccountProvider'
+import { userAuthContext } from '../../providers/AuthProvider'
+import EmailVerify from '../../UI/verification/EmailVerify'
 
 
 
 const DefaultLayout = () => {
-    const location = useLocation()
-    const [active, setActive] = useState(false)
-    const [toggleClass, setToggleClass] = useState('')
-    const [activeTab, setActiveTab] = useState(0)
-
-
     // useEffect(() => {
     //     window.scrollTo({
     //       top: 0,
@@ -28,6 +24,7 @@ const DefaultLayout = () => {
     return (
         <div>
             <Header />
+            {/* <EmailVerify /> */}
             <ScrollRestoration />
 
             <main className="main">

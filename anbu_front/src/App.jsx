@@ -26,7 +26,6 @@ function App() {
                     <AuthProvider>
                         <RouterProvider router={router} />
                     </AuthProvider>
-                    <ReactQueryDevtools initialIsOpen={false} />
                 </AccountContext.Provider>
             </AuthModalContext.Provider>
         </QueryClientProvider>
