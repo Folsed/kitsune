@@ -25,17 +25,21 @@
     justify-content: start;
 }
 
-.logo {
+.logoBox {
     display: flex;
     align-items: center;
-    height: 50px;
 }
 
-.logo img {
-    transition: filter .1s ease-in-out;
+.logo {
+    width: 150px;
+    fill: #76b900;
 }
 
-.logo:hover img{
+/* .logo img {
+    transition: filter 0.1s ease-in-out;
+}
+
+.logo:hover img {
     filter: hue-rotate(142deg);
 }
 
@@ -45,12 +49,12 @@
 }
 
 .logo-svg {
-    transition: fill .3s;
+    transition: fill 0.3s;
 }
 
 .logo:hover .logo-svg {
     fill: #dadada;
-    transition: fill .3s;
+    transition: fill 0.3s;
 }
 
 .logo-svg-eye-piece-one,
@@ -61,62 +65,54 @@
 .logo-svg-eye-piece-six,
 .logo-svg-eye-piece-seven,
 .logo-svg-eye-piece-eight {
-    transition: fill .3s;
+    transition: fill 0.3s;
 }
 
 .logo:hover .logo-svg-eye-piece-one {
-    transition: fill .3s;
+    transition: fill 0.3s;
     fill: #afc7f5;
 }
 
 .logo:hover .logo-svg-eye-piece-two {
-    transition: fill .3s;
+    transition: fill 0.3s;
     fill: #afc7f5;
 }
 
 .logo:hover .logo-svg-eye-piece-three {
-    transition: fill .3s;
+    transition: fill 0.3s;
     fill: #afc7f5;
-
 }
 
 .logo:hover .logo-svg-eye-piece-four {
-    transition: fill .3s;
+    transition: fill 0.3s;
     fill: #afc7f5;
-
 }
 
 .logo:hover .logo-svg-eye-piece-five {
-    transition: fill .3s;
+    transition: fill 0.3s;
     fill: #afc7f5;
-
 }
 
 .logo:hover .logo-svg-eye-piece-six {
-    transition: fill .3s;
+    transition: fill 0.3s;
     fill: #e0daff;
-
 }
 
 .logo:hover .logo-svg-eye-piece-seven {
-    transition: fill .3s;
+    transition: fill 0.3s;
     fill: #000000;
-
 }
 
 .logo:hover .logo-svg-eye-piece-eight {
-    transition: fill .3s;
+    transition: fill 0.3s;
     fill: #88afff;
+} */
 
-}
-
-
-.left-menu>*,
-.right-menu>* {
+.left-menu > *,
+.right-menu > * {
     padding: 0 10px 0;
-    transition: background-color .2s;
+    transition: background-color 0.2s;
 }
-
 
 .right-menu {
     display: flex;
@@ -124,7 +120,6 @@
     margin-right: 30px;
     justify-content: end;
 }
-
 
 .dropdown-menu-box {
     height: 100%;
@@ -143,14 +138,12 @@
     background-color: black;
     cursor: pointer;
     color: white;
-    transition: background-color .2s, color .2s;
+    transition: background-color 0.2s, color 0.2s;
 }
-
 
 .active-tab {
     background-color: #000000;
 }
-
 
 .blackout {
     top: 0;
@@ -165,7 +158,7 @@
     overflow: hidden;
     transform: scale(0);
     opacity: 0;
-    transition: opacity .2s;
+    transition: opacity 0.2s;
 }
 
 .blackout-active {
@@ -190,7 +183,7 @@
     overflow: hidden;
 }
 
-.avatar-wrapper img{
+.avatar-wrapper img {
     object-fit: cover;
     width: 100%;
     height: 100%;

@@ -1,6 +1,7 @@
 import styles from './header.module.css'
 import { Link } from 'react-router-dom';
 import { Logo } from '../../assets/logo/Logo';
+import { Logo1 } from '../../assets/logo/Logo1';
 import { useContext, useEffect, useState } from 'react';
 import BrowseModal from '../modals/BrowseModal';
 import AuthModal from '../modals/auth/AuthModal';
@@ -41,7 +42,7 @@ const Header = () => {
             <div className={styles.headerSection}>
                 <div className={styles.headerContent}>
                     <div className={styles.leftMenu}>
-                        <Link className={styles.logo} to={'/'} onClick={() => destroyStates()}><Logo /></Link>
+                        <Link className={styles.logoBox} to={'/'} onClick={() => destroyStates()}><Logo1 className={styles.logo} /></Link>
                         <div className={styles.dropdownMenuBox}>
                             <div
                                 className={`${styles.menuItem} ${toggleClass === 'anime' ? styles.activeTab : ''}`}
