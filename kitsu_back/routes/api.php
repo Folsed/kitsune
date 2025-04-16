@@ -47,6 +47,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
 // Auth API
 
+
+
 Route::controller(AuthController::class)->group(function () {
     Route::post('api/registered', 'registered')->name('api.registered');
     Route::post('api/login', 'login')->name('api.login');
